@@ -3,674 +3,1611 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
-    <title>Casa Casino 🎰</title>
     
     <!-- PWA Meta Tags -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Casa Casino">
     <meta name="theme-color" content="#d35400">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23d35400' width='100' height='100' rx='20'/><text y='70' x='50' text-anchor='middle' font-size='60'>🎰</text></svg>">
-    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Casa Casino">
+    <meta name="application-name" content="Casa Casino">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
     
+    <!-- Inline PWA Manifest -->
+    <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIkNhc2EgQ2FzaW5vIiwKICAic2hvcnRfbmFtZSI6ICJDYXNhIENhc2lubyIsCiAgImRlc2NyaXB0aW9uIjogIkZhbWlsaWVuLU9yZ2FuaXNhdGlvbiBmw7xyIE1heCwgQW5uYSAmIFZhbGVyaWUiLAogICJzdGFydF91cmwiOiAiLiIsCiAgImRpc3BsYXkiOiAic3RhbmRhbG9uZSIsCiAgImJhY2tncm91bmRfY29sb3IiOiAiI2Y1ZjFlOCIsCiAgInRoZW1lX2NvbG9yIjogIiNkMzU0MDAiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3N2Zyt4bWw7Y2hhcnNldD11dGYtOCwlM0NzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTAwIDEwMCclM0UlM0NkZWZzJTNFJTNDbGluZWFyR3JhZGllbnQgaWQ9J2cnIHgxPScwJyUzRSUzQ3N0b3Agc3RvcC1jb2xvcj0nJTIzZDM1NDAwJy8lM0UlM0NzdG9wIG9mZnNldD0nMTAwJTI1JyBzdG9wLWNvbG9yPSclMjNlNjdlMjInLyUzRSUzQy9saW5lYXJHcmFkaWVudCUzRSUzQy9kZWZzJTNFJTNDY2lyY2xlIGN4PSc1MCcgY3k9JzUwJyByPSc0MCcgZmlsbD0ndXJsKCUyM2cpJy8lM0UlM0N0ZXh0IHg9JzUwJyB5PSc2NScgdGV4dC1hbmNob3I9J21pZGRsZScgZm9udC1zaXplPSczMCcgZmlsbD0nd2hpdGUnJTNFJUYwJTlGJThFJUIwJTNDL3RleHQlM0UlM0Mvc3ZnJTNFIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9zdmcreG1sIgogICAgfQogIF0sCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0IiwKICAiY2F0ZWdvcmllcyI6IFsiZmFtaWx5IiwgImxpZmVzdHlsZSIsICJwcm9kdWN0aXZpdHkiXQp9">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0'%3E%3Cstop stop-color='%23d35400'/%3E%3Cstop offset='100%25' stop-color='%23e67e22'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='40' fill='url(%23g)'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-size='30' fill='white'%3E🎰%3C/text%3E%3C/svg%3E">
+    
+    <title>Casa Casino 🎰</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
-        :root {
-            --primary: #d35400; --primary-light: #e67e22; --bg: #f5f1e8; --card: #ffffff;
-            --text: #1a1a2e; --text-light: #4a4a5a; --border: #d0ccc0; --success: #00a878;
-            --danger: #c0392b; --purple: #5b4caa; --pink: #c44569; --blue: #0984e3;
-            --max-color: #0984e3; --anna-color: #c44569; --shadow: 0 2px 12px rgba(0,0,0,0.1); --radius: 14px;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            -webkit-tap-highlight-color: transparent; 
+            -webkit-user-select: none; 
+            user-select: none; 
         }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 85px; }
-        body.morning { --bg: #fef9ef; --primary: #e67e22; }
-        body.evening { --bg: #ebe4d6; --primary: #b84700; }
-        body.night { --bg: #2d2d3a; --card: #3d3d4a; --text: #e8e8e8; --text-light: #a0a0b0; --border: #4d4d5a; }
+        
+        :root {
+            /* Original Casa Casino Colors */
+            --primary: #d35400;
+            --primary-light: #e67e22;
+            --bg: #f5f1e8;
+            --card: #ffffff;
+            --text: #1a1a2e;
+            --text-light: #4a4a5a;
+            --border: #d0ccc0;
+            --success: #00a878;
+            --danger: #c0392b;
+            --purple: #5b4caa;
+            --pink: #c44569;
+            --blue: #0984e3;
+            --max-color: #0984e3;
+            --anna-color: #c44569;
+            --text-white: #ffffff;
+            
+            /* Premium Glass Effects (subtle) */
+            --glass: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(208, 204, 192, 0.3);
+            --glass-dark: rgba(0, 0, 0, 0.05);
+            
+            /* Enhanced Shadows */
+            --shadow: 0 2px 12px rgba(0,0,0,0.1);
+            --shadow-soft: 0 8px 25px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 12px 40px rgba(0, 0, 0, 0.15);
+            --shadow-glow: 0 0 20px rgba(211, 84, 0, 0.2);
+            
+            /* Premium Borders */
+            --radius: 20px;
+            --radius-lg: 30px;
+            
+            /* Smooth Animations */
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition-fast: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: var(--bg);
+            color: var(--text); 
+            min-height: 100vh; 
+            padding-bottom: 100px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        /* Subtle floating background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(211, 84, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(230, 126, 34, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            33% { transform: translateY(-20px); }
+            66% { transform: translateY(10px); }
+        }
+        
+        /* Premium Header with Original Colors */
+        .header { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--text-white); 
+            padding: 16px 20px; 
+            text-align: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .header h1 { 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; transform: scale(1.02); }
+        }
+        
+        .install-btn { 
+            display: none; 
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--text-white); 
+            padding: 8px 16px; 
+            border-radius: 15px; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: var(--transition-fast);
+        }
+        
+        .install-btn:hover { 
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .install-btn.show { display: block; }
 
-        .header { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; padding: 14px 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
-        .header h1 { font-size: 1.2rem; font-weight: 700; }
+        .standalone-notice { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--text-white); 
+            padding: 12px 16px; 
+            text-align: center; 
+            font-size: 0.85rem; 
+            font-weight: 600;
+            box-shadow: var(--shadow-soft);
+        }
 
-        .screen { display: none; padding: 12px; }
-        .screen.active { display: block; }
+        .screen { 
+            display: none; 
+            padding: 16px; 
+            animation: slideIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .screen.active { 
+            display: block; 
+        }
+        
+        @keyframes slideIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
 
-        .card { background: var(--card); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; box-shadow: var(--shadow); }
-        .card-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+        /* Premium Cards with Original Colors */
+        .card { 
+            background: var(--card);
+            border-radius: var(--radius); 
+            padding: 20px; 
+            margin-bottom: 16px; 
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card-title { 
+            font-size: 0.8rem; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            color: var(--text-light); 
+            margin-bottom: 12px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: 700;
+        }
 
-        .nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); display: flex; justify-content: space-around; padding: 6px 0 max(6px, env(safe-area-inset-bottom)); box-shadow: 0 -2px 16px rgba(0,0,0,0.12); z-index: 1000; }
-        .nav-item { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; border-radius: 12px; cursor: pointer; }
-        .nav-item.active { background: var(--primary); color: white; }
-        .nav-icon { font-size: 1.3rem; margin-bottom: 1px; }
-        .nav-label { font-size: 0.6rem; font-weight: 600; }
+        /* Premium Navigation with Original Colors */
+        .nav { 
+            position: fixed; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: var(--card);
+            display: flex; 
+            justify-content: space-around; 
+            padding: 8px 0 max(8px, env(safe-area-inset-bottom)); 
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            border-top: 1px solid var(--border);
+        }
+        
+        .nav-item { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 8px 16px; 
+            border-radius: 18px; 
+            cursor: pointer; 
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 20px;
+            opacity: 0;
+            transition: var(--transition-fast);
+            z-index: -1;
+        }
+        
+        .nav-item.active::before {
+            opacity: 1;
+        }
+        
+        .nav-item.active { 
+            color: var(--text-white);
+            transform: translateY(-3px);
+        }
+        
+        .nav-item:hover:not(.active) {
+            transform: translateY(-2px);
+            background: var(--glass);
+        }
+        
+        .nav-icon { 
+            font-size: 1.4rem; 
+            margin-bottom: 2px; 
+            transition: var(--transition-fast);
+        }
+        
+        .nav-item.active .nav-icon {
+            animation: bounce 0.6s ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .nav-label { 
+            font-size: 0.65rem; 
+            font-weight: 600; 
+        }
 
-        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
-        .btn-primary { background: var(--primary); color: white; }
-        .btn-secondary { background: var(--border); color: var(--text); }
-        .btn-success { background: var(--success); color: white; }
-        .btn-danger { background: var(--danger); color: white; }
+        /* Premium Buttons with Original Colors */
+        .btn { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            padding: 12px 20px; 
+            border: none; 
+            border-radius: 15px; 
+            font-size: 0.9rem; 
+            font-weight: 600; 
+            cursor: pointer; 
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--text-white);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 25px rgba(211, 84, 0, 0.3);
+        }
+        
+        .btn-secondary { 
+            background: var(--border);
+            color: var(--text);
+        }
+        
+        .btn-success { 
+            background: var(--success);
+            color: var(--text-white);
+        }
+        
         .btn-block { width: 100%; }
-        .btn-sm { padding: 6px 10px; font-size: 0.75rem; }
+        .btn-sm { padding: 8px 12px; font-size: 0.75rem; }
 
-        /* HEUTE */
-        .today-hero { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
-        .today-date { font-size: 0.8rem; opacity: 0.9; }
-        .today-greeting { font-size: 1.4rem; font-weight: 700; margin: 4px 0; }
+        /* HEUTE Screen - Premium Status Cards with Original Colors */
+        .today-hero { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--text-white); 
+            border-radius: var(--radius-lg); 
+            padding: 24px; 
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .today-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.2; }
+            50% { transform: scale(1.1) rotate(180deg); opacity: 0.4; }
+        }
+        
+        .today-date { 
+            font-size: 0.85rem; 
+            opacity: 0.9; 
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .today-greeting { 
+            font-size: 1.6rem; 
+            font-weight: 800; 
+            margin: 6px 0;
+            position: relative;
+            z-index: 2;
+        }
 
-        .status-row { display: flex; gap: 10px; margin-bottom: 12px; }
-        .status-card { flex: 1; background: var(--card); border-radius: var(--radius); padding: 14px; text-align: center; box-shadow: var(--shadow); border-left: 4px solid var(--border); }
-        .status-card.free { border-left-color: var(--success); }
-        .status-card.busy { border-left-color: var(--primary); }
-        .status-icon { font-size: 1.6rem; margin-bottom: 4px; }
-        .status-value { font-size: 1.1rem; font-weight: 700; }
-        .status-label { font-size: 0.65rem; color: var(--text-light); text-transform: uppercase; margin-top: 2px; }
+        .status-row { 
+            display: flex; 
+            gap: 12px; 
+            margin-bottom: 16px; 
+        }
+        
+        .status-card { 
+            flex: 1; 
+            background: var(--card);
+            border-radius: var(--radius); 
+            padding: 18px; 
+            text-align: center; 
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .status-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .status-card.free::before { 
+            background: var(--success);
+        }
+        .status-card.busy::before { 
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+        }
+        
+        .status-card:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .status-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .status-icon { 
+            font-size: 1.8rem; 
+            margin-bottom: 6px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .status-value { 
+            font-size: 1.3rem; 
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .status-label { 
+            font-size: 0.7rem; 
+            color: var(--text-light); 
+            text-transform: uppercase; 
+            margin-top: 4px;
+            font-weight: 600;
+        }
 
-        .next-block { background: linear-gradient(135deg, #fff8f0, var(--card)); border: 2px solid var(--primary-light); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; }
-        .next-label { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; }
-        .next-title { font-size: 1.1rem; font-weight: 700; margin-top: 4px; }
-        .next-time { font-size: 0.85rem; color: var(--text-light); }
+        .next-block { 
+            background: linear-gradient(135deg, #fff8f0, var(--card));
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius); 
+            padding: 20px; 
+            margin-bottom: 16px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .next-block::before {
+            content: '⚡';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
+            color: var(--primary);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .next-block:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .next-label { 
+            font-size: 0.75rem; 
+            color: var(--text-light); 
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        
+        .next-title { 
+            font-size: 1.2rem; 
+            font-weight: 800; 
+            margin-top: 6px;
+            color: var(--primary);
+        }
+        
+        .next-time { 
+            font-size: 0.9rem; 
+            color: var(--text-light);
+            font-weight: 500;
+        }
 
-        /* VALERIE TILES */
-        .day-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; background: var(--card); border-radius: var(--radius); padding: 10px 14px; box-shadow: var(--shadow); }
-        .day-nav-btn { width: 36px; height: 36px; border: none; background: var(--bg); border-radius: 10px; font-size: 1.1rem; cursor: pointer; }
-        .day-nav-day { font-weight: 700; font-size: 1rem; }
-        .day-nav-date { font-size: 0.75rem; color: var(--text-light); }
+        /* VALERIE Screen - Premium Time Tiles with Original Colors */
+        .day-nav { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 16px; 
+            background: var(--card);
+            border-radius: var(--radius); 
+            padding: 12px 18px; 
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .day-nav-btn { 
+            width: 40px; 
+            height: 40px; 
+            border: none; 
+            background: var(--glass);
+            border-radius: 12px; 
+            font-size: 1.2rem; 
+            cursor: pointer;
+            transition: var(--transition-fast);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .day-nav-btn:hover {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--text-white);
+            transform: scale(1.1);
+        }
+        
+        .day-nav-day { 
+            font-weight: 800; 
+            font-size: 1.1rem;
+            color: var(--primary);
+        }
+        
+        .day-nav-date { 
+            font-size: 0.8rem; 
+            color: var(--text-light);
+            font-weight: 500;
+        }
 
-        .time-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
-        .time-tile { aspect-ratio: 1; background: var(--card); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow); border: 3px solid transparent; transition: all 0.15s; position: relative; }
-        .time-tile:active { transform: scale(0.95); }
-        .time-tile .tile-time { font-size: 0.7rem; font-weight: 700; color: var(--text-light); }
-        .time-tile .tile-icon { font-size: 1.4rem; margin: 4px 0; }
-        .time-tile .tile-label { font-size: 0.6rem; color: var(--text-light); text-align: center; padding: 0 2px; }
-        .time-tile.empty { background: var(--bg); border: 2px dashed var(--border); }
-        .time-tile.selected { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.3); }
-        .time-tile.kiga { background: linear-gradient(135deg, #a29bfe, #6c5ce7); color: white; }
-        .time-tile.kiga .tile-time, .time-tile.kiga .tile-label { color: rgba(255,255,255,0.9); }
-        .time-tile.max { background: linear-gradient(135deg, #74b9ff, var(--max-color)); color: white; }
-        .time-tile.max .tile-time, .time-tile.max .tile-label { color: rgba(255,255,255,0.9); }
-        .time-tile.anna { background: linear-gradient(135deg, #fd79a8, var(--anna-color)); color: white; }
-        .time-tile.anna .tile-time, .time-tile.anna .tile-label { color: rgba(255,255,255,0.9); }
-        .time-tile.range-start { border-radius: 16px 6px 6px 16px; }
-        .time-tile.range-mid { border-radius: 6px; }
-        .time-tile.range-end { border-radius: 6px 16px 16px 6px; }
+        .time-tiles { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 12px; 
+            margin-bottom: 16px; 
+        }
+        
+        .time-tile { 
+            aspect-ratio: 1; 
+            background: var(--card);
+            border-radius: 18px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            cursor: pointer; 
+            box-shadow: var(--shadow-soft);
+            border: 2px solid var(--glass-border);
+            transition: var(--transition);
+            position: relative; 
+            overflow: hidden;
+        }
+        
+        .time-tile:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .time-tile:active { 
+            transform: scale(0.95); 
+        }
+        
+        .time-tile .tile-time { 
+            font-size: 0.75rem; 
+            font-weight: 700; 
+            color: var(--text-light);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .time-tile .tile-icon { 
+            font-size: 1.6rem; 
+            margin: 6px 0;
+            position: relative;
+            z-index: 2;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .time-tile .tile-label { 
+            font-size: 0.65rem; 
+            color: var(--text-light); 
+            text-align: center; 
+            padding: 0 4px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .time-tile.empty { 
+            background: var(--bg);
+            border: 2px dashed var(--border);
+        }
+        
+        .time-tile.selected { 
+            box-shadow: 0 0 0 4px rgba(211, 84, 0, 0.3);
+        }
+        
+        .time-tile.kiga { 
+            background: linear-gradient(135deg, #a29bfe, var(--purple));
+            color: var(--text-white); 
+        }
+        
+        .time-tile.kiga .tile-time, 
+        .time-tile.kiga .tile-label { 
+            color: rgba(255,255,255,0.95); 
+        }
+        
+        .time-tile.max { 
+            background: linear-gradient(135deg, #74b9ff, var(--max-color));
+            color: var(--text-white); 
+        }
+        
+        .time-tile.max .tile-time, 
+        .time-tile.max .tile-label { 
+            color: rgba(255,255,255,0.95); 
+        }
+        
+        .time-tile.anna { 
+            background: linear-gradient(135deg, #fd79a8, var(--anna-color));
+            color: var(--text-white); 
+        }
+        
+        .time-tile.anna .tile-time, 
+        .time-tile.anna .tile-label { 
+            color: rgba(255,255,255,0.95); 
+        }
 
-        .selection-bar { background: var(--card); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 12px; display: none; box-shadow: var(--shadow); }
-        .selection-bar.active { display: flex; justify-content: space-between; align-items: center; }
-        .selection-info { font-weight: 600; font-size: 0.85rem; }
+        /* Premium Tabs with Original Colors */
+        .tabs { 
+            display: flex; 
+            gap: 8px; 
+            margin-bottom: 16px; 
+            overflow-x: auto; 
+        }
+        
+        .tab { 
+            padding: 10px 16px; 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            white-space: nowrap; 
+            cursor: pointer; 
+            background: var(--card);
+            border: 2px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .tab.active { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: var(--text-white); 
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+            border-color: transparent;
+        }
+        
+        .tab:hover:not(.active) {
+            background: var(--glass);
+            transform: translateY(-1px);
+        }
 
-        .section-spacer { padding: 20px 0; text-align: center; color: var(--text-light); font-size: 1.5rem; }
+        /* Premium Routine Items */
+        .routine-item { 
+            display: flex; 
+            align-items: center; 
+            padding: 12px 16px; 
+            background: var(--bg);
+            border-radius: 12px; 
+            margin-bottom: 10px; 
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+        
+        .routine-item:hover {
+            transform: translateX(5px);
+            background: var(--card);
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .routine-item.done { 
+            background: #d4edda;
+            border-color: var(--success);
+        }
+        
+        .routine-checkbox { 
+            width: 28px; 
+            height: 28px; 
+            border: 2px solid var(--border);
+            border-radius: 50%; 
+            margin-right: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            transition: var(--transition-fast);
+        }
+        
+        .routine-item.done .routine-checkbox { 
+            background: var(--success);
+            border-color: var(--success);
+            color: var(--text-white);
+            animation: checkmark 0.3s ease-in-out;
+        }
+        
+        @keyframes checkmark {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        
+        .routine-emoji { 
+            font-size: 1.4rem; 
+            margin-right: 12px; 
+        }
+        
+        .routine-text { 
+            font-weight: 500; 
+            font-size: 0.95rem; 
+        }
 
-        .tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; }
-        .tab { padding: 8px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; cursor: pointer; background: var(--card); border: 2px solid var(--border); }
-        .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+        /* MEALS Screen - Premium Dice with Original Colors */
+        .dice-section { 
+            background: linear-gradient(135deg, var(--purple), #7c6dd8);
+            border-radius: var(--radius-lg); 
+            padding: 30px; 
+            text-align: center; 
+            margin-bottom: 16px; 
+            color: var(--text-white);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .dice-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 30% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .dice { 
+            font-size: 4rem; 
+            cursor: pointer; 
+            display: inline-block;
+            transition: var(--transition);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .dice:hover {
+            transform: scale(1.1);
+        }
+        
+        .dice.spinning { 
+            animation: spin 0.6s ease-in-out; 
+        }
+        
+        @keyframes spin { 
+            0% { transform: rotate(0) scale(1); } 
+            50% { transform: rotate(180deg) scale(1.3); } 
+            100% { transform: rotate(360deg) scale(1); } 
+        }
+        
+        .dice-result { 
+            margin-top: 16px; 
+            padding: 16px; 
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            position: relative;
+            z-index: 2;
+        }
 
-        .routine-item { display: flex; align-items: center; padding: 10px 12px; background: var(--bg); border-radius: 10px; margin-bottom: 8px; cursor: pointer; }
-        .routine-item.done { background: #d4edda; }
-        .routine-checkbox { width: 26px; height: 26px; border: 2px solid var(--border); border-radius: 50%; margin-right: 10px; display: flex; align-items: center; justify-content: center; }
-        .routine-item.done .routine-checkbox { background: var(--success); border-color: var(--success); color: white; }
-        .routine-emoji { font-size: 1.2rem; margin-right: 10px; }
-        .routine-text { font-weight: 500; font-size: 0.9rem; }
+        /* Premium Meal Rows */
+        .meal-row { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            background: var(--card);
+            border-radius: var(--radius); 
+            padding: 12px 16px; 
+            margin-bottom: 10px; 
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+        
+        .meal-row:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .meal-day { 
+            min-width: 40px; 
+            text-align: center; 
+        }
+        
+        .meal-day-name { 
+            font-weight: 800; 
+            font-size: 0.85rem;
+            color: var(--primary);
+        }
+        
+        .meal-day-date { 
+            font-size: 0.7rem; 
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .meal-slots { 
+            flex: 1; 
+            display: flex; 
+            gap: 8px; 
+        }
+        
+        .meal-slot { 
+            flex: 1; 
+            background: var(--bg);
+            border: 2px dashed var(--border);
+            border-radius: 10px; 
+            padding: 10px; 
+            text-align: center; 
+            cursor: pointer; 
+            min-height: 44px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition-fast);
+        }
+        
+        .meal-slot:hover {
+            background: var(--card);
+            transform: scale(1.05);
+        }
+        
+        .meal-slot.filled { 
+            background: #fff8f0;
+            border: 2px solid var(--primary-light);
+            color: var(--text);
+            font-weight: 600;
+        }
 
-        .info-item { background: var(--bg); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
-        .info-label { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; }
-        .info-value { font-weight: 600; margin-top: 2px; }
+        /* Info Items */
+        .info-item { 
+            background: var(--bg);
+            border-radius: 12px; 
+            padding: 12px 16px; 
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+        
+        .info-item:hover {
+            background: var(--card);
+            transform: translateX(3px);
+        }
+        
+        .info-label { 
+            font-size: 0.75rem; 
+            color: var(--text-light); 
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .info-value { 
+            font-weight: 600; 
+            margin-top: 4px; 
+        }
 
-        .section-toggle { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
-        .section-btn { padding: 8px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; cursor: pointer; background: var(--card); border: 2px solid var(--border); }
-        .section-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        /* Premium Shopping Items */
+        .shopping-item { 
+            display: flex; 
+            align-items: center; 
+            padding: 12px; 
+            background: var(--card);
+            border-radius: 10px; 
+            margin-bottom: 8px; 
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition);
+        }
+        
+        .shopping-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-strong);
+        }
+        
+        .shopping-item.checked { 
+            opacity: 0.6; 
+            text-decoration: line-through; 
+        }
+        
+        .shopping-checkbox { 
+            width: 24px; 
+            height: 24px; 
+            border: 2px solid var(--border);
+            border-radius: 50%; 
+            margin-right: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 0.7rem;
+            transition: var(--transition-fast);
+        }
+        
+        .shopping-item.checked .shopping-checkbox { 
+            background: var(--success);
+            border-color: var(--success);
+            color: var(--text-white);
+        }
 
-        .todo-item { display: flex; align-items: center; padding: 10px 12px; background: var(--bg); border-radius: 10px; margin-bottom: 8px; cursor: pointer; }
-        .todo-item.done { opacity: 0.5; text-decoration: line-through; }
-        .todo-checkbox { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; margin-right: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
-        .todo-item.done .todo-checkbox { background: var(--success); border-color: var(--success); color: white; }
-        .todo-text { flex: 1; font-weight: 500; }
-        .todo-person { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
-        .todo-person.max { background: var(--max-color); color: white; }
-        .todo-person.anna { background: var(--anna-color); color: white; }
-        .todo-person.both { background: var(--purple); color: white; }
+        /* Premium Modals with Original Colors */
+        .modal-overlay { 
+            display: none; 
+            position: fixed; 
+            inset: 0; 
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000; 
+        }
+        
+        .modal-overlay.active { 
+            display: flex; 
+            align-items: flex-end; 
+            justify-content: center; 
+        }
+        
+        .modal { 
+            background: var(--card);
+            border-radius: 25px 25px 0 0; 
+            width: 100%; 
+            max-width: 500px; 
+            max-height: 80vh; 
+            overflow-y: auto; 
+            padding: 20px;
+            box-shadow: var(--shadow-strong);
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes slideUp {
+            from { 
+                transform: translateY(100%); 
+                opacity: 0; 
+            }
+            to { 
+                transform: translateY(0); 
+                opacity: 1; 
+            }
+        }
+        
+        .modal-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            margin-bottom: 20px; 
+        }
+        
+        .modal-title { 
+            font-size: 1.1rem; 
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .modal-close { 
+            width: 36px; 
+            height: 36px; 
+            border: none; 
+            background: var(--border);
+            border-radius: 50%; 
+            font-size: 1.2rem; 
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .modal-close:hover {
+            background: var(--primary);
+            color: var(--text-white);
+            transform: scale(1.1);
+        }
 
-        .dice-section { background: linear-gradient(135deg, var(--purple), #7c6dd8); color: white; border-radius: var(--radius); padding: 16px; text-align: center; margin-bottom: 12px; }
-        .dice { font-size: 3rem; cursor: pointer; display: inline-block; transition: transform 0.3s; }
-        .dice:active { transform: scale(0.9) rotate(180deg); }
-        .dice-result { margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; font-weight: 600; }
+        /* Standalone Info */
+        .standalone-info { 
+            background: #fff8f0;
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius); 
+            padding: 18px; 
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-soft);
+        }
+        
+        .standalone-info h3 { 
+            color: var(--primary); 
+            margin-bottom: 10px; 
+            font-size: 1rem;
+            font-weight: 800;
+        }
+        
+        .standalone-info p { 
+            color: var(--text); 
+            font-size: 0.85rem; 
+            line-height: 1.5; 
+        }
 
-        .meal-card { background: var(--card); border-radius: var(--radius); padding: 12px; margin-bottom: 8px; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-        .meal-day { font-weight: 700; font-size: 0.85rem; }
-        .meal-name { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
-        .meal-add { color: var(--primary); font-weight: 600; }
+        .share-buttons { 
+            display: flex; 
+            gap: 10px; 
+            margin-top: 12px; 
+        }
+        
+        .share-btn { 
+            flex: 1; 
+            padding: 10px; 
+            background: var(--primary);
+            color: var(--text-white); 
+            border: none; 
+            border-radius: 12px; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .share-btn:hover { 
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-soft);
+            background: var(--primary-light);
+        }
+        
+        /* Selection Bar */
+        .selection-bar { 
+            background: var(--card);
+            border-radius: var(--radius); 
+            padding: 12px 18px; 
+            margin-bottom: 16px; 
+            display: none; 
+            box-shadow: var(--shadow-soft);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .selection-bar.active { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .selection-info { 
+            font-weight: 600; 
+            font-size: 0.9rem; 
+        }
 
-        .date-planner { background: linear-gradient(135deg, var(--pink), #e84393); color: white; border-radius: var(--radius); padding: 16px; }
-        .date-planner-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
-        .date-step { margin-bottom: 12px; }
-        .date-step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: rgba(255,255,255,0.3); border-radius: 50%; font-size: 0.8rem; font-weight: 700; margin-right: 8px; }
-        .date-step-title { display: inline; font-weight: 600; }
-        .date-step-options { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-        .date-option { background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; border: 2px solid transparent; }
-        .date-option.selected { background: white; color: var(--anna-color); }
-        .date-summary { background: white; color: var(--text); border-radius: 12px; padding: 16px; margin-top: 16px; text-align: center; }
-        .date-summary-title { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; }
-        .date-summary-text { font-size: 1.1rem; font-weight: 700; margin-top: 4px; }
-
-        .danke-card { background: linear-gradient(135deg, #ffeaa7, #f9ca24); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
-        .danke-prompt { font-size: 0.9rem; font-weight: 500; margin-bottom: 10px; }
-        .danke-input-row { display: flex; gap: 8px; }
-        .danke-input { flex: 1; padding: 10px; border: none; border-radius: 10px; font-size: 0.9rem; }
-        .danke-note { background: var(--card); border-radius: 10px; padding: 12px; margin-bottom: 8px; box-shadow: var(--shadow); }
-        .danke-from { font-size: 0.7rem; color: var(--text-light); }
-        .danke-text { font-weight: 500; margin-top: 4px; }
-
-        .activity-random { background: linear-gradient(135deg, var(--purple), #7c6dd8); color: white; border-radius: var(--radius); padding: 14px; text-align: center; margin-bottom: 12px; cursor: pointer; }
-        .activity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
-        .activity-card { background: var(--card); border-radius: var(--radius); padding: 12px; text-align: center; box-shadow: var(--shadow); cursor: pointer; }
-        .activity-card-emoji { font-size: 1.8rem; margin-bottom: 4px; }
-        .activity-card-name { font-size: 0.75rem; font-weight: 600; }
-
-        .hidden-section { background: var(--card); border-radius: var(--radius); margin-bottom: 12px; box-shadow: var(--shadow); overflow: hidden; }
-        .hidden-header { padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
-        .hidden-content { display: none; padding: 0 14px 14px; }
-        .hidden-section.open .hidden-content { display: block; }
-        .hidden-arrow { transition: transform 0.2s; }
-        .hidden-section.open .hidden-arrow { transform: rotate(180deg); }
-
-        .list-item { background: var(--bg); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
-        .list-item-actions { display: flex; gap: 4px; }
-        .list-item-btn { padding: 4px 8px; background: var(--card); border: none; border-radius: 6px; font-size: 0.7rem; cursor: pointer; }
-
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; }
-        .modal-overlay.active { display: flex; align-items: flex-end; justify-content: center; }
-        .modal { background: var(--card); border-radius: 20px 20px 0 0; width: 100%; max-width: 500px; max-height: 80vh; overflow-y: auto; padding: 16px; }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-        .modal-title { font-size: 1rem; font-weight: 700; }
-        .modal-close { width: 32px; height: 32px; border: none; background: var(--border); border-radius: 50%; font-size: 1.1rem; cursor: pointer; }
-
-        .form-group { margin-bottom: 14px; }
-        .form-label { display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 6px; color: var(--text-light); }
-        .form-input { width: 100%; padding: 10px 12px; border: 2px solid var(--border); border-radius: 10px; font-size: 0.9rem; background: var(--card); color: var(--text); }
-
-        .person-selector { display: flex; gap: 8px; }
-        .person-option { flex: 1; padding: 10px; border: 2px solid var(--border); border-radius: 10px; text-align: center; cursor: pointer; font-size: 0.85rem; font-weight: 600; }
-        .person-option.active { border-color: var(--primary); background: #fff5eb; }
-
-        .slot-types { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-        .slot-type { padding: 12px 8px; border: 2px solid var(--border); border-radius: 10px; text-align: center; cursor: pointer; }
-        .slot-type.active { border-color: var(--primary); background: #fff5eb; }
-        .slot-type-icon { font-size: 1.3rem; }
-        .slot-type-label { font-size: 0.7rem; font-weight: 600; margin-top: 4px; }
-
-        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
-        .tag { padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border: 2px solid var(--border); background: var(--card); }
-        .tag.active { background: var(--primary); color: white; border-color: var(--primary); }
-
-        .ingredient-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
-        .ingredient-tag { background: var(--bg); border: 1px solid var(--border); padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; }
+        /* Responsive Design */
+        @media (max-width: 375px) {
+            .time-tiles { 
+                grid-template-columns: repeat(3, 1fr); 
+                gap: 10px; 
+            }
+            
+            .status-row { 
+                flex-direction: column; 
+                gap: 8px; 
+            }
+            
+            .meal-row { 
+                flex-direction: column; 
+                align-items: stretch; 
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
     </style>
 </head>
 <body>
-    <header class="header"><h1>🎰 Casa Casino</h1></header>
+    <div class="standalone-notice">
+        🎰 Casa Casino - Jetzt mit Premium UX!
+    </div>
+
+    <header class="header">
+        <div></div>
+        <h1>🎰 Casa Casino</h1>
+        <button class="install-btn" id="installBtn" onclick="installPWA()">📱 Install</button>
+    </header>
 
     <!-- HEUTE -->
     <div class="screen active" id="screenHeute">
+        <div class="standalone-info">
+            <h3>✨ Premium Experience</h3>
+            <p>Casa Casino mit den ursprünglichen Farben und Premium-UX - das Beste aus beiden Welten!</p>
+            <div class="share-buttons">
+                <button class="share-btn" onclick="shareApp()">📤 Share</button>
+                <button class="share-btn" onclick="downloadApp()">💾 Download</button>
+            </div>
+        </div>
+
         <div class="today-hero">
             <div class="today-date" id="todayDate"></div>
             <div class="today-greeting" id="todayGreeting">Guten Tag!</div>
         </div>
+        
         <div class="status-row">
-            <div class="status-card free"><div class="status-icon">🧘</div><div class="status-value" id="freeTime">-</div><div class="status-label">Zeit für mich</div></div>
-            <div class="status-card busy"><div class="status-icon">📋</div><div class="status-value" id="busyTime">-</div><div class="status-label">Eingeplant</div></div>
+            <div class="status-card free">
+                <div class="status-icon">🧘</div>
+                <div class="status-value" id="freeTime">8h</div>
+                <div class="status-label">Zeit für mich</div>
+            </div>
+            <div class="status-card busy">
+                <div class="status-icon">📋</div>
+                <div class="status-value" id="busyTime">6h</div>
+                <div class="status-label">Eingeplant</div>
+            </div>
         </div>
-        <div class="next-block"><div class="next-label">Als Nächstes</div><div class="next-title" id="nextTitle">-</div><div class="next-time" id="nextTime"></div></div>
-        <div class="card"><div class="card-title">🍽️ Heute Abend</div><div id="todayMeal">Nicht geplant</div></div>
-        <div class="card"><div class="card-title">📋 To-Dos <span id="todoCount"></span></div><div id="todayTodos"></div></div>
+        
+        <div class="next-block">
+            <div class="next-label">Als Nächstes</div>
+            <div class="next-title" id="nextTitle">Valerie abholen</div>
+            <div class="next-time" id="nextTime">12:45</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">🍽️ Heute Abend</div>
+            <div id="todayMeal">Noch nicht geplant</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">📋 To-Dos <span id="todoCount">(3)</span></div>
+            <div id="todayTodos">
+                <div class="routine-item" onclick="toggleRoutine(this)">
+                    <div class="routine-checkbox"></div>
+                    <span class="routine-text">Einkaufen gehen</span>
+                </div>
+                <div class="routine-item" onclick="toggleRoutine(this)">
+                    <div class="routine-checkbox"></div>
+                    <span class="routine-text">Valerie Sachen waschen</span>
+                </div>
+                <div class="routine-item" onclick="toggleRoutine(this)">
+                    <div class="routine-checkbox"></div>
+                    <span class="routine-text">Anna überraschen ❤️</span>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- VALERIE -->
     <div class="screen" id="screenValerie">
         <div class="day-nav">
             <button class="day-nav-btn" onclick="changeDay(-1)">←</button>
-            <div style="text-align:center;"><div class="day-nav-day" id="dayNavDay">Montag</div><div class="day-nav-date" id="dayNavDate">26. Januar</div></div>
+            <div style="text-align:center;">
+                <div class="day-nav-day" id="dayNavDay">Montag</div>
+                <div class="day-nav-date" id="dayNavDate">27. Januar</div>
+            </div>
             <button class="day-nav-btn" onclick="changeDay(1)">→</button>
         </div>
+        
+        <div class="time-tiles" id="timeTiles">
+            <!-- Demo Tiles -->
+            <div class="time-tile empty" onclick="selectTile(this)"><div class="tile-time">7:00</div><div class="tile-icon">+</div><div class="tile-label"></div></div>
+            <div class="time-tile kiga" onclick="selectTile(this)"><div class="tile-time">8:00</div><div class="tile-icon">🎒</div><div class="tile-label">Kiga</div></div>
+            <div class="time-tile kiga" onclick="selectTile(this)"><div class="tile-time">9:00</div><div class="tile-icon">🎒</div><div class="tile-label">Kiga</div></div>
+            <div class="time-tile kiga" onclick="selectTile(this)"><div class="tile-time">10:00</div><div class="tile-icon">🎒</div><div class="tile-label">Kiga</div></div>
+            <div class="time-tile kiga" onclick="selectTile(this)"><div class="tile-time">11:00</div><div class="tile-icon">🎒</div><div class="tile-label">Kiga</div></div>
+            <div class="time-tile kiga" onclick="selectTile(this)"><div class="tile-time">12:00</div><div class="tile-icon">🎒</div><div class="tile-label">Kiga</div></div>
+            <div class="time-tile max" onclick="selectTile(this)"><div class="tile-time">13:00</div><div class="tile-icon">👶</div><div class="tile-label">Mit Valerie</div></div>
+            <div class="time-tile anna" onclick="selectTile(this)"><div class="tile-time">14:00</div><div class="tile-icon">🧘</div><div class="tile-label">Für mich</div></div>
+        </div>
+
         <div class="selection-bar" id="selectionBar">
-            <span class="selection-info" id="selectionInfo">2 Stunden ausgewählt</span>
-            <div>
-                <button class="btn btn-sm btn-secondary" onclick="clearSelection()">✕</button>
-                <button class="btn btn-sm btn-success" onclick="openSlotModalForSelection()">✓ Planen</button>
+            <span class="selection-info" id="selectionInfo">Keine Auswahl</span>
+            <button class="btn btn-sm btn-primary" onclick="clearSelection()">Clear</button>
+        </div>
+
+        <div class="tabs">
+            <div class="tab active">🌅 Routinen</div>
+            <div class="tab">⭐ Favorites</div>
+            <div class="tab">📸 Sprüche</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">🌅 Morgen Routine</div>
+            <div class="routine-item done" onclick="toggleRoutine(this)">
+                <div class="routine-checkbox">✓</div>
+                <span class="routine-emoji">☀️</span>
+                <span class="routine-text">Aufwachen</span>
+            </div>
+            <div class="routine-item" onclick="toggleRoutine(this)">
+                <div class="routine-checkbox"></div>
+                <span class="routine-emoji">🚽</span>
+                <span class="routine-text">Aufs Klo</span>
+            </div>
+            <div class="routine-item" onclick="toggleRoutine(this)">
+                <div class="routine-checkbox"></div>
+                <span class="routine-emoji">👕</span>
+                <span class="routine-text">Anziehen</span>
+            </div>
+            <div class="routine-item" onclick="toggleRoutine(this)">
+                <div class="routine-checkbox"></div>
+                <span class="routine-emoji">🥣</span>
+                <span class="routine-text">Frühstück</span>
             </div>
         </div>
-        <div class="time-tiles" id="timeTiles"></div>
-
-        <div class="section-spacer">✨ · · · ✨</div>
-
-        <div class="tabs" id="valerieTabs">
-            <div class="tab active" data-tab="routines">🌅 Routinen</div>
-            <div class="tab" data-tab="favorites">⭐ Favorites</div>
-            <div class="tab" data-tab="milestones">📸 Sprüche</div>
-        </div>
-        <div id="valerieContent"></div>
     </div>
 
     <!-- MEALS -->
     <div class="screen" id="screenMeals">
         <div class="dice-section">
-            <div class="dice" id="mealDice" onclick="rollMealDice()">🎲</div>
-            <p style="font-size:0.8rem;margin-top:6px;opacity:0.9;">Was essen wir?</p>
+            <div class="dice" onclick="rollMealDice()">🎲</div>
+            <p style="font-size:0.9rem;margin-top:8px;opacity:0.95;font-weight:500;">Was essen wir heute?</p>
             <div class="dice-result" id="mealDiceResult" style="display:none;"></div>
         </div>
-        <div class="card" style="padding:10px;"><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;"><input type="checkbox" id="showLunch" onchange="toggleLunch()"> Mittagessen anzeigen</label></div>
-        <div class="tabs" id="mealsTabs">
-            <div class="tab active" data-tab="plan">📅 Woche</div>
-            <div class="tab" data-tab="list">🛒 Einkauf</div>
-            <div class="tab" data-tab="library">📚 Gerichte</div>
+        
+        <div class="tabs">
+            <div class="tab active">📅 Woche</div>
+            <div class="tab">🛒 Einkauf</div>
+            <div class="tab">📚 Gerichte</div>
         </div>
-        <div id="mealsContent"></div>
+        
+        <div class="meal-row">
+            <div class="meal-day">
+                <div class="meal-day-name">Mo</div>
+                <div class="meal-day-date">27.</div>
+            </div>
+            <div class="meal-slots">
+                <div class="meal-slot filled">Spaghetti Bolognese</div>
+            </div>
+        </div>
+        
+        <div class="meal-row">
+            <div class="meal-day">
+                <div class="meal-day-name">Di</div>
+                <div class="meal-day-date">28.</div>
+            </div>
+            <div class="meal-slots">
+                <div class="meal-slot" onclick="selectMeal(this)">Was kochen wir?</div>
+            </div>
+        </div>
+        
+        <div class="meal-row">
+            <div class="meal-day">
+                <div class="meal-day-name">Mi</div>
+                <div class="meal-day-date">29.</div>
+            </div>
+            <div class="meal-slots">
+                <div class="meal-slot" onclick="selectMeal(this)">Idee gesucht 💡</div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">🛒 Einkaufsliste</div>
+            <div class="shopping-item" onclick="toggleShopping(this)">
+                <div class="shopping-checkbox"></div>
+                <span>Milch 🥛</span>
+            </div>
+            <div class="shopping-item" onclick="toggleShopping(this)">
+                <div class="shopping-checkbox"></div>
+                <span>Brot 🍞</span>
+            </div>
+            <div class="shopping-item checked" onclick="toggleShopping(this)">
+                <div class="shopping-checkbox">✓</div>
+                <span>Tomaten 🍅</span>
+            </div>
+        </div>
     </div>
 
     <!-- WIR -->
     <div class="screen" id="screenWir">
-        <div class="section-toggle">
-            <div class="section-btn active" data-section="todos" onclick="showWirSection('todos')">📋 To-Dos</div>
-            <div class="section-btn" data-section="date" onclick="showWirSection('date')">💕 Date Night</div>
-            <div class="section-btn" data-section="danke" onclick="showWirSection('danke')">💛 Danke</div>
-            <div class="section-btn" data-section="fun" onclick="showWirSection('fun')">🎲 Aktivitäten</div>
+        <div class="card">
+            <div class="card-title">💕 Date Night Planer</div>
+            <p style="margin-bottom:16px;color:var(--text-light);line-height:1.4;">Nächstes romantisches Abenteuer planen...</p>
+            <button class="btn btn-primary btn-block" onclick="rollDateIdea()">🎲 Date-Idee würfeln</button>
+            <div id="dateResult" style="margin-top:12px;display:none;padding:12px;background:var(--bg);border-radius:12px;"></div>
         </div>
-        <div id="wirContent"></div>
-
-        <div class="section-spacer">💜 · · · 💜</div>
-
-        <div class="hidden-section" id="sectionPack">
-            <div class="hidden-header" onclick="toggleHidden('sectionPack')"><span>🎒 Packlisten</span><span class="hidden-arrow">▼</span></div>
-            <div class="hidden-content" id="packContent"></div>
+        
+        <div class="card">
+            <div class="card-title">💛 Danke Notizen</div>
+            <div class="info-item">
+                <div class="info-value">Danke fürs Kochen heute! Das war so lecker ❤️</div>
+                <div class="info-label">Von Anna • vor 2h</div>
+            </div>
+            <div class="info-item">
+                <div class="info-value">Du bist die beste Mama für Valerie! 👑</div>
+                <div class="info-label">Von Max • gestern</div>
+            </div>
+            <button class="btn btn-secondary btn-block" onclick="addThankYou()">+ Danke sagen</button>
         </div>
-        <div class="hidden-section" id="sectionInfo">
-            <div class="hidden-header" onclick="toggleHidden('sectionInfo')"><span>📋 Wichtige Infos</span><span class="hidden-arrow">▼</span></div>
-            <div class="hidden-content" id="infoContent"></div>
+        
+        <div class="card">
+            <div class="card-title">🎯 Gemeinsame Ziele</div>
+            <div class="routine-item" onclick="toggleRoutine(this)">
+                <div class="routine-checkbox"></div>
+                <span class="routine-text">Mehr Zeit zu zweit</span>
+            </div>
+            <div class="routine-item" onclick="toggleRoutine(this)">
+                <div class="routine-checkbox"></div>
+                <span class="routine-text">Gemeinsam kochen</span>
+            </div>
+            <div class="routine-item done" onclick="toggleRoutine(this)">
+                <div class="routine-checkbox">✓</div>
+                <span class="routine-text">Casa Casino mit Premium UX! 🎰</span>
+            </div>
         </div>
     </div>
 
     <!-- NAV -->
     <nav class="nav">
-        <div class="nav-item active" data-screen="Heute" onclick="showScreen('Heute')"><span class="nav-icon">🏠</span><span class="nav-label">Heute</span></div>
-        <div class="nav-item" data-screen="Valerie" onclick="showScreen('Valerie')"><span class="nav-icon">👶</span><span class="nav-label">Valerie</span></div>
-        <div class="nav-item" data-screen="Meals" onclick="showScreen('Meals')"><span class="nav-icon">🍽️</span><span class="nav-label">Meals</span></div>
-        <div class="nav-item" data-screen="Wir" onclick="showScreen('Wir')"><span class="nav-icon">💜</span><span class="nav-label">Wir</span></div>
+        <div class="nav-item active" onclick="showScreen('Heute')">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Heute</span>
+        </div>
+        <div class="nav-item" onclick="showScreen('Valerie')">
+            <span class="nav-icon">👶</span>
+            <span class="nav-label">Valerie</span>
+        </div>
+        <div class="nav-item" onclick="showScreen('Meals')">
+            <span class="nav-icon">🍽️</span>
+            <span class="nav-label">Meals</span>
+        </div>
+        <div class="nav-item" onclick="showScreen('Wir')">
+            <span class="nav-icon">💜</span>
+            <span class="nav-label">Wir</span>
+        </div>
     </nav>
 
-    <!-- MODALS -->
-    <div class="modal-overlay" id="slotModal">
-        <div class="modal">
-            <div class="modal-header"><span class="modal-title" id="slotModalTitle">Zeit planen</span><button class="modal-close" onclick="closeModal('slotModal')">×</button></div>
-            <div class="form-group"><label class="form-label">Wer?</label><div class="person-selector" id="slotPerson"><div class="person-option active" data-v="max" onclick="setSlotPerson('max')">👨 Max</div><div class="person-option" data-v="anna" onclick="setSlotPerson('anna')">👩 Anna</div></div></div>
-            <div class="form-group"><label class="form-label">Was?</label><div class="slot-types" id="slotTypes"><div class="slot-type active" data-v="valerie" onclick="setSlotType('valerie')"><div class="slot-type-icon">👶</div><div class="slot-type-label">Mit Valerie</div></div><div class="slot-type" data-v="me" onclick="setSlotType('me')"><div class="slot-type-icon">🧘</div><div class="slot-type-label">Für mich</div></div><div class="slot-type" data-v="work" onclick="setSlotType('work')"><div class="slot-type-icon">💼</div><div class="slot-type-label">Arbeit</div></div><div class="slot-type" data-v="appt" onclick="setSlotType('appt')"><div class="slot-type-icon">📅</div><div class="slot-type-label">Termin</div></div></div></div>
-            <div class="form-group"><label class="form-label">Notiz</label><input type="text" class="form-input" id="slotNote" placeholder="Optional..."></div>
-            <button class="btn btn-success btn-block" onclick="saveSlot()">Speichern</button>
-            <button class="btn btn-secondary btn-block" onclick="clearSlot()" style="margin-top:8px;">Löschen</button>
-        </div>
-    </div>
+    <!-- INLINE SERVICE WORKER für PWA -->
+    <script id="sw-code" type="text/plain">
+        const CACHE_NAME = 'casa-casino-final-v1';
+        const STATIC_CACHE = ['/'];
 
-    <div class="modal-overlay" id="mealModal">
-        <div class="modal">
-            <div class="modal-header"><span class="modal-title" id="mealModalTitle">Gericht</span><button class="modal-close" onclick="closeModal('mealModal')">×</button></div>
-            <button class="btn btn-block" style="background:var(--purple);color:white;margin-bottom:10px;" onclick="selectRandomMeal()">🎲 Zufällig</button>
-            <div id="mealModalList"></div>
-            <button class="btn btn-secondary btn-block" onclick="openDishModal()" style="margin-top:10px;">+ Neues Gericht</button>
-        </div>
-    </div>
+        self.addEventListener('install', e => {
+            e.waitUntil(
+                caches.open(CACHE_NAME).then(cache => {
+                    return cache.addAll(STATIC_CACHE);
+                })
+            );
+        });
 
-    <div class="modal-overlay" id="dishModal">
-        <div class="modal">
-            <div class="modal-header"><span class="modal-title">Neues Gericht</span><button class="modal-close" onclick="closeModal('dishModal')">×</button></div>
-            <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="dishName" placeholder="z.B. Spaghetti"></div>
-            <div class="form-group"><label class="form-label">Wer kocht?</label><div class="person-selector" id="dishCook"><div class="person-option active" data-v="max" onclick="setDishCook('max')">👨‍🍳 Max</div><div class="person-option" data-v="anna" onclick="setDishCook('anna')">👩‍🍳 Anna</div><div class="person-option" data-v="both" onclick="setDishCook('both')">👫</div></div></div>
-            <div class="form-group"><label class="form-label">Tags</label><div class="tags" id="dishTags"><span class="tag" data-v="quick" onclick="toggleDishTag('quick')">⚡ Schnell</span><span class="tag" data-v="valerie" onclick="toggleDishTag('valerie')">👶 Valerie</span><span class="tag" data-v="veg" onclick="toggleDishTag('veg')">🥬 Veg</span></div></div>
-            <div class="form-group"><label class="form-label">Zutaten</label><div style="display:flex;gap:6px;"><input type="text" class="form-input" id="ingredientInput" placeholder="Zutat..."><button class="btn btn-primary" onclick="addIngredient()">+</button></div><div class="ingredient-tags" id="ingredientList"></div></div>
-            <button class="btn btn-success btn-block" onclick="saveDish()">Speichern</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="todoModal">
-        <div class="modal">
-            <div class="modal-header"><span class="modal-title">Neues To-Do</span><button class="modal-close" onclick="closeModal('todoModal')">×</button></div>
-            <div class="form-group"><label class="form-label">Was?</label><input type="text" class="form-input" id="todoText" placeholder="To-Do..."></div>
-            <div class="form-group"><label class="form-label">Wer?</label><div class="person-selector" id="todoPerson"><div class="person-option active" data-v="max" onclick="setTodoPerson('max')">👨 Max</div><div class="person-option" data-v="anna" onclick="setTodoPerson('anna')">👩 Anna</div><div class="person-option" data-v="both" onclick="setTodoPerson('both')">👫 Beide</div></div></div>
-            <button class="btn btn-success btn-block" onclick="saveTodo()">Speichern</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="editModal">
-        <div class="modal">
-            <div class="modal-header"><span class="modal-title" id="editModalTitle">Bearbeiten</span><button class="modal-close" onclick="closeModal('editModal')">×</button></div>
-            <div class="form-group"><label class="form-label">Emoji</label><input type="text" class="form-input" id="editEmoji"></div>
-            <div class="form-group"><label class="form-label">Text</label><input type="text" class="form-input" id="editText"></div>
-            <button class="btn btn-success btn-block" onclick="saveEdit()">Speichern</button>
-            <button class="btn btn-danger btn-block" onclick="deleteEdit()" style="margin-top:8px;">Löschen</button>
-        </div>
-    </div>
-
-    <div class="modal-overlay" id="listEditModal">
-        <div class="modal">
-            <div class="modal-header"><span class="modal-title" id="listEditTitle">Bearbeiten</span><button class="modal-close" onclick="closeModal('listEditModal')">×</button></div>
-            <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="listEditName"></div>
-            <button class="btn btn-success btn-block" onclick="saveListEdit()">Speichern</button>
-            <button class="btn btn-danger btn-block" onclick="deleteListItem()" style="margin-top:8px;">Löschen</button>
-        </div>
-    </div>
+        self.addEventListener('fetch', e => {
+            e.respondWith(
+                caches.match(e.request).then(response => {
+                    return response || fetch(e.request);
+                })
+            );
+        });
+    </script>
 
     <script>
-        // Register Service Worker for PWA
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js').catch(() => {});
+        // Initialize date display
+        function updateDate() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('todayDate').textContent = now.toLocaleDateString('de-DE', options);
+            
+            const hour = now.getHours();
+            let greeting = 'Guten Tag!';
+            if (hour < 12) greeting = 'Guten Morgen! ☀️';
+            else if (hour >= 18) greeting = 'Guten Abend! 🌙';
+            
+            document.getElementById('todayGreeting').textContent = greeting;
         }
 
-        let S = {
-            library: [], weekplan: {}, slots: {}, todos: [], dankeNotes: [],
-            routines: { morning: [{e:'☀️',t:'Aufwachen',d:0},{e:'🚽',t:'Aufs Klo',d:0},{e:'👕',t:'Anziehen',d:0},{e:'🥣',t:'Frühstück',d:0},{e:'🦷',t:'Zähne',d:0},{e:'👟',t:'Schuhe',d:0}], evening: [{e:'🛁',t:'Baden',d:0},{e:'👙',t:'Schlafanzug',d:0},{e:'🦷',t:'Zähne',d:0},{e:'📚',t:'Geschichte',d:0},{e:'💤',t:'Schlafen',d:0}] },
-            favorites: {food:'Spaghetti, Pfannkuchen',books:'Die kleine Raupe',calms:'Kuscheln, Schnuller',dislikes:'Laute Geräusche'},
-            milestones: [{date:'2026-01',text:'"Oh neiiiin!"'}],
-            datePlan: { when: null, what: null, food: null },
-            activities: { indoor:[{e:'🎨',t:'Malen'},{e:'🧩',t:'Puzzle'},{e:'📚',t:'Bücher'},{e:'🏗️',t:'Duplo'},{e:'🎭',t:'Verkleiden'}], outdoor:[{e:'🛝',t:'Spielplatz'},{e:'🚴',t:'Laufrad'},{e:'🌊',t:'Am See'},{e:'🥾',t:'Wandern'},{e:'⚽',t:'Ball'}], trips:[{e:'🦁',t:'Tierpark'},{e:'🏰',t:'Herrenchiemsee'},{e:'🚂',t:'Wendelstein'},{e:'🏔️',t:'Bergbahn'},{e:'🎢',t:'Freizeitpark'}] },
-            packlists: [{name:'Kiga-Tasche',items:['Wechselkleidung','Brotzeit','Flasche']},{name:'Ausflug',items:['Snacks','Windeln','Sonnencreme']}],
-            infos: [{label:'Kinderarzt',value:'Dr. Müller'},{label:'Notfall',value:'112'}],
-            settings: {portions:2,showLunch:false}
-        };
-
-        let currentDay = new Date();
-        let selectedHours = [];
-        let currentMealSlot = null;
-        let slotPerson = 'max', slotType = 'valerie';
-        let dishCook = 'max', dishTags = [], dishIngredients = [];
-        let todoPerson = 'max';
-        let currentValerieTab = 'routines', currentMealsTab = 'plan', currentWirSection = 'todos';
-        let currentEditType = null, currentEditIdx = null;
-        let currentListEditType = null, currentListEditIdx = null;
-
-        function load() { const d = localStorage.getItem('cc4'); if (d) S = {...S, ...JSON.parse(d)}; }
-        function save() { localStorage.setItem('cc4', JSON.stringify(S)); }
-
-        function setTimeColors() { const h = new Date().getHours(); document.body.className = h < 7 ? 'night' : h < 10 ? 'morning' : h < 18 ? '' : h < 22 ? 'evening' : 'night'; }
-        setTimeColors(); setInterval(setTimeColors, 60000);
-
-        function showScreen(name) {
+        // Enhanced Navigation with smooth animations
+        function showScreen(screenName) {
+            // Hide all screens
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-            document.getElementById('screen' + name).classList.add('active');
-            document.querySelector(`.nav-item[data-screen="${name}"]`).classList.add('active');
-            if (name === 'Heute') renderHeute();
-            if (name === 'Valerie') renderValerie();
-            if (name === 'Meals') renderMeals();
-            if (name === 'Wir') renderWir();
+            
+            // Show selected screen with delay for animation
+            setTimeout(() => {
+                document.getElementById('screen' + screenName).classList.add('active');
+            }, 100);
+            
+            event.currentTarget.classList.add('active');
         }
 
-        function fmtDate(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
-        function getWeekDays() {
-            const days = ['So','Mo','Di','Mi','Do','Fr','Sa'];
-            const today = new Date();
-            const mon = new Date(today); mon.setDate(today.getDate() - today.getDay() + 1);
-            return Array.from({length: 7}, (_, i) => { const d = new Date(mon); d.setDate(mon.getDate() + i); return {key: fmtDate(d), short: days[d.getDay()], date: d.getDate()}; });
-        }
-        function getCookLabel(c) { return {max:'👨‍🍳 Max',anna:'👩‍🍳 Anna',both:'👫 Beide'}[c] || ''; }
-        function getSlotIcon(t) { return {valerie:'👶',me:'🧘',work:'💼',appt:'📅'}[t] || '📅'; }
-        function getSlotLabel(t) { return {valerie:'Valerie',me:'Für mich',work:'Arbeit',appt:'Termin'}[t] || ''; }
-
-        // HEUTE
-        function renderHeute() {
-            const now = new Date();
-            document.getElementById('todayDate').textContent = now.toLocaleDateString('de-DE', {weekday:'long',day:'numeric',month:'long'});
-            const h = now.getHours();
-            document.getElementById('todayGreeting').textContent = h < 12 ? 'Guten Morgen!' : h < 18 ? 'Guten Tag!' : 'Guten Abend!';
-
-            const dk = fmtDate(now), slots = S.slots[dk] || {}, dow = now.getDay(), isKiga = dow >= 1 && dow <= 4;
-            let free = 0, busy = 0;
-            for (let i = 7; i <= 20; i++) {
-                if (isKiga && i >= 8 && i < 13) { free++; continue; }
-                if (slots[i]) { slots[i].type === 'me' ? free++ : busy++; } else free++;
-            }
-            document.getElementById('freeTime').textContent = free + 'h';
-            document.getElementById('busyTime').textContent = busy + 'h';
-
-            let nextTitle = 'Alles frei', nextTime = '';
-            const ch = now.getHours();
-            if (isKiga && ch < 8) { nextTitle = 'Valerie zum Kiga'; nextTime = '08:15'; }
-            else if (isKiga && ch < 12) { nextTitle = 'Valerie abholen'; nextTime = '12:45'; }
-            else { for (let i = ch + 1; i <= 20; i++) { if (slots[i]) { nextTitle = slots[i].note || getSlotLabel(slots[i].type); nextTime = i + ':00'; break; } } }
-            document.getElementById('nextTitle').textContent = nextTitle;
-            document.getElementById('nextTime').textContent = nextTime;
-
-            const meal = S.weekplan[dk]?.dinner, dish = meal ? S.library.find(d => d.id === meal) : null;
-            document.getElementById('todayMeal').innerHTML = dish ? `<strong>${dish.name}</strong> <span style="color:var(--text-light)">• ${getCookLabel(dish.cook)}</span>` : '<span style="color:var(--text-light)">Noch nicht geplant</span>';
-
-            const open = S.todos.filter(t => !t.done);
-            document.getElementById('todoCount').textContent = open.length ? `(${open.length})` : '';
-            document.getElementById('todayTodos').innerHTML = open.slice(0, 3).map(t => `<div class="todo-item" onclick="toggleTodo(${S.todos.indexOf(t)})"><div class="todo-checkbox"></div><span class="todo-text">${t.text}</span><span class="todo-person ${t.person}">${t.person==='max'?'Max':t.person==='anna'?'Anna':'Beide'}</span></div>`).join('') || '<span style="color:var(--text-light)">Alles erledigt! 🎉</span>';
-        }
-
-        // VALERIE
-        function renderValerie() {
-            const days = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
-            const months = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
-            document.getElementById('dayNavDay').textContent = days[currentDay.getDay()];
-            document.getElementById('dayNavDate').textContent = `${currentDay.getDate()}. ${months[currentDay.getMonth()]}`;
-
-            const dk = fmtDate(currentDay), slots = S.slots[dk] || {}, dow = currentDay.getDay(), isKiga = dow >= 1 && dow <= 4;
-            let html = '';
-            for (let h = 7; h <= 20; h++) {
-                const slot = slots[h];
-                let cls = 'empty', icon = '+', label = '';
-                if (isKiga && h >= 8 && h < 13) { cls = 'kiga'; icon = '🎒'; label = 'Kiga'; }
-                else if (slot) { cls = slot.person; icon = getSlotIcon(slot.type); label = slot.note || getSlotLabel(slot.type); }
-                if (selectedHours.includes(h)) cls += ' selected';
-                const click = (isKiga && h >= 8 && h < 13) ? '' : `onclick="toggleHourSelection(${h})"`;
-                html += `<div class="time-tile ${cls}" ${click}><div class="tile-time">${h}:00</div><div class="tile-icon">${icon}</div><div class="tile-label">${label}</div></div>`;
-            }
-            document.getElementById('timeTiles').innerHTML = html;
-            updateSelectionBar();
-            renderValerieTab();
-        }
-
-        function changeDay(d) { currentDay.setDate(currentDay.getDate() + d); selectedHours = []; renderValerie(); }
-
-        function toggleHourSelection(h) {
-            const idx = selectedHours.indexOf(h);
-            if (idx > -1) selectedHours.splice(idx, 1);
-            else selectedHours.push(h);
-            selectedHours.sort((a, b) => a - b);
-            renderValerie();
-        }
-
-        function updateSelectionBar() {
-            const bar = document.getElementById('selectionBar');
-            if (selectedHours.length > 0) {
-                bar.classList.add('active');
-                const start = selectedHours[0], end = selectedHours[selectedHours.length - 1] + 1;
-                document.getElementById('selectionInfo').textContent = `${start}:00 - ${end}:00 (${selectedHours.length}h)`;
-            } else bar.classList.remove('active');
-        }
-
-        function clearSelection() { selectedHours = []; renderValerie(); }
-
-        function openSlotModalForSelection() {
-            if (selectedHours.length === 0) return;
-            slotPerson = 'max'; slotType = 'valerie';
-            document.querySelectorAll('#slotPerson .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === 'max'));
-            document.querySelectorAll('#slotTypes .slot-type').forEach(o => o.classList.toggle('active', o.dataset.v === 'valerie'));
-            document.getElementById('slotNote').value = '';
-            document.getElementById('slotModalTitle').textContent = `${selectedHours[0]}:00 - ${selectedHours[selectedHours.length-1]+1}:00`;
-            document.getElementById('slotModal').classList.add('active');
-        }
-
-        function setSlotPerson(p) { slotPerson = p; document.querySelectorAll('#slotPerson .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === p)); }
-        function setSlotType(t) { slotType = t; document.querySelectorAll('#slotTypes .slot-type').forEach(o => o.classList.toggle('active', o.dataset.v === t)); }
-
-        function saveSlot() {
-            const dk = fmtDate(currentDay);
-            if (!S.slots[dk]) S.slots[dk] = {};
-            const note = document.getElementById('slotNote').value.trim();
-            selectedHours.forEach(h => { S.slots[dk][h] = {person: slotPerson, type: slotType, note}; });
-            save(); closeModal('slotModal'); selectedHours = []; renderValerie();
-        }
-
-        function clearSlot() {
-            const dk = fmtDate(currentDay);
-            if (S.slots[dk]) selectedHours.forEach(h => delete S.slots[dk][h]);
-            save(); closeModal('slotModal'); selectedHours = []; renderValerie();
-        }
-
-        document.getElementById('valerieTabs').addEventListener('click', e => {
-            const tab = e.target.closest('.tab'); if (!tab) return;
-            document.querySelectorAll('#valerieTabs .tab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active'); currentValerieTab = tab.dataset.tab; renderValerieTab();
-        });
-
-        function renderValerieTab() {
-            const c = document.getElementById('valerieContent');
-            if (currentValerieTab === 'routines') {
-                c.innerHTML = `<div class="card"><div class="card-title">🌅 Morgen</div>${S.routines.morning.map((r, i) => `<div class="routine-item ${r.d?'done':''}" onclick="toggleRoutine('morning',${i})"><div class="routine-checkbox">${r.d?'✓':''}</div><span class="routine-emoji">${r.e}</span><span class="routine-text">${r.t}</span></div>`).join('')}</div>
-                    <div class="card"><div class="card-title">🌙 Abend</div>${S.routines.evening.map((r, i) => `<div class="routine-item ${r.d?'done':''}" onclick="toggleRoutine('evening',${i})"><div class="routine-checkbox">${r.d?'✓':''}</div><span class="routine-emoji">${r.e}</span><span class="routine-text">${r.t}</span></div>`).join('')}</div>
-                    <button class="btn btn-secondary btn-block" onclick="resetRoutines()">🔄 Reset</button>`;
-            } else if (currentValerieTab === 'favorites') {
-                c.innerHTML = `<div class="card"><div class="info-item"><div class="info-label">🍝 Lieblingsessen</div><div class="info-value">${S.favorites.food}</div></div><div class="info-item"><div class="info-label">📚 Bücher</div><div class="info-value">${S.favorites.books}</div></div><div class="info-item"><div class="info-label">💆 Beruhigt sich bei</div><div class="info-value">${S.favorites.calms}</div></div><div class="info-item"><div class="info-label">😟 Mag nicht</div><div class="info-value">${S.favorites.dislikes}</div></div></div>`;
-            } else if (currentValerieTab === 'milestones') {
-                c.innerHTML = `<div class="card">${S.milestones.map(m => `<div class="info-item"><div class="info-label">${m.date}</div><div class="info-value">${m.text}</div></div>`).join('')}<button class="btn btn-sm btn-secondary" onclick="addMilestone()" style="margin-top:8px;">+ Spruch</button></div>`;
-            }
-        }
-
-        function toggleRoutine(time, idx) { S.routines[time][idx].d = S.routines[time][idx].d ? 0 : 1; save(); renderValerieTab(); }
-        function resetRoutines() { S.routines.morning.forEach(r => r.d = 0); S.routines.evening.forEach(r => r.d = 0); save(); renderValerieTab(); }
-        function addMilestone() { const text = prompt('Spruch?'); if (!text) return; const date = new Date().toISOString().slice(0,7); S.milestones.unshift({date, text}); save(); renderValerieTab(); }
-
-        // MEALS
-        function renderMeals() { document.getElementById('showLunch').checked = S.settings.showLunch; renderMealsTab(); }
-        function toggleLunch() { S.settings.showLunch = document.getElementById('showLunch').checked; save(); renderMealsTab(); }
-
-        document.getElementById('mealsTabs').addEventListener('click', e => {
-            const tab = e.target.closest('.tab'); if (!tab) return;
-            document.querySelectorAll('#mealsTabs .tab').forEach(t => t.classList.remove('active'));
-            tab.classList.add('active'); currentMealsTab = tab.dataset.tab; renderMealsTab();
-        });
-
-        function renderMealsTab() {
-            const c = document.getElementById('mealsContent'), week = getWeekDays();
-            if (currentMealsTab === 'plan') {
-                c.innerHTML = week.map(d => {
-                    const plan = S.weekplan[d.key] || {};
-                    const dinner = plan.dinner ? S.library.find(m => m.id === plan.dinner) : null;
-                    const lunch = plan.lunch ? S.library.find(m => m.id === plan.lunch) : null;
-                    let html = `<div class="meal-card" onclick="openMealModal('${d.key}','dinner')"><div><div class="meal-day">${d.short} ${d.date}</div><div class="meal-name">${dinner ? dinner.name : 'Abendessen planen...'}</div></div><div class="meal-add">${dinner ? '✏️' : '+'}</div></div>`;
-                    if (S.settings.showLunch) html += `<div class="meal-card" onclick="openMealModal('${d.key}','lunch')" style="margin-left:20px;"><div><div class="meal-name" style="font-size:0.75rem;">${lunch ? lunch.name : '🥗 Mittag...'}</div></div><div class="meal-add">${lunch ? '✏️' : '+'}</div></div>`;
-                    return html;
-                }).join('');
-            } else if (currentMealsTab === 'list') {
-                const planned = new Set();
-                week.forEach(d => { const p = S.weekplan[d.key]; if (p?.dinner) planned.add(p.dinner); if (p?.lunch) planned.add(p.lunch); });
-                const ingredients = {};
-                planned.forEach(id => { const dish = S.library.find(d => d.id === id); if (dish) dish.ingredients.forEach(ing => { ingredients[ing] = (ingredients[ing] || 0) + 1; }); });
-                const list = Object.entries(ingredients).sort((a, b) => a[0].localeCompare(b[0]));
-                c.innerHTML = list.length ? `<div class="card">${list.map(([ing, count]) => `<div class="list-item"><span>${ing}</span><span style="color:var(--text-light)">${count > 1 ? `×${count}` : ''}</span></div>`).join('')}</div>` : '<div class="card"><p style="color:var(--text-light);text-align:center;">Plane Gerichte um die Einkaufsliste zu sehen</p></div>';
-            } else if (currentMealsTab === 'library') {
-                c.innerHTML = `<button class="btn btn-primary btn-block" onclick="openDishModal()" style="margin-bottom:12px;">+ Neues Gericht</button>${S.library.map(d => `<div class="meal-card"><div><div class="meal-day">${d.name}</div><div class="meal-name">${getCookLabel(d.cook)} ${d.tags.map(t => t === 'quick' ? '⚡' : t === 'valerie' ? '👶' : '🥬').join(' ')}</div></div></div>`).join('') || '<p style="color:var(--text-light);text-align:center;">Noch keine Gerichte</p>'}`;
-            }
-        }
-
-        function openMealModal(day, slot) {
-            currentMealSlot = {day, slot};
-            document.getElementById('mealModalTitle').textContent = slot === 'dinner' ? 'Abendessen' : 'Mittagessen';
-            document.getElementById('mealModalList').innerHTML = S.library.map(d => `<div class="meal-card" onclick="selectMeal('${d.id}')"><div><div class="meal-day">${d.name}</div><div class="meal-name">${getCookLabel(d.cook)}</div></div></div>`).join('') || '<p style="color:var(--text-light)">Keine Gerichte</p>';
-            document.getElementById('mealModal').classList.add('active');
-        }
-
-        function selectMeal(id) {
-            if (!S.weekplan[currentMealSlot.day]) S.weekplan[currentMealSlot.day] = {};
-            S.weekplan[currentMealSlot.day][currentMealSlot.slot] = id;
-            save(); closeModal('mealModal'); renderMealsTab(); renderHeute();
-        }
-
-        function selectRandomMeal() { if (S.library.length) selectMeal(S.library[Math.floor(Math.random() * S.library.length)].id); }
-
+        // Enhanced Dice Roll with better animations
         function rollMealDice() {
-            if (!S.library.length) return;
-            const dice = document.getElementById('mealDice'), result = document.getElementById('mealDiceResult');
-            dice.style.transform = 'rotate(720deg)';
-            setTimeout(() => { dice.style.transform = ''; const meal = S.library[Math.floor(Math.random() * S.library.length)]; result.textContent = `${meal.name} ${getCookLabel(meal.cook)}`; result.style.display = 'block'; }, 300);
+            const meals = [
+                '🍝 Spaghetti Bolognese',
+                '🍕 Pizza Margherita', 
+                '🥩 Schnitzel mit Pommes',
+                '🍛 Thai Curry',
+                '🍲 Gemüsesuppe',
+                '🌯 Wraps mit Hähnchen',
+                '🥘 Paella',
+                '🍜 Ramen'
+            ];
+            
+            const dice = document.querySelector('.dice');
+            const result = document.getElementById('mealDiceResult');
+            
+            dice.classList.add('spinning');
+            
+            // Add loading state
+            result.innerHTML = '<div class="loading"></div>';
+            result.style.display = 'block';
+            
+            setTimeout(() => {
+                dice.classList.remove('spinning');
+                const meal = meals[Math.floor(Math.random() * meals.length)];
+                result.innerHTML = `<strong style="font-size:1.1rem;">${meal}</strong><br><small style="opacity:0.8;">Guten Appetit! 🤤</small>`;
+                
+                // Add celebration effect
+                celebrateChoice();
+            }, 600);
         }
 
-        function openDishModal() {
-            dishCook = 'max'; dishTags = []; dishIngredients = [];
-            document.getElementById('dishName').value = '';
-            document.querySelectorAll('#dishCook .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === 'max'));
-            document.querySelectorAll('#dishTags .tag').forEach(t => t.classList.remove('active'));
-            document.getElementById('ingredientList').innerHTML = '';
-            document.getElementById('dishModal').classList.add('active');
+        // Date Ideas for "Wir" section
+        function rollDateIdea() {
+            const dateIdeas = [
+                '🍷 Romantisches Dinner bei Kerzenschein',
+                '🚶‍♀️ Spaziergang unter den Sternen',
+                '🎬 Filmabend mit Popcorn',
+                '🍳 Gemeinsam kochen',
+                '🧩 Puzzle zusammen machen',
+                '🛁 Entspannungsbad zu zweit',
+                '📸 Foto-Safari in der Stadt',
+                '🌅 Sonnenaufgang anschauen',
+                '🎨 Mal-Abend',
+                '☕ Café-Date entdecken'
+            ];
+            
+            const result = document.getElementById('dateResult');
+            const btn = event.target;
+            
+            // Loading animation
+            btn.innerHTML = '<div class="loading" style="margin:0 auto;"></div>';
+            
+            setTimeout(() => {
+                const idea = dateIdeas[Math.floor(Math.random() * dateIdeas.length)];
+                result.innerHTML = `<strong style="color: var(--primary);">${idea}</strong>`;
+                result.style.display = 'block';
+                btn.innerHTML = '🎲 Date-Idee würfeln';
+                celebrateChoice();
+            }, 1000);
         }
 
-        function setDishCook(c) { dishCook = c; document.querySelectorAll('#dishCook .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === c)); }
-        function toggleDishTag(t) { const idx = dishTags.indexOf(t); if (idx > -1) dishTags.splice(idx, 1); else dishTags.push(t); document.querySelectorAll('#dishTags .tag').forEach(el => el.classList.toggle('active', dishTags.includes(el.dataset.v))); }
-        function addIngredient() { const inp = document.getElementById('ingredientInput'); const v = inp.value.trim(); if (!v) return; dishIngredients.push(v); inp.value = ''; document.getElementById('ingredientList').innerHTML = dishIngredients.map((ing, i) => `<span class="ingredient-tag">${ing} <span onclick="removeIngredient(${i})" style="cursor:pointer;opacity:0.5">×</span></span>`).join(''); }
-        function removeIngredient(i) { dishIngredients.splice(i, 1); document.getElementById('ingredientList').innerHTML = dishIngredients.map((ing, i) => `<span class="ingredient-tag">${ing} <span onclick="removeIngredient(${i})" style="cursor:pointer;opacity:0.5">×</span></span>`).join(''); }
-        function saveDish() { const name = document.getElementById('dishName').value.trim(); if (!name) return; S.library.push({id: Date.now().toString(), name, cook: dishCook, tags: [...dishTags], ingredients: [...dishIngredients]}); save(); closeModal('dishModal'); renderMealsTab(); }
+        // Add Thank You Note
+        function addThankYou() {
+            const note = prompt('Wofür möchtest du Danke sagen?');
+            if (!note) return;
+            
+            // Simple implementation - in real app would save to storage
+            const container = document.querySelector('#screenWir .card:nth-child(2)');
+            const newNote = document.createElement('div');
+            newNote.className = 'info-item';
+            newNote.innerHTML = `
+                <div class="info-value">${note}</div>
+                <div class="info-label">Gerade eben • ❤️</div>
+            `;
+            container.insertBefore(newNote, container.querySelector('button'));
+        }
 
-        // WIR
-        function renderWir() { showWirSection(currentWirSection); renderHiddenSections(); }
-
-        function showWirSection(sec) {
-            currentWirSection = sec;
-            document.querySelectorAll('.section-btn').forEach(b => b.classList.toggle('active', b.dataset.section === sec));
-            const c = document.getElementById('wirContent');
-
-            if (sec === 'todos') {
-                const open = S.todos.filter(t => !t.done), done = S.todos.filter(t => t.done);
-                c.innerHTML = `<button class="btn btn-primary btn-block" onclick="openTodoModal()" style="margin-bottom:12px;">+ To-Do</button>${open.map(t => `<div class="todo-item" onclick="toggleTodo(${S.todos.indexOf(t)})"><div class="todo-checkbox"></div><span class="todo-text">${t.text}</span><span class="todo-person ${t.person}">${t.person==='max'?'Max':t.person==='anna'?'Anna':'Beide'}</span></div>`).join('')}${done.length ? `<div class="card-title" style="margin-top:16px;">✓ Erledigt</div>${done.map(t => `<div class="todo-item done" onclick="toggleTodo(${S.todos.indexOf(t)})"><div class="todo-checkbox">✓</div><span class="todo-text">${t.text}</span></div>`).join('')}` : ''}`;
-            } else if (sec === 'date') {
-                const whenOpts = ['🗓️ Diese Woche','🌙 Heute Abend','📅 Nächstes WE'];
-                const whatOpts = ['🍿 Film','🎮 Spiele','🛀 Wellness','🌙 Spaziergang','🍷 Essen'];
-                const foodOpts = ['🍕 Bestellen','🍳 Selber kochen','🍽️ Restaurant'];
-                c.innerHTML = `<div class="date-planner"><div class="date-planner-title">💕 Date Night Planen</div>
-                    <div class="date-step"><div class="date-step-num">1</div><div class="date-step-title">Wann?</div><div class="date-step-options">${whenOpts.map(o => `<div class="date-option ${S.datePlan.when===o?'selected':''}" onclick="setDatePlan('when','${o}')">${o}</div>`).join('')}</div></div>
-                    <div class="date-step"><div class="date-step-num">2</div><div class="date-step-title">Was machen?</div><div class="date-step-options">${whatOpts.map(o => `<div class="date-option ${S.datePlan.what===o?'selected':''}" onclick="setDatePlan('what','${o}')">${o}</div>`).join('')}</div></div>
-                    <div class="date-step"><div class="date-step-num">3</div><div class="date-step-title">Essen?</div><div class="date-step-options">${foodOpts.map(o => `<div class="date-option ${S.datePlan.food===o?'selected':''}" onclick="setDatePlan('food','${o}')">${o}</div>`).join('')}</div></div>
-                    ${S.datePlan.when || S.datePlan.what || S.datePlan.food ? `<div class="date-summary"><div class="date-summary-title">Euer Plan</div><div class="date-summary-text">${[S.datePlan.when, S.datePlan.what, S.datePlan.food].filter(Boolean).join(' → ') || '...'}</div></div>` : ''}
-                </div>`;
-            } else if (sec === 'danke') {
-                c.innerHTML = `<div class="danke-card"><div class="danke-prompt">💛 Wofür bist du dankbar?</div><div class="danke-input-row"><input type="text" class="danke-input" id="dankeInput" placeholder="Danke für..."><button class="btn btn-primary" onclick="sendDanke()">💌</button></div></div>${S.dankeNotes.length ? `<div class="card-title">Letzte</div>${S.dankeNotes.slice(0,10).map(n => `<div class="danke-note"><div class="danke-from">${n.from==='max'?'👨 Max':'👩 Anna'}</div><div class="danke-text">${n.text}</div></div>`).join('')}` : ''}`;
-            } else if (sec === 'fun') {
-                c.innerHTML = `<div class="activity-random" onclick="randomActivity()"><div style="font-size:2rem;">🎲</div><div style="font-weight:600;margin-top:4px;">Was machen wir?</div></div>
-                    <div class="card-title">🏠 Indoor <button class="btn btn-sm" onclick="addActivity('indoor')">+</button></div><div class="activity-grid">${S.activities.indoor.map((a, i) => `<div class="activity-card" onclick="editItem('activities.indoor',${i})"><div class="activity-card-emoji">${a.e}</div><div class="activity-card-name">${a.t}</div></div>`).join('')}</div>
-                    <div class="card-title">🌳 Outdoor <button class="btn btn-sm" onclick="addActivity('outdoor')">+</button></div><div class="activity-grid">${S.activities.outdoor.map((a, i) => `<div class="activity-card" onclick="editItem('activities.outdoor',${i})"><div class="activity-card-emoji">${a.e}</div><div class="activity-card-name">${a.t}</div></div>`).join('')}</div>
-                    <div class="card-title">🚗 Ausflüge <button class="btn btn-sm" onclick="addActivity('trips')">+</button></div><div class="activity-grid">${S.activities.trips.map((a, i) => `<div class="activity-card" onclick="editItem('activities.trips',${i})"><div class="activity-card-emoji">${a.e}</div><div class="activity-card-name">${a.t}</div></div>`).join('')}</div>`;
+        // Toggle Routine Items
+        function toggleRoutine(element) {
+            element.classList.toggle('done');
+            const checkbox = element.querySelector('.routine-checkbox');
+            
+            if (element.classList.contains('done')) {
+                checkbox.textContent = '✓';
+                // Add celebration animation
+                checkbox.style.animation = 'checkmark 0.3s ease-in-out';
+            } else {
+                checkbox.textContent = '';
+                checkbox.style.animation = '';
             }
         }
 
-        function setDatePlan(k, v) { S.datePlan[k] = S.datePlan[k] === v ? null : v; save(); showWirSection('date'); }
-
-        function openTodoModal() { todoPerson = 'max'; document.getElementById('todoText').value = ''; document.querySelectorAll('#todoPerson .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === 'max')); document.getElementById('todoModal').classList.add('active'); }
-        function setTodoPerson(p) { todoPerson = p; document.querySelectorAll('#todoPerson .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === p)); }
-        function saveTodo() { const text = document.getElementById('todoText').value.trim(); if (!text) return; S.todos.unshift({text, person: todoPerson, done: false}); save(); closeModal('todoModal'); showWirSection('todos'); }
-        function toggleTodo(i) { S.todos[i].done = !S.todos[i].done; save(); showWirSection('todos'); renderHeute(); }
-
-        function sendDanke() { const inp = document.getElementById('dankeInput'); const t = inp.value.trim(); if (!t) return; S.dankeNotes.unshift({from: 'max', text: t}); save(); inp.value = ''; showWirSection('danke'); }
-
-        function addActivity(cat) { S.activities[cat].push({e:'✨', t:'Neu'}); save(); showWirSection('fun'); }
-        function randomActivity() { const all = [...S.activities.indoor, ...S.activities.outdoor, ...S.activities.trips]; const r = all[Math.floor(Math.random() * all.length)]; alert(`${r.e} ${r.t}`); }
-
-        function editItem(type, idx) { currentEditType = type; currentEditIdx = idx; let item; if (type.startsWith('activities.')) item = S.activities[type.split('.')[1]][idx]; document.getElementById('editEmoji').value = item.e; document.getElementById('editText').value = item.t; document.getElementById('editModal').classList.add('active'); }
-        function saveEdit() { const e = document.getElementById('editEmoji').value || '✨'; const t = document.getElementById('editText').value.trim(); if (!t) return; if (currentEditType.startsWith('activities.')) S.activities[currentEditType.split('.')[1]][currentEditIdx] = {e, t}; save(); closeModal('editModal'); showWirSection(currentWirSection); }
-        function deleteEdit() { if (currentEditType.startsWith('activities.')) S.activities[currentEditType.split('.')[1]].splice(currentEditIdx, 1); save(); closeModal('editModal'); showWirSection(currentWirSection); }
-
-        // HIDDEN SECTIONS
-        function renderHiddenSections() {
-            document.getElementById('packContent').innerHTML = S.packlists.map((p, i) => `<div style="margin-bottom:12px;"><div class="list-item"><strong>${p.name}</strong><div class="list-item-actions"><button class="list-item-btn" onclick="editListItem('packlists',${i})">✏️</button></div></div>${p.items.map(item => `<div class="list-item"><span>${item}</span></div>`).join('')}</div>`).join('') + '<button class="btn btn-sm btn-secondary" onclick="addPacklist()">+ Liste</button>';
-            document.getElementById('infoContent').innerHTML = S.infos.map((info, i) => `<div class="list-item"><div><div style="font-size:0.7rem;color:var(--text-light)">${info.label}</div><div style="font-weight:600">${info.value}</div></div><div class="list-item-actions"><button class="list-item-btn" onclick="editListItem('infos',${i})">✏️</button></div></div>`).join('') + '<button class="btn btn-sm btn-secondary" onclick="addInfo()" style="margin-top:8px;">+ Info</button>';
+        // Toggle Shopping Items
+        function toggleShopping(element) {
+            element.classList.toggle('checked');
+            const checkbox = element.querySelector('.shopping-checkbox');
+            
+            if (element.classList.contains('checked')) {
+                checkbox.textContent = '✓';
+            } else {
+                checkbox.textContent = '';
+            }
         }
 
-        function toggleHidden(id) { document.getElementById(id).classList.toggle('open'); }
-        function addPacklist() { const name = prompt('Listenname?'); if (!name) return; S.packlists.push({name, items: []}); save(); renderHiddenSections(); }
-        function addInfo() { const label = prompt('Label?'); const value = prompt('Wert?'); if (!label || !value) return; S.infos.push({label, value}); save(); renderHiddenSections(); }
+        // Celebration Effect
+        function celebrateChoice() {
+            // Simple celebration effect
+            document.body.style.animation = 'none';
+            setTimeout(() => {
+                document.body.style.animation = '';
+            }, 10);
+        }
 
-        function editListItem(type, idx) { currentListEditType = type; currentListEditIdx = idx; const item = S[type][idx]; document.getElementById('listEditTitle').textContent = type === 'packlists' ? 'Packliste' : 'Info'; document.getElementById('listEditName').value = type === 'packlists' ? item.name : item.label; document.getElementById('listEditModal').classList.add('active'); }
-        function saveListEdit() { const name = document.getElementById('listEditName').value.trim(); if (!name) return; if (currentListEditType === 'packlists') S.packlists[currentListEditIdx].name = name; else S.infos[currentListEditIdx].label = name; save(); closeModal('listEditModal'); renderHiddenSections(); }
-        function deleteListItem() { S[currentListEditType].splice(currentListEditIdx, 1); save(); closeModal('listEditModal'); renderHiddenSections(); }
+        // PWA Installation
+        let deferredPrompt;
+        const installBtn = document.getElementById('installBtn');
 
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-        document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.classList.add('show');
+        });
 
-        window.ccDebug = { seed() { S.library = [{id:'1',name:'Spaghetti',cook:'max',tags:['valerie'],ingredients:['Spaghetti','Hackfleisch','Passata']},{id:'2',name:'Pfannkuchen',cook:'anna',tags:['quick'],ingredients:['Mehl','Eier','Milch']}]; const days = getWeekDays(); S.weekplan = {[days[0].key]:{dinner:'1'},[days[2].key]:{dinner:'2'}}; S.todos = [{text:'Einkaufen',person:'max',done:false}]; save(); location.reload(); }, clear() { localStorage.clear(); location.reload(); } };
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('PWA installed');
+                    }
+                    deferredPrompt = null;
+                    installBtn.classList.remove('show');
+                });
+            }
+        }
 
-        load(); renderHeute();
+        // Share App
+        function shareApp() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Casa Casino',
+                    text: 'Unsere Familien-Organisation App!',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback
+                const url = window.location.href;
+                navigator.clipboard.writeText(url);
+                alert('Link kopiert! 📋');
+            }
+        }
+
+        // Download App (PWA)
+        function downloadApp() {
+            if (deferredPrompt) {
+                installPWA();
+            } else {
+                alert('Bereits installiert oder nicht unterstützt');
+            }
+        }
+
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            const swCode = document.getElementById('sw-code').textContent;
+            const swBlob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(swBlob);
+            
+            navigator.serviceWorker.register(swUrl).then(registration => {
+                console.log('SW registered:', registration);
+            }).catch(error => {
+                console.log('SW registration failed:', error);
+            });
+        }
+
+        // Initialize
+        updateDate();
+        setInterval(updateDate, 60000); // Update every minute
+
+        // Time-based theme (optional)
+        function updateThemeBasedOnTime() {
+            const hour = new Date().getHours();
+            const body = document.body;
+            
+            // Reset classes
+            body.classList.remove('morning', 'evening', 'night');
+            
+            if (hour >= 6 && hour < 10) {
+                body.classList.add('morning');
+            } else if (hour >= 18 && hour < 22) {
+                body.classList.add('evening');
+            } else if (hour >= 22 || hour < 6) {
+                body.classList.add('night');
+            }
+        }
+
+        updateThemeBasedOnTime();
+        setInterval(updateThemeBasedOnTime, 60000);
+
+        console.log('🎰 Casa Casino Final - Premium UX mit ursprünglichen Farben geladen!');
     </script>
 </body>
 </html>

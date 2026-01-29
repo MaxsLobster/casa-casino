@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1">
+    <title>Casa Casino 🎰</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Casa Casino">
+    <meta name="theme-color" content="#d35400">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23d35400' width='100' height='100' rx='20'/><text y='70' x='50' text-anchor='middle' font-size='60'>🎰</text></svg>">
+    <link rel="manifest" href="manifest.json">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+        :root {
+            --primary: #d35400; --primary-light: #e67e22; --bg: #f5f1e8; --card: #ffffff;
+            --text: #1a1a2e; --text-light: #4a4a5a; --border: #d0ccc0; --success: #00a878;
+            --danger: #c0392b; --purple: #5b4caa; --pink: #c44569; --blue: #0984e3;
+            --max-color: #0984e3; --anna-color: #c44569; --shadow: 0 2px 12px rgba(0,0,0,0.1); --radius: 14px;
+        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding-bottom: 85px; }
+        body.morning { --bg: #fef9ef; --primary: #e67e22; }
+        body.evening { --bg: #ebe4d6; --primary: #b84700; }
+        body.night { --bg: #2d2d3a; --card: #3d3d4a; --text: #e8e8e8; --text-light: #a0a0b0; --border: #4d4d5a; }
+
+        .header { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; padding: 14px 20px; text-align: center; position: sticky; top: 0; z-index: 100; }
+        .header h1 { font-size: 1.2rem; font-weight: 700; }
+
+        .screen { display: none; padding: 12px; }
+        .screen.active { display: block; }
+
+        .card { background: var(--card); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; box-shadow: var(--shadow); }
+        .card-title { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-light); margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+
+        .nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--card); display: flex; justify-content: space-around; padding: 6px 0 max(6px, env(safe-area-inset-bottom)); box-shadow: 0 -2px 16px rgba(0,0,0,0.12); z-index: 1000; }
+        .nav-item { display: flex; flex-direction: column; align-items: center; padding: 6px 14px; border-radius: 12px; cursor: pointer; }
+        .nav-item.active { background: var(--primary); color: white; }
+        .nav-icon { font-size: 1.3rem; margin-bottom: 1px; }
+        .nav-label { font-size: 0.6rem; font-weight: 600; }
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border: none; border-radius: 10px; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-secondary { background: var(--border); color: var(--text); }
+        .btn-success { background: var(--success); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-block { width: 100%; }
+        .btn-sm { padding: 6px 10px; font-size: 0.75rem; }
+
+        /* HEUTE */
+        .today-hero { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: white; border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
+        .today-date { font-size: 0.8rem; opacity: 0.9; }
+        .today-greeting { font-size: 1.4rem; font-weight: 700; margin: 4px 0; }
+
+        .status-row { display: flex; gap: 10px; margin-bottom: 12px; }
+        .status-card { flex: 1; background: var(--card); border-radius: var(--radius); padding: 14px; text-align: center; box-shadow: var(--shadow); border-left: 4px solid var(--border); }
+        .status-card.free { border-left-color: var(--success); }
+        .status-card.busy { border-left-color: var(--primary); }
+        .status-icon { font-size: 1.6rem; margin-bottom: 4px; }
+        .status-value { font-size: 1.1rem; font-weight: 700; }
+        .status-label { font-size: 0.65rem; color: var(--text-light); text-transform: uppercase; margin-top: 2px; }
+
+        .next-block { background: linear-gradient(135deg, #fff8f0, var(--card)); border: 2px solid var(--primary-light); border-radius: var(--radius); padding: 14px; margin-bottom: 12px; }
+        .next-label { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; }
+        .next-title { font-size: 1.1rem; font-weight: 700; margin-top: 4px; }
+        .next-time { font-size: 0.85rem; color: var(--text-light); }
+
+        /* VALERIE TILES */
+        .day-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; background: var(--card); border-radius: var(--radius); padding: 10px 14px; box-shadow: var(--shadow); }
+        .day-nav-btn { width: 36px; height: 36px; border: none; background: var(--bg); border-radius: 10px; font-size: 1.1rem; cursor: pointer; }
+        .day-nav-day { font-weight: 700; font-size: 1rem; }
+        .day-nav-date { font-size: 0.75rem; color: var(--text-light); }
+
+        .time-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+        .time-tile { aspect-ratio: 1; background: var(--card); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; box-shadow: var(--shadow); border: 3px solid transparent; transition: all 0.15s; position: relative; }
+        .time-tile:active { transform: scale(0.95); }
+        .time-tile .tile-time { font-size: 0.7rem; font-weight: 700; color: var(--text-light); }
+        .time-tile .tile-icon { font-size: 1.4rem; margin: 4px 0; }
+        .time-tile .tile-label { font-size: 0.6rem; color: var(--text-light); text-align: center; padding: 0 2px; }
+        .time-tile.empty { background: var(--bg); border: 2px dashed var(--border); }
+        .time-tile.selected { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(211, 84, 0, 0.3); }
+        .time-tile.kiga { background: linear-gradient(135deg, #a29bfe, #6c5ce7); color: white; }
+        .time-tile.kiga .tile-time, .time-tile.kiga .tile-label { color: rgba(255,255,255,0.9); }
+        .time-tile.max { background: linear-gradient(135deg, #74b9ff, var(--max-color)); color: white; }
+        .time-tile.max .tile-time, .time-tile.max .tile-label { color: rgba(255,255,255,0.9); }
+        .time-tile.anna { background: linear-gradient(135deg, #fd79a8, var(--anna-color)); color: white; }
+        .time-tile.anna .tile-time, .time-tile.anna .tile-label { color: rgba(255,255,255,0.9); }
+        .time-tile.range-start { border-radius: 16px 6px 6px 16px; }
+        .time-tile.range-mid { border-radius: 6px; }
+        .time-tile.range-end { border-radius: 6px 16px 16px 6px; }
+
+        .selection-bar { background: var(--card); border-radius: var(--radius); padding: 10px 14px; margin-bottom: 12px; display: none; box-shadow: var(--shadow); }
+        .selection-bar.active { display: flex; justify-content: space-between; align-items: center; }
+        .selection-info { font-weight: 600; font-size: 0.85rem; }
+
+        .section-spacer { padding: 20px 0; text-align: center; color: var(--text-light); font-size: 1.5rem; }
+
+        .tabs { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; }
+        .tab { padding: 8px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; cursor: pointer; background: var(--card); border: 2px solid var(--border); }
+        .tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .routine-item { display: flex; align-items: center; padding: 10px 12px; background: var(--bg); border-radius: 10px; margin-bottom: 8px; cursor: pointer; }
+        .routine-item.done { background: #d4edda; }
+        .routine-checkbox { width: 26px; height: 26px; border: 2px solid var(--border); border-radius: 50%; margin-right: 10px; display: flex; align-items: center; justify-content: center; }
+        .routine-item.done .routine-checkbox { background: var(--success); border-color: var(--success); color: white; }
+        .routine-emoji { font-size: 1.2rem; margin-right: 10px; }
+        .routine-text { font-weight: 500; font-size: 0.9rem; }
+
+        .info-item { background: var(--bg); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+        .info-label { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; }
+        .info-value { font-weight: 600; margin-top: 2px; }
+
+        .section-toggle { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
+        .section-btn { padding: 8px 12px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; white-space: nowrap; cursor: pointer; background: var(--card); border: 2px solid var(--border); }
+        .section-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .todo-item { display: flex; align-items: center; padding: 10px 12px; background: var(--bg); border-radius: 10px; margin-bottom: 8px; cursor: pointer; }
+        .todo-item.done { opacity: 0.5; text-decoration: line-through; }
+        .todo-checkbox { width: 22px; height: 22px; border: 2px solid var(--border); border-radius: 6px; margin-right: 10px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; }
+        .todo-item.done .todo-checkbox { background: var(--success); border-color: var(--success); color: white; }
+        .todo-text { flex: 1; font-weight: 500; }
+        .todo-person { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+        .todo-person.max { background: var(--max-color); color: white; }
+        .todo-person.anna { background: var(--anna-color); color: white; }
+        .todo-person.both { background: var(--purple); color: white; }
+
+        .dice-section { background: linear-gradient(135deg, var(--purple), #7c6dd8); color: white; border-radius: var(--radius); padding: 16px; text-align: center; margin-bottom: 12px; }
+        .dice { font-size: 3rem; cursor: pointer; display: inline-block; transition: transform 0.3s; }
+        .dice:active { transform: scale(0.9) rotate(180deg); }
+        .dice-result { margin-top: 10px; padding: 10px; background: rgba(255,255,255,0.2); border-radius: 10px; font-weight: 600; }
+
+        .meal-card { background: var(--card); border-radius: var(--radius); padding: 12px; margin-bottom: 8px; box-shadow: var(--shadow); display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
+        .meal-day { font-weight: 700; font-size: 0.85rem; }
+        .meal-name { font-size: 0.8rem; color: var(--text-light); margin-top: 2px; }
+        .meal-add { color: var(--primary); font-weight: 600; }
+
+        .date-planner { background: linear-gradient(135deg, var(--pink), #e84393); color: white; border-radius: var(--radius); padding: 16px; }
+        .date-planner-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; }
+        .date-step { margin-bottom: 12px; }
+        .date-step-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: rgba(255,255,255,0.3); border-radius: 50%; font-size: 0.8rem; font-weight: 700; margin-right: 8px; }
+        .date-step-title { display: inline; font-weight: 600; }
+        .date-step-options { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+        .date-option { background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; border: 2px solid transparent; }
+        .date-option.selected { background: white; color: var(--anna-color); }
+        .date-summary { background: white; color: var(--text); border-radius: 12px; padding: 16px; margin-top: 16px; text-align: center; }
+        .date-summary-title { font-size: 0.7rem; color: var(--text-light); text-transform: uppercase; }
+        .date-summary-text { font-size: 1.1rem; font-weight: 700; margin-top: 4px; }
+
+        .danke-card { background: linear-gradient(135deg, #ffeaa7, #f9ca24); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; }
+        .danke-prompt { font-size: 0.9rem; font-weight: 500; margin-bottom: 10px; }
+        .danke-input-row { display: flex; gap: 8px; }
+        .danke-input { flex: 1; padding: 10px; border: none; border-radius: 10px; font-size: 0.9rem; }
+        .danke-note { background: var(--card); border-radius: 10px; padding: 12px; margin-bottom: 8px; box-shadow: var(--shadow); }
+        .danke-from { font-size: 0.7rem; color: var(--text-light); }
+        .danke-text { font-weight: 500; margin-top: 4px; }
+
+        .activity-random { background: linear-gradient(135deg, var(--purple), #7c6dd8); color: white; border-radius: var(--radius); padding: 14px; text-align: center; margin-bottom: 12px; cursor: pointer; }
+        .activity-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 16px; }
+        .activity-card { background: var(--card); border-radius: var(--radius); padding: 12px; text-align: center; box-shadow: var(--shadow); cursor: pointer; }
+        .activity-card-emoji { font-size: 1.8rem; margin-bottom: 4px; }
+        .activity-card-name { font-size: 0.75rem; font-weight: 600; }
+
+        .hidden-section { background: var(--card); border-radius: var(--radius); margin-bottom: 12px; box-shadow: var(--shadow); overflow: hidden; }
+        .hidden-header { padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-size: 0.85rem; }
+        .hidden-content { display: none; padding: 0 14px 14px; }
+        .hidden-section.open .hidden-content { display: block; }
+        .hidden-arrow { transition: transform 0.2s; }
+        .hidden-section.open .hidden-arrow { transform: rotate(180deg); }
+
+        .list-item { background: var(--bg); border-radius: 8px; padding: 10px 12px; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
+        .list-item-actions { display: flex; gap: 4px; }
+        .list-item-btn { padding: 4px 8px; background: var(--card); border: none; border-radius: 6px; font-size: 0.7rem; cursor: pointer; }
+
+        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; }
+        .modal-overlay.active { display: flex; align-items: flex-end; justify-content: center; }
+        .modal { background: var(--card); border-radius: 20px 20px 0 0; width: 100%; max-width: 500px; max-height: 80vh; overflow-y: auto; padding: 16px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-title { font-size: 1rem; font-weight: 700; }
+        .modal-close { width: 32px; height: 32px; border: none; background: var(--border); border-radius: 50%; font-size: 1.1rem; cursor: pointer; }
+
+        .form-group { margin-bottom: 14px; }
+        .form-label { display: block; font-size: 0.75rem; font-weight: 600; margin-bottom: 6px; color: var(--text-light); }
+        .form-input { width: 100%; padding: 10px 12px; border: 2px solid var(--border); border-radius: 10px; font-size: 0.9rem; background: var(--card); color: var(--text); }
+
+        .person-selector { display: flex; gap: 8px; }
+        .person-option { flex: 1; padding: 10px; border: 2px solid var(--border); border-radius: 10px; text-align: center; cursor: pointer; font-size: 0.85rem; font-weight: 600; }
+        .person-option.active { border-color: var(--primary); background: #fff5eb; }
+
+        .slot-types { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+        .slot-type { padding: 12px 8px; border: 2px solid var(--border); border-radius: 10px; text-align: center; cursor: pointer; }
+        .slot-type.active { border-color: var(--primary); background: #fff5eb; }
+        .slot-type-icon { font-size: 1.3rem; }
+        .slot-type-label { font-size: 0.7rem; font-weight: 600; margin-top: 4px; }
+
+        .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .tag { padding: 6px 10px; border-radius: 16px; font-size: 0.75rem; font-weight: 600; cursor: pointer; border: 2px solid var(--border); background: var(--card); }
+        .tag.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .ingredient-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+        .ingredient-tag { background: var(--bg); border: 1px solid var(--border); padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; }
+    </style>
+</head>
+<body>
+    <header class="header"><h1>🎰 Casa Casino</h1></header>
+
+    <!-- HEUTE -->
+    <div class="screen active" id="screenHeute">
+        <div class="today-hero">
+            <div class="today-date" id="todayDate"></div>
+            <div class="today-greeting" id="todayGreeting">Guten Tag!</div>
+        </div>
+        <div class="status-row">
+            <div class="status-card free"><div class="status-icon">🧘</div><div class="status-value" id="freeTime">-</div><div class="status-label">Zeit für mich</div></div>
+            <div class="status-card busy"><div class="status-icon">📋</div><div class="status-value" id="busyTime">-</div><div class="status-label">Eingeplant</div></div>
+        </div>
+        <div class="next-block"><div class="next-label">Als Nächstes</div><div class="next-title" id="nextTitle">-</div><div class="next-time" id="nextTime"></div></div>
+        <div class="card"><div class="card-title">🍽️ Heute Abend</div><div id="todayMeal">Nicht geplant</div></div>
+        <div class="card"><div class="card-title">📋 To-Dos <span id="todoCount"></span></div><div id="todayTodos"></div></div>
+    </div>
+
+    <!-- VALERIE -->
+    <div class="screen" id="screenValerie">
+        <div class="day-nav">
+            <button class="day-nav-btn" onclick="changeDay(-1)">←</button>
+            <div style="text-align:center;"><div class="day-nav-day" id="dayNavDay">Montag</div><div class="day-nav-date" id="dayNavDate">26. Januar</div></div>
+            <button class="day-nav-btn" onclick="changeDay(1)">→</button>
+        </div>
+        <div class="selection-bar" id="selectionBar">
+            <span class="selection-info" id="selectionInfo">2 Stunden ausgewählt</span>
+            <div>
+                <button class="btn btn-sm btn-secondary" onclick="clearSelection()">✕</button>
+                <button class="btn btn-sm btn-success" onclick="openSlotModalForSelection()">✓ Planen</button>
+            </div>
+        </div>
+        <div class="time-tiles" id="timeTiles"></div>
+
+        <div class="section-spacer">✨ · · · ✨</div>
+
+        <div class="tabs" id="valerieTabs">
+            <div class="tab active" data-tab="routines">🌅 Routinen</div>
+            <div class="tab" data-tab="favorites">⭐ Favorites</div>
+            <div class="tab" data-tab="milestones">📸 Sprüche</div>
+        </div>
+        <div id="valerieContent"></div>
+    </div>
+
+    <!-- MEALS -->
+    <div class="screen" id="screenMeals">
+        <div class="dice-section">
+            <div class="dice" id="mealDice" onclick="rollMealDice()">🎲</div>
+            <p style="font-size:0.8rem;margin-top:6px;opacity:0.9;">Was essen wir?</p>
+            <div class="dice-result" id="mealDiceResult" style="display:none;"></div>
+        </div>
+        <div class="card" style="padding:10px;"><label style="display:flex;align-items:center;gap:8px;font-size:0.85rem;"><input type="checkbox" id="showLunch" onchange="toggleLunch()"> Mittagessen anzeigen</label></div>
+        <div class="tabs" id="mealsTabs">
+            <div class="tab active" data-tab="plan">📅 Woche</div>
+            <div class="tab" data-tab="list">🛒 Einkauf</div>
+            <div class="tab" data-tab="library">📚 Gerichte</div>
+        </div>
+        <div id="mealsContent"></div>
+    </div>
+
+    <!-- WIR -->
+    <div class="screen" id="screenWir">
+        <div class="section-toggle">
+            <div class="section-btn active" data-section="todos" onclick="showWirSection('todos')">📋 To-Dos</div>
+            <div class="section-btn" data-section="date" onclick="showWirSection('date')">💕 Date Night</div>
+            <div class="section-btn" data-section="danke" onclick="showWirSection('danke')">💛 Danke</div>
+            <div class="section-btn" data-section="fun" onclick="showWirSection('fun')">🎲 Aktivitäten</div>
+        </div>
+        <div id="wirContent"></div>
+
+        <div class="section-spacer">💜 · · · 💜</div>
+
+        <div class="hidden-section" id="sectionPack">
+            <div class="hidden-header" onclick="toggleHidden('sectionPack')"><span>🎒 Packlisten</span><span class="hidden-arrow">▼</span></div>
+            <div class="hidden-content" id="packContent"></div>
+        </div>
+        <div class="hidden-section" id="sectionInfo">
+            <div class="hidden-header" onclick="toggleHidden('sectionInfo')"><span>📋 Wichtige Infos</span><span class="hidden-arrow">▼</span></div>
+            <div class="hidden-content" id="infoContent"></div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-item active" data-screen="Heute" onclick="showScreen('Heute')"><span class="nav-icon">🏠</span><span class="nav-label">Heute</span></div>
+        <div class="nav-item" data-screen="Valerie" onclick="showScreen('Valerie')"><span class="nav-icon">👶</span><span class="nav-label">Valerie</span></div>
+        <div class="nav-item" data-screen="Meals" onclick="showScreen('Meals')"><span class="nav-icon">🍽️</span><span class="nav-label">Meals</span></div>
+        <div class="nav-item" data-screen="Wir" onclick="showScreen('Wir')"><span class="nav-icon">💜</span><span class="nav-label">Wir</span></div>
+    </nav>
+
+    <!-- MODALS -->
+    <div class="modal-overlay" id="slotModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title" id="slotModalTitle">Zeit planen</span><button class="modal-close" onclick="closeModal('slotModal')">×</button></div>
+            <div class="form-group"><label class="form-label">Wer?</label><div class="person-selector" id="slotPerson"><div class="person-option active" data-v="max" onclick="setSlotPerson('max')">👨 Max</div><div class="person-option" data-v="anna" onclick="setSlotPerson('anna')">👩 Anna</div></div></div>
+            <div class="form-group"><label class="form-label">Was?</label><div class="slot-types" id="slotTypes"><div class="slot-type active" data-v="valerie" onclick="setSlotType('valerie')"><div class="slot-type-icon">👶</div><div class="slot-type-label">Mit Valerie</div></div><div class="slot-type" data-v="me" onclick="setSlotType('me')"><div class="slot-type-icon">🧘</div><div class="slot-type-label">Für mich</div></div><div class="slot-type" data-v="work" onclick="setSlotType('work')"><div class="slot-type-icon">💼</div><div class="slot-type-label">Arbeit</div></div><div class="slot-type" data-v="appt" onclick="setSlotType('appt')"><div class="slot-type-icon">📅</div><div class="slot-type-label">Termin</div></div></div></div>
+            <div class="form-group"><label class="form-label">Notiz</label><input type="text" class="form-input" id="slotNote" placeholder="Optional..."></div>
+            <button class="btn btn-success btn-block" onclick="saveSlot()">Speichern</button>
+            <button class="btn btn-secondary btn-block" onclick="clearSlot()" style="margin-top:8px;">Löschen</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="mealModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title" id="mealModalTitle">Gericht</span><button class="modal-close" onclick="closeModal('mealModal')">×</button></div>
+            <button class="btn btn-block" style="background:var(--purple);color:white;margin-bottom:10px;" onclick="selectRandomMeal()">🎲 Zufällig</button>
+            <div id="mealModalList"></div>
+            <button class="btn btn-secondary btn-block" onclick="openDishModal()" style="margin-top:10px;">+ Neues Gericht</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="dishModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">Neues Gericht</span><button class="modal-close" onclick="closeModal('dishModal')">×</button></div>
+            <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="dishName" placeholder="z.B. Spaghetti"></div>
+            <div class="form-group"><label class="form-label">Wer kocht?</label><div class="person-selector" id="dishCook"><div class="person-option active" data-v="max" onclick="setDishCook('max')">👨‍🍳 Max</div><div class="person-option" data-v="anna" onclick="setDishCook('anna')">👩‍🍳 Anna</div><div class="person-option" data-v="both" onclick="setDishCook('both')">👫</div></div></div>
+            <div class="form-group"><label class="form-label">Tags</label><div class="tags" id="dishTags"><span class="tag" data-v="quick" onclick="toggleDishTag('quick')">⚡ Schnell</span><span class="tag" data-v="valerie" onclick="toggleDishTag('valerie')">👶 Valerie</span><span class="tag" data-v="veg" onclick="toggleDishTag('veg')">🥬 Veg</span></div></div>
+            <div class="form-group"><label class="form-label">Zutaten</label><div style="display:flex;gap:6px;"><input type="text" class="form-input" id="ingredientInput" placeholder="Zutat..."><button class="btn btn-primary" onclick="addIngredient()">+</button></div><div class="ingredient-tags" id="ingredientList"></div></div>
+            <button class="btn btn-success btn-block" onclick="saveDish()">Speichern</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="todoModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title">Neues To-Do</span><button class="modal-close" onclick="closeModal('todoModal')">×</button></div>
+            <div class="form-group"><label class="form-label">Was?</label><input type="text" class="form-input" id="todoText" placeholder="To-Do..."></div>
+            <div class="form-group"><label class="form-label">Wer?</label><div class="person-selector" id="todoPerson"><div class="person-option active" data-v="max" onclick="setTodoPerson('max')">👨 Max</div><div class="person-option" data-v="anna" onclick="setTodoPerson('anna')">👩 Anna</div><div class="person-option" data-v="both" onclick="setTodoPerson('both')">👫 Beide</div></div></div>
+            <button class="btn btn-success btn-block" onclick="saveTodo()">Speichern</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="editModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title" id="editModalTitle">Bearbeiten</span><button class="modal-close" onclick="closeModal('editModal')">×</button></div>
+            <div class="form-group"><label class="form-label">Emoji</label><input type="text" class="form-input" id="editEmoji"></div>
+            <div class="form-group"><label class="form-label">Text</label><input type="text" class="form-input" id="editText"></div>
+            <button class="btn btn-success btn-block" onclick="saveEdit()">Speichern</button>
+            <button class="btn btn-danger btn-block" onclick="deleteEdit()" style="margin-top:8px;">Löschen</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="listEditModal">
+        <div class="modal">
+            <div class="modal-header"><span class="modal-title" id="listEditTitle">Bearbeiten</span><button class="modal-close" onclick="closeModal('listEditModal')">×</button></div>
+            <div class="form-group"><label class="form-label">Name</label><input type="text" class="form-input" id="listEditName"></div>
+            <button class="btn btn-success btn-block" onclick="saveListEdit()">Speichern</button>
+            <button class="btn btn-danger btn-block" onclick="deleteListItem()" style="margin-top:8px;">Löschen</button>
+        </div>
+    </div>
+
+    <script>
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(() => {});
+        }
+
+        let S = {
+            library: [], weekplan: {}, slots: {}, todos: [], dankeNotes: [],
+            routines: { morning: [{e:'☀️',t:'Aufwachen',d:0},{e:'🚽',t:'Aufs Klo',d:0},{e:'👕',t:'Anziehen',d:0},{e:'🥣',t:'Frühstück',d:0},{e:'🦷',t:'Zähne',d:0},{e:'👟',t:'Schuhe',d:0}], evening: [{e:'🛁',t:'Baden',d:0},{e:'👙',t:'Schlafanzug',d:0},{e:'🦷',t:'Zähne',d:0},{e:'📚',t:'Geschichte',d:0},{e:'💤',t:'Schlafen',d:0}] },
+            favorites: {food:'Spaghetti, Pfannkuchen',books:'Die kleine Raupe',calms:'Kuscheln, Schnuller',dislikes:'Laute Geräusche'},
+            milestones: [{date:'2026-01',text:'"Oh neiiiin!"'}],
+            datePlan: { when: null, what: null, food: null },
+            activities: { indoor:[{e:'🎨',t:'Malen'},{e:'🧩',t:'Puzzle'},{e:'📚',t:'Bücher'},{e:'🏗️',t:'Duplo'},{e:'🎭',t:'Verkleiden'}], outdoor:[{e:'🛝',t:'Spielplatz'},{e:'🚴',t:'Laufrad'},{e:'🌊',t:'Am See'},{e:'🥾',t:'Wandern'},{e:'⚽',t:'Ball'}], trips:[{e:'🦁',t:'Tierpark'},{e:'🏰',t:'Herrenchiemsee'},{e:'🚂',t:'Wendelstein'},{e:'🏔️',t:'Bergbahn'},{e:'🎢',t:'Freizeitpark'}] },
+            packlists: [{name:'Kiga-Tasche',items:['Wechselkleidung','Brotzeit','Flasche']},{name:'Ausflug',items:['Snacks','Windeln','Sonnencreme']}],
+            infos: [{label:'Kinderarzt',value:'Dr. Müller'},{label:'Notfall',value:'112'}],
+            settings: {portions:2,showLunch:false}
+        };
+
+        let currentDay = new Date();
+        let selectedHours = [];
+        let currentMealSlot = null;
+        let slotPerson = 'max', slotType = 'valerie';
+        let dishCook = 'max', dishTags = [], dishIngredients = [];
+        let todoPerson = 'max';
+        let currentValerieTab = 'routines', currentMealsTab = 'plan', currentWirSection = 'todos';
+        let currentEditType = null, currentEditIdx = null;
+        let currentListEditType = null, currentListEditIdx = null;
+
+        function load() { const d = localStorage.getItem('cc4'); if (d) S = {...S, ...JSON.parse(d)}; }
+        function save() { localStorage.setItem('cc4', JSON.stringify(S)); }
+
+        function setTimeColors() { const h = new Date().getHours(); document.body.className = h < 7 ? 'night' : h < 10 ? 'morning' : h < 18 ? '' : h < 22 ? 'evening' : 'night'; }
+        setTimeColors(); setInterval(setTimeColors, 60000);
+
+        function showScreen(name) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById('screen' + name).classList.add('active');
+            document.querySelector(`.nav-item[data-screen="${name}"]`).classList.add('active');
+            if (name === 'Heute') renderHeute();
+            if (name === 'Valerie') renderValerie();
+            if (name === 'Meals') renderMeals();
+            if (name === 'Wir') renderWir();
+        }
+
+        function fmtDate(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+        function getWeekDays() {
+            const days = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+            const today = new Date();
+            const mon = new Date(today); mon.setDate(today.getDate() - today.getDay() + 1);
+            return Array.from({length: 7}, (_, i) => { const d = new Date(mon); d.setDate(mon.getDate() + i); return {key: fmtDate(d), short: days[d.getDay()], date: d.getDate()}; });
+        }
+        function getCookLabel(c) { return {max:'👨‍🍳 Max',anna:'👩‍🍳 Anna',both:'👫 Beide'}[c] || ''; }
+        function getSlotIcon(t) { return {valerie:'👶',me:'🧘',work:'💼',appt:'📅'}[t] || '📅'; }
+        function getSlotLabel(t) { return {valerie:'Valerie',me:'Für mich',work:'Arbeit',appt:'Termin'}[t] || ''; }
+
+        // HEUTE
+        function renderHeute() {
+            const now = new Date();
+            document.getElementById('todayDate').textContent = now.toLocaleDateString('de-DE', {weekday:'long',day:'numeric',month:'long'});
+            const h = now.getHours();
+            document.getElementById('todayGreeting').textContent = h < 12 ? 'Guten Morgen!' : h < 18 ? 'Guten Tag!' : 'Guten Abend!';
+
+            const dk = fmtDate(now), slots = S.slots[dk] || {}, dow = now.getDay(), isKiga = dow >= 1 && dow <= 4;
+            let free = 0, busy = 0;
+            for (let i = 7; i <= 20; i++) {
+                if (isKiga && i >= 8 && i < 13) { free++; continue; }
+                if (slots[i]) { slots[i].type === 'me' ? free++ : busy++; } else free++;
+            }
+            document.getElementById('freeTime').textContent = free + 'h';
+            document.getElementById('busyTime').textContent = busy + 'h';
+
+            let nextTitle = 'Alles frei', nextTime = '';
+            const ch = now.getHours();
+            if (isKiga && ch < 8) { nextTitle = 'Valerie zum Kiga'; nextTime = '08:15'; }
+            else if (isKiga && ch < 12) { nextTitle = 'Valerie abholen'; nextTime = '12:45'; }
+            else { for (let i = ch + 1; i <= 20; i++) { if (slots[i]) { nextTitle = slots[i].note || getSlotLabel(slots[i].type); nextTime = i + ':00'; break; } } }
+            document.getElementById('nextTitle').textContent = nextTitle;
+            document.getElementById('nextTime').textContent = nextTime;
+
+            const meal = S.weekplan[dk]?.dinner, dish = meal ? S.library.find(d => d.id === meal) : null;
+            document.getElementById('todayMeal').innerHTML = dish ? `<strong>${dish.name}</strong> <span style="color:var(--text-light)">• ${getCookLabel(dish.cook)}</span>` : '<span style="color:var(--text-light)">Noch nicht geplant</span>';
+
+            const open = S.todos.filter(t => !t.done);
+            document.getElementById('todoCount').textContent = open.length ? `(${open.length})` : '';
+            document.getElementById('todayTodos').innerHTML = open.slice(0, 3).map(t => `<div class="todo-item" onclick="toggleTodo(${S.todos.indexOf(t)})"><div class="todo-checkbox"></div><span class="todo-text">${t.text}</span><span class="todo-person ${t.person}">${t.person==='max'?'Max':t.person==='anna'?'Anna':'Beide'}</span></div>`).join('') || '<span style="color:var(--text-light)">Alles erledigt! 🎉</span>';
+        }
+
+        // VALERIE
+        function renderValerie() {
+            const days = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+            const months = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+            document.getElementById('dayNavDay').textContent = days[currentDay.getDay()];
+            document.getElementById('dayNavDate').textContent = `${currentDay.getDate()}. ${months[currentDay.getMonth()]}`;
+
+            const dk = fmtDate(currentDay), slots = S.slots[dk] || {}, dow = currentDay.getDay(), isKiga = dow >= 1 && dow <= 4;
+            let html = '';
+            for (let h = 7; h <= 20; h++) {
+                const slot = slots[h];
+                let cls = 'empty', icon = '+', label = '';
+                if (isKiga && h >= 8 && h < 13) { cls = 'kiga'; icon = '🎒'; label = 'Kiga'; }
+                else if (slot) { cls = slot.person; icon = getSlotIcon(slot.type); label = slot.note || getSlotLabel(slot.type); }
+                if (selectedHours.includes(h)) cls += ' selected';
+                const click = (isKiga && h >= 8 && h < 13) ? '' : `onclick="toggleHourSelection(${h})"`;
+                html += `<div class="time-tile ${cls}" ${click}><div class="tile-time">${h}:00</div><div class="tile-icon">${icon}</div><div class="tile-label">${label}</div></div>`;
+            }
+            document.getElementById('timeTiles').innerHTML = html;
+            updateSelectionBar();
+            renderValerieTab();
+        }
+
+        function changeDay(d) { currentDay.setDate(currentDay.getDate() + d); selectedHours = []; renderValerie(); }
+
+        function toggleHourSelection(h) {
+            const idx = selectedHours.indexOf(h);
+            if (idx > -1) selectedHours.splice(idx, 1);
+            else selectedHours.push(h);
+            selectedHours.sort((a, b) => a - b);
+            renderValerie();
+        }
+
+        function updateSelectionBar() {
+            const bar = document.getElementById('selectionBar');
+            if (selectedHours.length > 0) {
+                bar.classList.add('active');
+                const start = selectedHours[0], end = selectedHours[selectedHours.length - 1] + 1;
+                document.getElementById('selectionInfo').textContent = `${start}:00 - ${end}:00 (${selectedHours.length}h)`;
+            } else bar.classList.remove('active');
+        }
+
+        function clearSelection() { selectedHours = []; renderValerie(); }
+
+        function openSlotModalForSelection() {
+            if (selectedHours.length === 0) return;
+            slotPerson = 'max'; slotType = 'valerie';
+            document.querySelectorAll('#slotPerson .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === 'max'));
+            document.querySelectorAll('#slotTypes .slot-type').forEach(o => o.classList.toggle('active', o.dataset.v === 'valerie'));
+            document.getElementById('slotNote').value = '';
+            document.getElementById('slotModalTitle').textContent = `${selectedHours[0]}:00 - ${selectedHours[selectedHours.length-1]+1}:00`;
+            document.getElementById('slotModal').classList.add('active');
+        }
+
+        function setSlotPerson(p) { slotPerson = p; document.querySelectorAll('#slotPerson .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === p)); }
+        function setSlotType(t) { slotType = t; document.querySelectorAll('#slotTypes .slot-type').forEach(o => o.classList.toggle('active', o.dataset.v === t)); }
+
+        function saveSlot() {
+            const dk = fmtDate(currentDay);
+            if (!S.slots[dk]) S.slots[dk] = {};
+            const note = document.getElementById('slotNote').value.trim();
+            selectedHours.forEach(h => { S.slots[dk][h] = {person: slotPerson, type: slotType, note}; });
+            save(); closeModal('slotModal'); selectedHours = []; renderValerie();
+        }
+
+        function clearSlot() {
+            const dk = fmtDate(currentDay);
+            if (S.slots[dk]) selectedHours.forEach(h => delete S.slots[dk][h]);
+            save(); closeModal('slotModal'); selectedHours = []; renderValerie();
+        }
+
+        document.getElementById('valerieTabs').addEventListener('click', e => {
+            const tab = e.target.closest('.tab'); if (!tab) return;
+            document.querySelectorAll('#valerieTabs .tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active'); currentValerieTab = tab.dataset.tab; renderValerieTab();
+        });
+
+        function renderValerieTab() {
+            const c = document.getElementById('valerieContent');
+            if (currentValerieTab === 'routines') {
+                c.innerHTML = `<div class="card"><div class="card-title">🌅 Morgen</div>${S.routines.morning.map((r, i) => `<div class="routine-item ${r.d?'done':''}" onclick="toggleRoutine('morning',${i})"><div class="routine-checkbox">${r.d?'✓':''}</div><span class="routine-emoji">${r.e}</span><span class="routine-text">${r.t}</span></div>`).join('')}</div>
+                    <div class="card"><div class="card-title">🌙 Abend</div>${S.routines.evening.map((r, i) => `<div class="routine-item ${r.d?'done':''}" onclick="toggleRoutine('evening',${i})"><div class="routine-checkbox">${r.d?'✓':''}</div><span class="routine-emoji">${r.e}</span><span class="routine-text">${r.t}</span></div>`).join('')}</div>
+                    <button class="btn btn-secondary btn-block" onclick="resetRoutines()">🔄 Reset</button>`;
+            } else if (currentValerieTab === 'favorites') {
+                c.innerHTML = `<div class="card"><div class="info-item"><div class="info-label">🍝 Lieblingsessen</div><div class="info-value">${S.favorites.food}</div></div><div class="info-item"><div class="info-label">📚 Bücher</div><div class="info-value">${S.favorites.books}</div></div><div class="info-item"><div class="info-label">💆 Beruhigt sich bei</div><div class="info-value">${S.favorites.calms}</div></div><div class="info-item"><div class="info-label">😟 Mag nicht</div><div class="info-value">${S.favorites.dislikes}</div></div></div>`;
+            } else if (currentValerieTab === 'milestones') {
+                c.innerHTML = `<div class="card">${S.milestones.map(m => `<div class="info-item"><div class="info-label">${m.date}</div><div class="info-value">${m.text}</div></div>`).join('')}<button class="btn btn-sm btn-secondary" onclick="addMilestone()" style="margin-top:8px;">+ Spruch</button></div>`;
+            }
+        }
+
+        function toggleRoutine(time, idx) { S.routines[time][idx].d = S.routines[time][idx].d ? 0 : 1; save(); renderValerieTab(); }
+        function resetRoutines() { S.routines.morning.forEach(r => r.d = 0); S.routines.evening.forEach(r => r.d = 0); save(); renderValerieTab(); }
+        function addMilestone() { const text = prompt('Spruch?'); if (!text) return; const date = new Date().toISOString().slice(0,7); S.milestones.unshift({date, text}); save(); renderValerieTab(); }
+
+        // MEALS
+        function renderMeals() { document.getElementById('showLunch').checked = S.settings.showLunch; renderMealsTab(); }
+        function toggleLunch() { S.settings.showLunch = document.getElementById('showLunch').checked; save(); renderMealsTab(); }
+
+        document.getElementById('mealsTabs').addEventListener('click', e => {
+            const tab = e.target.closest('.tab'); if (!tab) return;
+            document.querySelectorAll('#mealsTabs .tab').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active'); currentMealsTab = tab.dataset.tab; renderMealsTab();
+        });
+
+        function renderMealsTab() {
+            const c = document.getElementById('mealsContent'), week = getWeekDays();
+            if (currentMealsTab === 'plan') {
+                c.innerHTML = week.map(d => {
+                    const plan = S.weekplan[d.key] || {};
+                    const dinner = plan.dinner ? S.library.find(m => m.id === plan.dinner) : null;
+                    const lunch = plan.lunch ? S.library.find(m => m.id === plan.lunch) : null;
+                    let html = `<div class="meal-card" onclick="openMealModal('${d.key}','dinner')"><div><div class="meal-day">${d.short} ${d.date}</div><div class="meal-name">${dinner ? dinner.name : 'Abendessen planen...'}</div></div><div class="meal-add">${dinner ? '✏️' : '+'}</div></div>`;
+                    if (S.settings.showLunch) html += `<div class="meal-card" onclick="openMealModal('${d.key}','lunch')" style="margin-left:20px;"><div><div class="meal-name" style="font-size:0.75rem;">${lunch ? lunch.name : '🥗 Mittag...'}</div></div><div class="meal-add">${lunch ? '✏️' : '+'}</div></div>`;
+                    return html;
+                }).join('');
+            } else if (currentMealsTab === 'list') {
+                const planned = new Set();
+                week.forEach(d => { const p = S.weekplan[d.key]; if (p?.dinner) planned.add(p.dinner); if (p?.lunch) planned.add(p.lunch); });
+                const ingredients = {};
+                planned.forEach(id => { const dish = S.library.find(d => d.id === id); if (dish) dish.ingredients.forEach(ing => { ingredients[ing] = (ingredients[ing] || 0) + 1; }); });
+                const list = Object.entries(ingredients).sort((a, b) => a[0].localeCompare(b[0]));
+                c.innerHTML = list.length ? `<div class="card">${list.map(([ing, count]) => `<div class="list-item"><span>${ing}</span><span style="color:var(--text-light)">${count > 1 ? `×${count}` : ''}</span></div>`).join('')}</div>` : '<div class="card"><p style="color:var(--text-light);text-align:center;">Plane Gerichte um die Einkaufsliste zu sehen</p></div>';
+            } else if (currentMealsTab === 'library') {
+                c.innerHTML = `<button class="btn btn-primary btn-block" onclick="openDishModal()" style="margin-bottom:12px;">+ Neues Gericht</button>${S.library.map(d => `<div class="meal-card"><div><div class="meal-day">${d.name}</div><div class="meal-name">${getCookLabel(d.cook)} ${d.tags.map(t => t === 'quick' ? '⚡' : t === 'valerie' ? '👶' : '🥬').join(' ')}</div></div></div>`).join('') || '<p style="color:var(--text-light);text-align:center;">Noch keine Gerichte</p>'}`;
+            }
+        }
+
+        function openMealModal(day, slot) {
+            currentMealSlot = {day, slot};
+            document.getElementById('mealModalTitle').textContent = slot === 'dinner' ? 'Abendessen' : 'Mittagessen';
+            document.getElementById('mealModalList').innerHTML = S.library.map(d => `<div class="meal-card" onclick="selectMeal('${d.id}')"><div><div class="meal-day">${d.name}</div><div class="meal-name">${getCookLabel(d.cook)}</div></div></div>`).join('') || '<p style="color:var(--text-light)">Keine Gerichte</p>';
+            document.getElementById('mealModal').classList.add('active');
+        }
+
+        function selectMeal(id) {
+            if (!S.weekplan[currentMealSlot.day]) S.weekplan[currentMealSlot.day] = {};
+            S.weekplan[currentMealSlot.day][currentMealSlot.slot] = id;
+            save(); closeModal('mealModal'); renderMealsTab(); renderHeute();
+        }
+
+        function selectRandomMeal() { if (S.library.length) selectMeal(S.library[Math.floor(Math.random() * S.library.length)].id); }
+
+        function rollMealDice() {
+            if (!S.library.length) return;
+            const dice = document.getElementById('mealDice'), result = document.getElementById('mealDiceResult');
+            dice.style.transform = 'rotate(720deg)';
+            setTimeout(() => { dice.style.transform = ''; const meal = S.library[Math.floor(Math.random() * S.library.length)]; result.textContent = `${meal.name} ${getCookLabel(meal.cook)}`; result.style.display = 'block'; }, 300);
+        }
+
+        function openDishModal() {
+            dishCook = 'max'; dishTags = []; dishIngredients = [];
+            document.getElementById('dishName').value = '';
+            document.querySelectorAll('#dishCook .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === 'max'));
+            document.querySelectorAll('#dishTags .tag').forEach(t => t.classList.remove('active'));
+            document.getElementById('ingredientList').innerHTML = '';
+            document.getElementById('dishModal').classList.add('active');
+        }
+
+        function setDishCook(c) { dishCook = c; document.querySelectorAll('#dishCook .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === c)); }
+        function toggleDishTag(t) { const idx = dishTags.indexOf(t); if (idx > -1) dishTags.splice(idx, 1); else dishTags.push(t); document.querySelectorAll('#dishTags .tag').forEach(el => el.classList.toggle('active', dishTags.includes(el.dataset.v))); }
+        function addIngredient() { const inp = document.getElementById('ingredientInput'); const v = inp.value.trim(); if (!v) return; dishIngredients.push(v); inp.value = ''; document.getElementById('ingredientList').innerHTML = dishIngredients.map((ing, i) => `<span class="ingredient-tag">${ing} <span onclick="removeIngredient(${i})" style="cursor:pointer;opacity:0.5">×</span></span>`).join(''); }
+        function removeIngredient(i) { dishIngredients.splice(i, 1); document.getElementById('ingredientList').innerHTML = dishIngredients.map((ing, i) => `<span class="ingredient-tag">${ing} <span onclick="removeIngredient(${i})" style="cursor:pointer;opacity:0.5">×</span></span>`).join(''); }
+        function saveDish() { const name = document.getElementById('dishName').value.trim(); if (!name) return; S.library.push({id: Date.now().toString(), name, cook: dishCook, tags: [...dishTags], ingredients: [...dishIngredients]}); save(); closeModal('dishModal'); renderMealsTab(); }
+
+        // WIR
+        function renderWir() { showWirSection(currentWirSection); renderHiddenSections(); }
+
+        function showWirSection(sec) {
+            currentWirSection = sec;
+            document.querySelectorAll('.section-btn').forEach(b => b.classList.toggle('active', b.dataset.section === sec));
+            const c = document.getElementById('wirContent');
+
+            if (sec === 'todos') {
+                const open = S.todos.filter(t => !t.done), done = S.todos.filter(t => t.done);
+                c.innerHTML = `<button class="btn btn-primary btn-block" onclick="openTodoModal()" style="margin-bottom:12px;">+ To-Do</button>${open.map(t => `<div class="todo-item" onclick="toggleTodo(${S.todos.indexOf(t)})"><div class="todo-checkbox"></div><span class="todo-text">${t.text}</span><span class="todo-person ${t.person}">${t.person==='max'?'Max':t.person==='anna'?'Anna':'Beide'}</span></div>`).join('')}${done.length ? `<div class="card-title" style="margin-top:16px;">✓ Erledigt</div>${done.map(t => `<div class="todo-item done" onclick="toggleTodo(${S.todos.indexOf(t)})"><div class="todo-checkbox">✓</div><span class="todo-text">${t.text}</span></div>`).join('')}` : ''}`;
+            } else if (sec === 'date') {
+                const whenOpts = ['🗓️ Diese Woche','🌙 Heute Abend','📅 Nächstes WE'];
+                const whatOpts = ['🍿 Film','🎮 Spiele','🛀 Wellness','🌙 Spaziergang','🍷 Essen'];
+                const foodOpts = ['🍕 Bestellen','🍳 Selber kochen','🍽️ Restaurant'];
+                c.innerHTML = `<div class="date-planner"><div class="date-planner-title">💕 Date Night Planen</div>
+                    <div class="date-step"><div class="date-step-num">1</div><div class="date-step-title">Wann?</div><div class="date-step-options">${whenOpts.map(o => `<div class="date-option ${S.datePlan.when===o?'selected':''}" onclick="setDatePlan('when','${o}')">${o}</div>`).join('')}</div></div>
+                    <div class="date-step"><div class="date-step-num">2</div><div class="date-step-title">Was machen?</div><div class="date-step-options">${whatOpts.map(o => `<div class="date-option ${S.datePlan.what===o?'selected':''}" onclick="setDatePlan('what','${o}')">${o}</div>`).join('')}</div></div>
+                    <div class="date-step"><div class="date-step-num">3</div><div class="date-step-title">Essen?</div><div class="date-step-options">${foodOpts.map(o => `<div class="date-option ${S.datePlan.food===o?'selected':''}" onclick="setDatePlan('food','${o}')">${o}</div>`).join('')}</div></div>
+                    ${S.datePlan.when || S.datePlan.what || S.datePlan.food ? `<div class="date-summary"><div class="date-summary-title">Euer Plan</div><div class="date-summary-text">${[S.datePlan.when, S.datePlan.what, S.datePlan.food].filter(Boolean).join(' → ') || '...'}</div></div>` : ''}
+                </div>`;
+            } else if (sec === 'danke') {
+                c.innerHTML = `<div class="danke-card"><div class="danke-prompt">💛 Wofür bist du dankbar?</div><div class="danke-input-row"><input type="text" class="danke-input" id="dankeInput" placeholder="Danke für..."><button class="btn btn-primary" onclick="sendDanke()">💌</button></div></div>${S.dankeNotes.length ? `<div class="card-title">Letzte</div>${S.dankeNotes.slice(0,10).map(n => `<div class="danke-note"><div class="danke-from">${n.from==='max'?'👨 Max':'👩 Anna'}</div><div class="danke-text">${n.text}</div></div>`).join('')}` : ''}`;
+            } else if (sec === 'fun') {
+                c.innerHTML = `<div class="activity-random" onclick="randomActivity()"><div style="font-size:2rem;">🎲</div><div style="font-weight:600;margin-top:4px;">Was machen wir?</div></div>
+                    <div class="card-title">🏠 Indoor <button class="btn btn-sm" onclick="addActivity('indoor')">+</button></div><div class="activity-grid">${S.activities.indoor.map((a, i) => `<div class="activity-card" onclick="editItem('activities.indoor',${i})"><div class="activity-card-emoji">${a.e}</div><div class="activity-card-name">${a.t}</div></div>`).join('')}</div>
+                    <div class="card-title">🌳 Outdoor <button class="btn btn-sm" onclick="addActivity('outdoor')">+</button></div><div class="activity-grid">${S.activities.outdoor.map((a, i) => `<div class="activity-card" onclick="editItem('activities.outdoor',${i})"><div class="activity-card-emoji">${a.e}</div><div class="activity-card-name">${a.t}</div></div>`).join('')}</div>
+                    <div class="card-title">🚗 Ausflüge <button class="btn btn-sm" onclick="addActivity('trips')">+</button></div><div class="activity-grid">${S.activities.trips.map((a, i) => `<div class="activity-card" onclick="editItem('activities.trips',${i})"><div class="activity-card-emoji">${a.e}</div><div class="activity-card-name">${a.t}</div></div>`).join('')}</div>`;
+            }
+        }
+
+        function setDatePlan(k, v) { S.datePlan[k] = S.datePlan[k] === v ? null : v; save(); showWirSection('date'); }
+
+        function openTodoModal() { todoPerson = 'max'; document.getElementById('todoText').value = ''; document.querySelectorAll('#todoPerson .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === 'max')); document.getElementById('todoModal').classList.add('active'); }
+        function setTodoPerson(p) { todoPerson = p; document.querySelectorAll('#todoPerson .person-option').forEach(o => o.classList.toggle('active', o.dataset.v === p)); }
+        function saveTodo() { const text = document.getElementById('todoText').value.trim(); if (!text) return; S.todos.unshift({text, person: todoPerson, done: false}); save(); closeModal('todoModal'); showWirSection('todos'); }
+        function toggleTodo(i) { S.todos[i].done = !S.todos[i].done; save(); showWirSection('todos'); renderHeute(); }
+
+        function sendDanke() { const inp = document.getElementById('dankeInput'); const t = inp.value.trim(); if (!t) return; S.dankeNotes.unshift({from: 'max', text: t}); save(); inp.value = ''; showWirSection('danke'); }
+
+        function addActivity(cat) { S.activities[cat].push({e:'✨', t:'Neu'}); save(); showWirSection('fun'); }
+        function randomActivity() { const all = [...S.activities.indoor, ...S.activities.outdoor, ...S.activities.trips]; const r = all[Math.floor(Math.random() * all.length)]; alert(`${r.e} ${r.t}`); }
+
+        function editItem(type, idx) { currentEditType = type; currentEditIdx = idx; let item; if (type.startsWith('activities.')) item = S.activities[type.split('.')[1]][idx]; document.getElementById('editEmoji').value = item.e; document.getElementById('editText').value = item.t; document.getElementById('editModal').classList.add('active'); }
+        function saveEdit() { const e = document.getElementById('editEmoji').value || '✨'; const t = document.getElementById('editText').value.trim(); if (!t) return; if (currentEditType.startsWith('activities.')) S.activities[currentEditType.split('.')[1]][currentEditIdx] = {e, t}; save(); closeModal('editModal'); showWirSection(currentWirSection); }
+        function deleteEdit() { if (currentEditType.startsWith('activities.')) S.activities[currentEditType.split('.')[1]].splice(currentEditIdx, 1); save(); closeModal('editModal'); showWirSection(currentWirSection); }
+
+        // HIDDEN SECTIONS
+        function renderHiddenSections() {
+            document.getElementById('packContent').innerHTML = S.packlists.map((p, i) => `<div style="margin-bottom:12px;"><div class="list-item"><strong>${p.name}</strong><div class="list-item-actions"><button class="list-item-btn" onclick="editListItem('packlists',${i})">✏️</button></div></div>${p.items.map(item => `<div class="list-item"><span>${item}</span></div>`).join('')}</div>`).join('') + '<button class="btn btn-sm btn-secondary" onclick="addPacklist()">+ Liste</button>';
+            document.getElementById('infoContent').innerHTML = S.infos.map((info, i) => `<div class="list-item"><div><div style="font-size:0.7rem;color:var(--text-light)">${info.label}</div><div style="font-weight:600">${info.value}</div></div><div class="list-item-actions"><button class="list-item-btn" onclick="editListItem('infos',${i})">✏️</button></div></div>`).join('') + '<button class="btn btn-sm btn-secondary" onclick="addInfo()" style="margin-top:8px;">+ Info</button>';
+        }
+
+        function toggleHidden(id) { document.getElementById(id).classList.toggle('open'); }
+        function addPacklist() { const name = prompt('Listenname?'); if (!name) return; S.packlists.push({name, items: []}); save(); renderHiddenSections(); }
+        function addInfo() { const label = prompt('Label?'); const value = prompt('Wert?'); if (!label || !value) return; S.infos.push({label, value}); save(); renderHiddenSections(); }
+
+        function editListItem(type, idx) { currentListEditType = type; currentListEditIdx = idx; const item = S[type][idx]; document.getElementById('listEditTitle').textContent = type === 'packlists' ? 'Packliste' : 'Info'; document.getElementById('listEditName').value = type === 'packlists' ? item.name : item.label; document.getElementById('listEditModal').classList.add('active'); }
+        function saveListEdit() { const name = document.getElementById('listEditName').value.trim(); if (!name) return; if (currentListEditType === 'packlists') S.packlists[currentListEditIdx].name = name; else S.infos[currentListEditIdx].label = name; save(); closeModal('listEditModal'); renderHiddenSections(); }
+        function deleteListItem() { S[currentListEditType].splice(currentListEditIdx, 1); save(); closeModal('listEditModal'); renderHiddenSections(); }
+
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        document.querySelectorAll('.modal-overlay').forEach(m => m.addEventListener('click', e => { if (e.target === m) m.classList.remove('active'); }));
+
+        window.ccDebug = { seed() { S.library = [{id:'1',name:'Spaghetti',cook:'max',tags:['valerie'],ingredients:['Spaghetti','Hackfleisch','Passata']},{id:'2',name:'Pfannkuchen',cook:'anna',tags:['quick'],ingredients:['Mehl','Eier','Milch']}]; const days = getWeekDays(); S.weekplan = {[days[0].key]:{dinner:'1'},[days[2].key]:{dinner:'2'}}; S.todos = [{text:'Einkaufen',person:'max',done:false}]; save(); location.reload(); }, clear() { localStorage.clear(); location.reload(); } };
+
+        load(); renderHeute();
+    </script>
+</body>
+</html>

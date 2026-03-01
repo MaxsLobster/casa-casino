@@ -1,4 +1,4 @@
-const CACHE_NAME = 'casa-casino-v1';
+const CACHE_NAME = 'maxflow-v1';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

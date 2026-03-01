@@ -1,2 +1,2 @@
-# casa-casino
-living made easy
+# MaxFlow
+ADHS Co-Pilot for Max

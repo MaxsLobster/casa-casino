@@ -498,6 +498,25 @@
         .popup-input-label{font-family:'Playfair Display',serif;font-size:.85rem;color:var(--ink-muted);text-align:center;padding:8px;margin-bottom:10px;background:var(--porcelain);border-radius:8px}
         .btn-block{width:100%}
 
+        /* === FAMILY VIEWS === */
+        .family-grid{display:none}
+        .family-grid.show{display:flex;flex-wrap:wrap;gap:10px}
+        .family-subview{display:none;animation:fadeSlide .3s var(--ease)}
+        .family-subview.show{display:block}
+        @keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+        .family-back{display:flex;align-items:center;gap:6px;border:none;background:none;font-family:'Cormorant Garamond',Georgia,serif;font-size:.9rem;color:var(--ink-muted);cursor:pointer;padding:4px 0;margin-bottom:16px}
+        .family-back:active{opacity:.6}
+        .family-section-title{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--ink);margin-bottom:14px}
+        .family-item{background:var(--card);border:1px solid var(--porcelain-warm);border-radius:var(--radius);padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:center}
+        .family-item-icon{font-size:1.3rem}
+        .family-item-info{flex:1}
+        .family-item-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;font-weight:600;color:var(--ink)}
+        .family-item-sub{font-size:.78rem;color:var(--ink-ghost);margin-top:2px}
+        .family-add-btn{width:100%;padding:12px;border:2px dashed var(--porcelain-deep);border-radius:var(--radius);background:none;font-family:'Cormorant Garamond',Georgia,serif;font-size:.9rem;color:var(--ink-muted);cursor:pointer;margin-top:8px}
+        .family-add-btn:active{background:var(--porcelain)}
+        .family-note-input{width:100%;padding:10px 14px;border:1.5px solid var(--porcelain-deep);border-radius:var(--radius);font-family:'Cormorant Garamond',Georgia,serif;font-size:.9rem;margin-bottom:8px;background:var(--card)}
+        .family-note-input:focus{outline:none;border-color:var(--color-pink)}
+
         /* === IDEEN TAB === */
         .ideen-capture{display:flex;flex-direction:column;align-items:center;padding:20px 0 16px}
         .ideen-mic-btn{width:80px;height:80px;border-radius:50%;border:none;background:var(--color-pink);color:#fff;font-size:2rem;cursor:pointer;position:relative;transition:all .2s var(--ease);box-shadow:0 4px 20px rgba(244,143,177,0.3)}
@@ -732,28 +751,66 @@
         </div>
     </div>
 
-    <!-- ═══════ FAMILY (Sub-Navigation) ═══════ -->
+    <!-- ═══════ FAMILY ═══════ -->
     <div class="screen" id="screenFamily">
         <div class="hero" style="padding:22px 24px 20px;margin-bottom:20px">
             <div class="hero-title" style="font-size:1.5rem">Unser <em>Zuhause</em> 🏡</div>
         </div>
-        <div class="family-subnav">
-            <div class="family-tab" onclick="showNotification('👧🏼 Valerie – kommt bald!')">
+
+        <!-- 2x2 Grid Menu -->
+        <div class="family-subnav family-grid show" id="familyGrid">
+            <div class="family-tab" onclick="showFamilyView('valerie')">
                 <span class="family-tab-icon">👧🏼</span>
                 <span class="family-tab-label">Valerie</span>
             </div>
-            <div class="family-tab" onclick="showNotification('🏡 Haus – kommt bald!')">
+            <div class="family-tab" onclick="showFamilyView('haus')">
                 <span class="family-tab-icon">🏡</span>
                 <span class="family-tab-label">Haus</span>
             </div>
-            <div class="family-tab" onclick="showNotification('🍽️ Meals – kommt bald!')">
+            <div class="family-tab" onclick="showFamilyView('meals')">
                 <span class="family-tab-icon">🍽️</span>
                 <span class="family-tab-label">Meals</span>
             </div>
-            <div class="family-tab" onclick="showNotification('💜 Wir – kommt bald!')">
+            <div class="family-tab" onclick="showFamilyView('wir')">
                 <span class="family-tab-icon">💜</span>
                 <span class="family-tab-label">Wir</span>
             </div>
+        </div>
+
+        <!-- Valerie Sub-View -->
+        <div class="family-subview" id="familyValerie">
+            <button class="family-back" onclick="backToFamilyGrid()">◀ Zurück</button>
+            <div class="family-section-title">👧🏼 Valerie</div>
+            <div id="valerieNotes"></div>
+            <input class="family-note-input" id="valerieInput" placeholder="Notiz für Valerie..." onkeydown="if(event.key==='Enter')addFamilyNote('valerie')">
+            <button class="family-add-btn" onclick="addFamilyNote('valerie')">+ Notiz hinzufügen</button>
+        </div>
+
+        <!-- Haus Sub-View -->
+        <div class="family-subview" id="familyHaus">
+            <button class="family-back" onclick="backToFamilyGrid()">◀ Zurück</button>
+            <div class="family-section-title">🏡 Haushalt</div>
+            <div id="hausNotes"></div>
+            <input class="family-note-input" id="hausInput" placeholder="Haushalt-Aufgabe..." onkeydown="if(event.key==='Enter')addFamilyNote('haus')">
+            <button class="family-add-btn" onclick="addFamilyNote('haus')">+ Aufgabe hinzufügen</button>
+        </div>
+
+        <!-- Meals Sub-View -->
+        <div class="family-subview" id="familyMeals">
+            <button class="family-back" onclick="backToFamilyGrid()">◀ Zurück</button>
+            <div class="family-section-title">🍽️ Meal Plan</div>
+            <div id="mealsNotes"></div>
+            <input class="family-note-input" id="mealsInput" placeholder="Mahlzeit oder Rezeptidee..." onkeydown="if(event.key==='Enter')addFamilyNote('meals')">
+            <button class="family-add-btn" onclick="addFamilyNote('meals')">+ Mahlzeit hinzufügen</button>
+        </div>
+
+        <!-- Wir Sub-View -->
+        <div class="family-subview" id="familyWir">
+            <button class="family-back" onclick="backToFamilyGrid()">◀ Zurück</button>
+            <div class="family-section-title">💜 Wir (Paar-Notizen)</div>
+            <div id="wirNotes"></div>
+            <input class="family-note-input" id="wirInput" placeholder="Für uns..." onkeydown="if(event.key==='Enter')addFamilyNote('wir')">
+            <button class="family-add-btn" onclick="addFamilyNote('wir')">+ Notiz hinzufügen</button>
         </div>
     </div>
 
@@ -1609,6 +1666,62 @@
     function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
 
     function initIdeen(){renderIdeen()}
+
+    /* ═══ FAMILY TAB ═══ */
+    const familyIcons={valerie:'👧🏼',haus:'🏡',meals:'🍽️',wir:'💜'};
+
+    function getFamilyNotes(section){return lsGet('mf_family_'+section,[])}
+    function setFamilyNotes(section,notes){lsSet('mf_family_'+section,notes)}
+
+    function showFamilyView(section){
+        document.getElementById('familyGrid').classList.remove('show');
+        document.querySelectorAll('.family-subview').forEach(v=>v.classList.remove('show'));
+        const viewId='family'+section.charAt(0).toUpperCase()+section.slice(1);
+        document.getElementById(viewId).classList.add('show');
+        renderFamilyNotes(section)
+    }
+    function backToFamilyGrid(){
+        document.querySelectorAll('.family-subview').forEach(v=>v.classList.remove('show'));
+        document.getElementById('familyGrid').classList.add('show')
+    }
+    function addFamilyNote(section){
+        const input=document.getElementById(section+'Input');
+        const val=input.value.trim();
+        if(!val)return;
+        const notes=getFamilyNotes(section);
+        notes.unshift({id:Date.now(),text:val,created:new Date().toISOString(),done:false});
+        setFamilyNotes(section,notes);
+        input.value='';
+        renderFamilyNotes(section)
+    }
+    function toggleFamilyNote(section,id){
+        const notes=getFamilyNotes(section).map(n=>n.id===id?{...n,done:!n.done}:n);
+        setFamilyNotes(section,notes);
+        renderFamilyNotes(section)
+    }
+    function deleteFamilyNote(section,id){
+        setFamilyNotes(section,getFamilyNotes(section).filter(n=>n.id!==id));
+        renderFamilyNotes(section)
+    }
+    function renderFamilyNotes(section){
+        const notes=getFamilyNotes(section);
+        const container=document.getElementById(section+'Notes');
+        if(notes.length===0){
+            container.innerHTML='<div style="padding:16px 0;color:var(--ink-ghost);font-size:.85rem;font-style:italic;text-align:center">Noch keine Einträge</div>';
+            return
+        }
+        let html='';
+        notes.forEach(n=>{
+            html+='<div class="family-item" style="'+(n.done?'opacity:.5;text-decoration:line-through':'')+'">'+
+                '<div class="family-item-icon" onclick="toggleFamilyNote(\''+section+'\','+n.id+')" style="cursor:pointer">'+(n.done?'✅':familyIcons[section])+'</div>'+
+                '<div class="family-item-info">'+
+                    '<div class="family-item-title">'+escHtml(n.text)+'</div>'+
+                    '<div class="family-item-sub">'+timeAgo(n.created)+'</div>'+
+                '</div>'+
+                '<button class="ideen-action-btn" onclick="deleteFamilyNote(\''+section+'\','+n.id+')" style="color:var(--danger);opacity:.4">×</button></div>'
+        });
+        container.innerHTML=html
+    }
 
     /* ═══ INIT ═══ */
     updateDate();

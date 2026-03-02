@@ -498,6 +498,26 @@
         .popup-input-label{font-family:'Playfair Display',serif;font-size:.85rem;color:var(--ink-muted);text-align:center;padding:8px;margin-bottom:10px;background:var(--porcelain);border-radius:8px}
         .btn-block{width:100%}
 
+        /* === ACHIEVEMENTS === */
+        .achievements-section{margin-top:20px}
+        .achievements-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+        .achievements-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--ink)}
+        .achievements-count{font-size:.78rem;color:var(--ink-ghost);background:var(--porcelain);padding:4px 10px;border-radius:12px}
+        .achievements-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+        .achieve-cell{background:var(--card);border:1px solid var(--porcelain-warm);border-radius:var(--radius);padding:10px 4px;text-align:center;cursor:pointer;transition:all .2s var(--ease)}
+        .achieve-cell.unlocked{border-color:var(--kintsugi);box-shadow:0 0 0 2px var(--kintsugi-glow);animation:achieveIn .5s var(--bounce)}
+        .achieve-cell.locked{opacity:.4;filter:grayscale(1)}
+        .achieve-icon{font-size:1.5rem;display:block}
+        .achieve-name{font-size:.6rem;color:var(--ink-muted);margin-top:4px;font-family:'Cormorant Garamond',Georgia,serif;line-height:1.2}
+        @keyframes achieveIn{from{transform:scale(0) rotate(-15deg)}to{transform:scale(1) rotate(0)}}
+        .achieve-popup-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.6);z-index:2500;display:none;justify-content:center;align-items:center}
+        .achieve-popup-overlay.show{display:flex}
+        .achieve-popup{background:var(--card);border-radius:var(--radius-lg);padding:28px 24px;text-align:center;max-width:320px;width:90%;animation:achieveIn .4s var(--bounce)}
+        .achieve-popup-icon{font-size:3rem}
+        .achieve-popup-title{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:800;color:var(--ink);margin:12px 0 6px}
+        .achieve-popup-desc{font-size:.85rem;color:var(--ink-muted);margin-bottom:16px}
+        .achieve-popup-xp{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--kintsugi);font-weight:700}
+
         /* === FAMILY VIEWS === */
         .family-grid{display:none}
         .family-grid.show{display:flex;flex-wrap:wrap;gap:10px}
@@ -655,6 +675,15 @@
             </div>
             <div class="mood-week" id="moodWeek"></div>
             <input type="text" class="evening-input" id="eveningNote" placeholder="Was war heute gut?" onkeydown="if(event.key==='Enter')saveEveningNote()">
+        </div>
+
+        <!-- Achievements -->
+        <div class="achievements-section">
+            <div class="achievements-header">
+                <div class="achievements-title">🏆 Achievements</div>
+                <div class="achievements-count" id="achieveCount">0/10</div>
+            </div>
+            <div class="achievements-grid" id="achieveGrid"></div>
         </div>
     </div>
 
@@ -860,6 +889,17 @@
         <div class="level-up-text">LEVEL UP!</div>
         <div class="level-up-sub" id="levelUpText">Level 2 erreicht</div>
         <div style="font-size:.85rem;color:var(--ink-ghost);margin-top:8px">Tippe zum Schließen</div>
+    </div>
+
+    <!-- ═══════ ACHIEVEMENT POPUP ═══════ -->
+    <div class="achieve-popup-overlay" id="achievePopup" onclick="this.classList.remove('show')">
+        <div class="achieve-popup">
+            <div class="achieve-popup-icon" id="achievePopupIcon">🏆</div>
+            <div class="achieve-popup-title" id="achievePopupTitle">Achievement freigeschaltet!</div>
+            <div class="achieve-popup-desc" id="achievePopupDesc"></div>
+            <div class="achieve-popup-xp" id="achievePopupXP">+50 XP</div>
+            <div style="font-size:.78rem;color:var(--ink-ghost);margin-top:12px">Tippe zum Schließen</div>
+        </div>
     </div>
 
     <!-- ═══════ TAG SLOT POPUP ═══════ -->
@@ -1285,8 +1325,8 @@
             const check=el.querySelector('.task-check');
             if(check){check.style.background=task.priority==='high'?'#e05555':task.priority==='medium'?'#d4a030':'#5aab6a';check.style.borderColor=check.style.background;check.textContent='✓';check.style.color='#fff'}
             spawnConfetti(el);addXP(xp,el);
-            setTimeout(()=>renderAllTasks(),550)
-        }else{addXP(xp,null);renderAllTasks()}
+            setTimeout(()=>{renderAllTasks();checkAchievements()},550)
+        }else{addXP(xp,null);renderAllTasks();checkAchievements()}
     }
     function deleteTask(id){
         tasks=tasks.filter(t=>t.id!==id);lsSet('mf_tasks',tasks);renderAllTasks();showNotification('🗑️ Aufgabe gelöscht')
@@ -1535,7 +1575,8 @@
         setIdeen(ideen);
         input.value='';
         renderIdeen();
-        showNotification('💡 Idee gespeichert!')
+        showNotification('💡 Idee gespeichert!');
+        checkAchievements()
     }
 
     function toggleIdeenMic(){
@@ -1667,6 +1708,94 @@
 
     function initIdeen(){renderIdeen()}
 
+    /* ═══ ACHIEVEMENTS ═══ */
+    const ACHIEVEMENTS=[
+        {id:'first_task',icon:'🎯',name:'Erster Schritt',desc:'Erste Aufgabe erledigt',xp:50},
+        {id:'five_tasks',icon:'⚡',name:'Aufgaben-Held',desc:'5 Aufgaben erledigt',xp:100},
+        {id:'ten_tasks',icon:'🔥',name:'Unaufhaltbar',desc:'10 Aufgaben erledigt',xp:150},
+        {id:'quick_win_3',icon:'💨',name:'Quick Win Streak',desc:'3 Quick Wins an einem Tag',xp:75},
+        {id:'streak_3',icon:'🔥',name:'3-Tage-Streak',desc:'3 Tage Morgenroutine am Stück',xp:100},
+        {id:'streak_7',icon:'🌟',name:'Wochen-Krieger',desc:'7 Tage Streak',xp:200},
+        {id:'first_idea',icon:'💡',name:'Ideenblitz',desc:'Erste Idee festgehalten',xp:50},
+        {id:'voice_idea',icon:'🎤',name:'Voice Capture',desc:'Erste Idee per Sprache',xp:50},
+        {id:'level_5',icon:'👑',name:'Halbzeit',desc:'Level 5 erreicht',xp:250},
+        {id:'all_routines',icon:'🧊',name:'Morgen-Meister',desc:'Alle 3 Routinen an einem Tag',xp:75}
+    ];
+
+    function getUnlockedAchievements(){return lsGet('mf_achievements',[])}
+    function unlockAchievement(id){
+        const unlocked=getUnlockedAchievements();
+        if(unlocked.includes(id))return;
+        const a=ACHIEVEMENTS.find(x=>x.id===id);
+        if(!a)return;
+        unlocked.push(id);
+        lsSet('mf_achievements',unlocked);
+        // Award XP
+        const xpData=lsGet('mf_xp',{xp:0,level:1});
+        xpData.xp+=a.xp;
+        lsSet('mf_xp',xpData);
+        updateXPDisplay();
+        // Show popup
+        document.getElementById('achievePopupIcon').textContent=a.icon;
+        document.getElementById('achievePopupTitle').textContent=a.name;
+        document.getElementById('achievePopupDesc').textContent=a.desc;
+        document.getElementById('achievePopupXP').textContent='+'+a.xp+' XP';
+        document.getElementById('achievePopup').classList.add('show');
+        renderAchievements()
+    }
+
+    function renderAchievements(){
+        const unlocked=getUnlockedAchievements();
+        document.getElementById('achieveCount').textContent=unlocked.length+'/'+ACHIEVEMENTS.length;
+        let html='';
+        ACHIEVEMENTS.forEach(a=>{
+            const isUnlocked=unlocked.includes(a.id);
+            html+='<div class="achieve-cell '+(isUnlocked?'unlocked':'locked')+'" title="'+a.desc+'">'+
+                '<span class="achieve-icon">'+(isUnlocked?a.icon:'🔒')+'</span>'+
+                '<div class="achieve-name">'+(isUnlocked?a.name:'???')+'</div></div>'
+        });
+        document.getElementById('achieveGrid').innerHTML=html
+    }
+
+    function checkAchievements(){
+        const tasks=lsGet('mf_tasks',[]);
+        const done=tasks.filter(t=>t.status==='done');
+        if(done.length>=1)unlockAchievement('first_task');
+        if(done.length>=5)unlockAchievement('five_tasks');
+        if(done.length>=10)unlockAchievement('ten_tasks');
+
+        // Quick wins today
+        const today=new Date().toISOString().slice(0,10);
+        const qwToday=done.filter(t=>t.isQuickWin&&t.completedAt&&t.completedAt.startsWith(today));
+        if(qwToday.length>=3)unlockAchievement('quick_win_3');
+
+        // Streaks
+        const streak=lsGet('cc_streak',0);
+        if(streak>=3)unlockAchievement('streak_3');
+        if(streak>=7)unlockAchievement('streak_7');
+
+        // Ideas
+        const ideen=lsGet('mf_ideen',[]);
+        if(ideen.length>=1)unlockAchievement('first_idea');
+        if(ideen.some(i=>i.fromVoice))unlockAchievement('voice_idea');
+
+        // Level
+        const xpData=lsGet('mf_xp',{xp:0,level:1});
+        if(xpData.level>=5)unlockAchievement('level_5');
+
+        // All routines today
+        const routineState=load('routineState',{});
+        if(routineState.date===today){
+            const items=['meditation','stretching','eistonne'];
+            if(items.every(i=>routineState[i]))unlockAchievement('all_routines')
+        }
+    }
+
+    function initAchievements(){
+        renderAchievements();
+        checkAchievements()
+    }
+
     /* ═══ FAMILY TAB ═══ */
     const familyIcons={valerie:'👧🏼',haus:'🏡',meals:'🍽️',wir:'💜'};
 
@@ -1733,7 +1862,9 @@
     updateXPDisplay();
     initTag();
     initIdeen();
-    setInterval(checkEveningMode,60000)
+    initAchievements();
+    setInterval(checkEveningMode,60000);
+    setInterval(checkAchievements,30000)
     </script>
 </body>
 </html>

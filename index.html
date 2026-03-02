@@ -382,6 +382,68 @@
         }
         @keyframes notifIn{from{opacity:0;transform:translateX(-50%) translateY(-12px) scale(0.95)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
 
+        /* === FOKUS TAB === */
+        .fokus-xp-bar{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:var(--radius-lg);padding:12px 16px;margin-bottom:16px;box-shadow:var(--shadow-card)}
+        .fokus-xp-level{font-family:'Playfair Display',serif;font-weight:800;font-size:.85rem;color:var(--ember);white-space:nowrap}
+        .fokus-xp-progress{flex:1;height:6px;background:var(--porcelain-deep);border-radius:3px;overflow:hidden}
+        .fokus-xp-fill{height:100%;background:linear-gradient(90deg,var(--kintsugi),var(--ember-light));border-radius:3px;transition:width .5s var(--ease)}
+        .fokus-xp-text{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-faint);white-space:nowrap}
+        .next-move-card{background:var(--card);border-radius:var(--radius-xl);padding:28px 22px;margin-bottom:18px;box-shadow:var(--shadow-card);border-left:5px solid var(--color-orange);position:relative;overflow:hidden}
+        .next-move-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 80% 20%,var(--color-orange-glow),transparent 60%);pointer-events:none}
+        .next-move-badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--color-orange);font-weight:500}
+        .next-move-emoji{font-size:2rem;margin:10px 0 6px}
+        .next-move-title{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:800;color:var(--ink);line-height:1.2}
+        .next-move-duration{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--ink-faint);margin-top:6px}
+        .next-move-actions{display:flex;gap:10px;margin-top:16px}
+        .task-card{display:flex;align-items:center;padding:14px 16px;background:var(--card);border-radius:var(--radius);margin-bottom:8px;box-shadow:var(--shadow-subtle);border-left:4px solid var(--ink-ghost);cursor:pointer;transition:all .3s var(--ease);position:relative;overflow:hidden}
+        .task-card:active{transform:scale(0.98)}
+        .task-card.prio-high{border-left-color:#e05555}
+        .task-card.prio-medium{border-left-color:#d4a030}
+        .task-card.prio-low{border-left-color:#5aab6a}
+        .task-card.completing{animation:taskSlideOut .5s var(--ease) forwards}
+        @keyframes taskSlideOut{to{transform:translateX(100%);opacity:0}}
+        .task-check{width:26px;height:26px;border:2px solid var(--ink-ghost);border-radius:50%;margin-right:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .25s var(--bounce);font-size:.7rem}
+        .task-card.prio-high .task-check{border-color:#e05555}
+        .task-card.prio-medium .task-check{border-color:#d4a030}
+        .task-card.prio-low .task-check{border-color:#5aab6a}
+        .task-emoji{font-size:1.25rem;margin-right:10px;flex-shrink:0}
+        .task-info{flex:1;min-width:0}
+        .task-title{font-weight:600;font-size:.92rem;color:var(--ink-soft)}
+        .task-duration{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--ink-faint);margin-top:2px}
+        .task-card.quick-win{padding:10px 14px;margin-bottom:6px}
+        .task-card.quick-win .task-title{font-size:.82rem}
+        .quick-wins-section{margin-top:20px}
+        .quick-wins-header{font-family:'Playfair Display',serif;font-size:.72rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--ink-faint);margin-bottom:12px;font-weight:600;display:flex;align-items:center;gap:8px}
+        .section-header{font-family:'Playfair Display',serif;font-size:.72rem;text-transform:uppercase;letter-spacing:2.5px;color:var(--ink-faint);margin-bottom:12px;font-weight:600}
+        .xp-popup{position:fixed;pointer-events:none;font-family:'Playfair Display',serif;font-weight:800;font-size:1.1rem;color:var(--kintsugi);z-index:3000;animation:xpFloat 1.5s var(--ease) forwards;text-shadow:0 1px 4px rgba(245,166,35,0.3)}
+        @keyframes xpFloat{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-50px)}}
+        .level-up-overlay{display:none;position:fixed;inset:0;z-index:2500;background:rgba(26,23,20,0.7);justify-content:center;align-items:center;flex-direction:column;gap:12px}
+        .level-up-overlay.show{display:flex;animation:overlayIn .3s var(--ease)}
+        @keyframes overlayIn{from{opacity:0}to{opacity:1}}
+        .level-up-overlay .level-up-text{font-family:'Playfair Display',serif;font-size:2rem;font-weight:900;color:var(--kintsugi);text-align:center;animation:achieveIn .5s var(--bounce)}
+        .level-up-overlay .level-up-sub{font-size:1.1rem;color:var(--card);text-align:center}
+        @keyframes achieveIn{from{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}
+        .emoji-picker-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+        .emoji-pick{width:44px;height:44px;border:2px solid var(--porcelain-deep);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.3rem;cursor:pointer;background:var(--porcelain-warm);transition:all .2s var(--ease)}
+        .emoji-pick:active{transform:scale(0.9)}
+        .emoji-pick.selected{border-color:var(--ember);background:var(--ember-glow);box-shadow:0 0 0 3px var(--ember-glow)}
+        .prio-btn{padding:10px 16px;border-radius:20px;font-size:.78rem;font-weight:600;cursor:pointer;background:var(--porcelain-warm);border:1.5px solid var(--porcelain-deep);transition:all .2s var(--ease);color:var(--ink-muted)}
+        .prio-btn:active{transform:scale(0.95)}
+        .prio-btn.selected{color:#fff}
+        .prio-btn.selected[data-prio="high"]{background:#e05555;border-color:#e05555}
+        .prio-btn.selected[data-prio="medium"]{background:#d4a030;border-color:#d4a030}
+        .prio-btn.selected[data-prio="low"]{background:#5aab6a;border-color:#5aab6a}
+        .dur-btn{padding:8px 14px;border-radius:20px;font-size:.72rem;font-weight:600;cursor:pointer;background:var(--porcelain-warm);border:1.5px solid var(--porcelain-deep);transition:all .2s var(--ease);color:var(--ink-muted)}
+        .dur-btn:active{transform:scale(0.95)}
+        .dur-btn.selected{background:var(--ember);color:#fff;border-color:var(--ember)}
+        .qw-toggle{display:flex;align-items:center;gap:10px;padding:12px 0;font-size:.88rem;font-weight:500;color:var(--ink-soft)}
+        .qw-switch{width:44px;height:26px;background:var(--porcelain-deep);border-radius:13px;position:relative;cursor:pointer;transition:background .2s}
+        .qw-switch.on{background:var(--ember)}
+        .qw-switch::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;background:#fff;border-radius:50%;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,0.15)}
+        .qw-switch.on::after{transform:translateX(18px)}
+        .confetti-piece{position:fixed;width:8px;height:8px;border-radius:50%;z-index:3000;pointer-events:none;animation:confettiDrop 1.2s var(--ease) forwards}
+        @keyframes confettiDrop{0%{opacity:1;transform:translateY(0) rotate(0)}100%{opacity:0;transform:translateY(120px) rotate(360deg)}}
+
         /* === RESPONSIVE === */
         @media(min-width:768px){
             body{padding-bottom:120px}
@@ -493,13 +555,34 @@
         </div>
     </div>
 
-    <!-- ═══════ FOKUS (Platzhalter) ═══════ -->
+    <!-- ═══════ FOKUS ═══════ -->
     <div class="screen" id="screenFokus">
-        <div class="placeholder-screen">
-            <div class="placeholder-icon">⚡</div>
-            <div class="placeholder-title">Fokus & Tasks</div>
-            <div class="placeholder-sub">Aufgaben, Priorities und Productivity-Tools kommen hier hin.</div>
+        <div class="fokus-xp-bar">
+            <div class="fokus-xp-level" id="fokusLevel">⭐ Level 1</div>
+            <div class="fokus-xp-progress"><div class="fokus-xp-fill" id="fokusXPFill" style="width:0%"></div></div>
+            <div class="fokus-xp-text" id="fokusXPText">0/100 XP</div>
         </div>
+        <div class="next-move-card" id="fokusNextMove">
+            <div class="next-move-badge">Dein nächster Move</div>
+            <div class="next-move-emoji" id="nextMoveEmoji">🎯</div>
+            <div class="next-move-title" id="nextMoveTitle">Noch keine Aufgaben</div>
+            <div class="next-move-duration" id="nextMoveDuration">Füge eine Aufgabe hinzu!</div>
+            <div class="next-move-actions">
+                <button class="btn btn-ember" onclick="startNextMove()">Let's go ⚡</button>
+                <button class="btn btn-ghost" onclick="showNextMove()">Nächste →</button>
+            </div>
+        </div>
+        <div class="section-header">🔴 HOHE PRIORITÄT</div>
+        <div id="taskListHigh"></div>
+        <div class="section-header">🟡 MITTLERE PRIORITÄT</div>
+        <div id="taskListMedium"></div>
+        <div class="section-header">🟢 NIEDRIGE PRIORITÄT</div>
+        <div id="taskListLow"></div>
+        <div class="quick-wins-section">
+            <div class="quick-wins-header">⚡ QUICK WINS <span style="font-family:'JetBrains Mono',monospace;font-size:.55rem;font-weight:400;color:var(--ink-ghost)">Schnell erledigt</span></div>
+            <div id="taskListQuickWins"></div>
+        </div>
+        <button class="btn btn-ember btn-block" style="margin-top:20px" onclick="openTaskPopup()">+ Neue Aufgabe</button>
     </div>
 
     <!-- ═══════ IDEEN (Platzhalter) ═══════ -->
@@ -543,6 +626,54 @@
                 <span class="family-tab-label">Wir</span>
             </div>
         </div>
+    </div>
+
+    <!-- ═══════ TASK POPUP ═══════ -->
+    <div class="popup-overlay" id="taskPopup"><div class="popup" style="max-width:380px">
+        <h3>🎯 Neue Aufgabe</h3>
+        <label style="font-family:'Playfair Display',serif;font-size:.68rem;font-weight:700;color:var(--ink-faint);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Titel</label>
+        <input type="text" class="popup-input" id="taskTitle" placeholder="Was muss erledigt werden?">
+        <label style="font-family:'Playfair Display',serif;font-size:.68rem;font-weight:700;color:var(--ink-faint);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Emoji</label>
+        <div class="emoji-picker-grid" id="taskEmojiPicker">
+            <div class="emoji-pick selected" onclick="pickTaskEmoji(this)" data-emoji="📧">📧</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="📞">📞</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="💻">💻</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="🏠">🏠</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="📝">📝</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="🎯">🎯</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="🛒">🛒</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="📦">📦</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="🔧">🔧</div>
+            <div class="emoji-pick" onclick="pickTaskEmoji(this)" data-emoji="💡">💡</div>
+        </div>
+        <label style="font-family:'Playfair Display',serif;font-size:.68rem;font-weight:700;color:var(--ink-faint);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Priorität</label>
+        <div style="display:flex;gap:8px;margin-bottom:14px">
+            <button class="prio-btn" data-prio="high" onclick="pickTaskPrio(this)">🔴 Hoch</button>
+            <button class="prio-btn selected" data-prio="medium" onclick="pickTaskPrio(this)">🟡 Mittel</button>
+            <button class="prio-btn" data-prio="low" onclick="pickTaskPrio(this)">🟢 Niedrig</button>
+        </div>
+        <label style="font-family:'Playfair Display',serif;font-size:.68rem;font-weight:700;color:var(--ink-faint);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px">Geschätzte Dauer</label>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
+            <button class="dur-btn" onclick="pickTaskDur(this)" data-dur="5min">5 min</button>
+            <button class="dur-btn selected" onclick="pickTaskDur(this)" data-dur="15min">15 min</button>
+            <button class="dur-btn" onclick="pickTaskDur(this)" data-dur="30min">30 min</button>
+            <button class="dur-btn" onclick="pickTaskDur(this)" data-dur="1h">1 h</button>
+            <button class="dur-btn" onclick="pickTaskDur(this)" data-dur="2h+">2h+</button>
+        </div>
+        <div class="qw-toggle">
+            <span>⚡ Quick Win?</span>
+            <div class="qw-switch" id="taskQuickWinToggle" onclick="this.classList.toggle('on')"></div>
+        </div>
+        <button class="popup-btn popup-btn-ember" onclick="saveTask()">✓ Aufgabe erstellen</button>
+        <button class="popup-btn popup-btn-ghost" onclick="hideTaskPopup()">Abbrechen</button>
+    </div></div>
+
+    <!-- ═══════ LEVEL UP ═══════ -->
+    <div class="level-up-overlay" id="levelUpOverlay" onclick="this.classList.remove('show')">
+        <div style="font-size:3rem;animation:achieveIn .5s var(--bounce)">🎉</div>
+        <div class="level-up-text">LEVEL UP!</div>
+        <div class="level-up-sub" id="levelUpText">Level 2 erreicht</div>
+        <div style="font-size:.85rem;color:var(--ink-ghost);margin-top:8px">Tippe zum Schließen</div>
     </div>
 
     <!-- ═══════ NAV ═══════ -->
@@ -838,13 +969,160 @@
         document.body.appendChild(n);setTimeout(()=>n.remove(),2500)
     }
 
+    /* ═══ LOCALSTORAGE HELPERS ═══ */
+    function lsGet(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}
+    function lsSet(k,v){localStorage.setItem(k,JSON.stringify(v))}
+
+    /* ═══ GAMIFICATION / XP ═══ */
+    const LEVELS=[0,100,250,500,1000,1750,2750,4000,5500,7500];
+    let gameState=lsGet('mf_game',{totalXP:0,level:1});
+    function addXP(amount,el){
+        gameState.totalXP+=amount;
+        const oldLevel=gameState.level;
+        while(gameState.level<10&&gameState.totalXP>=LEVELS[gameState.level])gameState.level++;
+        lsSet('mf_game',gameState);
+        if(el)showXPPopup(amount,el);
+        if(gameState.level>oldLevel)showLevelUp(gameState.level);
+        updateXPDisplay()
+    }
+    function showXPPopup(amount,el){
+        const popup=document.createElement('div');popup.className='xp-popup';popup.textContent='+'+amount+' XP';
+        const rect=el.getBoundingClientRect();
+        popup.style.left=rect.left+'px';popup.style.top=(rect.top-10)+'px';
+        document.body.appendChild(popup);setTimeout(()=>popup.remove(),1600)
+    }
+    function showLevelUp(level){
+        document.getElementById('levelUpText').textContent='Level '+level+' erreicht!';
+        document.getElementById('levelUpOverlay').classList.add('show');
+        showNotification('🎉 Du bist on fire, Max! Level '+level+'!')
+    }
+    function updateXPDisplay(){
+        const lvl=gameState.level,xp=gameState.totalXP;
+        const cur=LEVELS[lvl-1]||0,next=LEVELS[lvl]||LEVELS[9];
+        const pct=next>cur?Math.min(100,((xp-cur)/(next-cur))*100):100;
+        document.getElementById('fokusLevel').textContent='⭐ Level '+lvl;
+        document.getElementById('fokusXPFill').style.width=pct+'%';
+        document.getElementById('fokusXPText').textContent=xp+'/'+next+' XP'
+    }
+    function spawnConfetti(el){
+        const rect=el.getBoundingClientRect();
+        const colors=['#e05555','#d4a030','#5aab6a','#64B5F6','#F5A623','#F48FB1'];
+        for(let i=0;i<8;i++){
+            const c=document.createElement('div');c.className='confetti-piece';
+            c.style.left=(rect.left+Math.random()*60-30)+'px';
+            c.style.top=(rect.top-5)+'px';
+            c.style.background=colors[Math.floor(Math.random()*colors.length)];
+            c.style.animationDelay=(Math.random()*0.3)+'s';
+            c.style.animationDuration=(0.8+Math.random()*0.6)+'s';
+            document.body.appendChild(c);setTimeout(()=>c.remove(),2000)
+        }
+    }
+
+    /* ═══ FOKUS / TASKS ═══ */
+    let tasks=lsGet('mf_tasks',[]);
+    let taskIdCounter=lsGet('mf_taskId',1);
+    let selectedTaskEmoji='📧',selectedTaskPrio='medium',selectedTaskDur='15min';
+    let nextMoveIndex=0;
+
+    function pickTaskEmoji(el){
+        document.querySelectorAll('.emoji-pick').forEach(e=>e.classList.remove('selected'));
+        el.classList.add('selected');selectedTaskEmoji=el.dataset.emoji
+    }
+    function pickTaskPrio(el){
+        document.querySelectorAll('.prio-btn').forEach(e=>e.classList.remove('selected'));
+        el.classList.add('selected');selectedTaskPrio=el.dataset.prio
+    }
+    function pickTaskDur(el){
+        document.querySelectorAll('.dur-btn').forEach(e=>e.classList.remove('selected'));
+        el.classList.add('selected');selectedTaskDur=el.dataset.dur
+    }
+    function openTaskPopup(){
+        document.getElementById('taskTitle').value='';
+        document.querySelectorAll('.emoji-pick').forEach((e,i)=>e.classList.toggle('selected',i===0));
+        selectedTaskEmoji='📧';
+        document.querySelectorAll('.prio-btn').forEach(e=>e.classList.toggle('selected',e.dataset.prio==='medium'));
+        selectedTaskPrio='medium';
+        document.querySelectorAll('.dur-btn').forEach(e=>e.classList.toggle('selected',e.dataset.dur==='15min'));
+        selectedTaskDur='15min';
+        document.getElementById('taskQuickWinToggle').classList.remove('on');
+        document.getElementById('taskPopup').classList.add('show')
+    }
+    function hideTaskPopup(){document.getElementById('taskPopup').classList.remove('show')}
+    function saveTask(){
+        const title=document.getElementById('taskTitle').value.trim();
+        if(!title){showNotification('Bitte Titel eingeben!');return}
+        const isQW=document.getElementById('taskQuickWinToggle').classList.contains('on');
+        tasks.push({id:taskIdCounter++,title,emoji:selectedTaskEmoji,priority:selectedTaskPrio,duration:selectedTaskDur,isQuickWin:isQW,status:'pending',createdAt:new Date().toISOString(),completedAt:null});
+        lsSet('mf_tasks',tasks);lsSet('mf_taskId',taskIdCounter);
+        hideTaskPopup();renderAllTasks();showNotification('✅ Aufgabe erstellt!')
+    }
+    function completeTask(id){
+        const task=tasks.find(t=>t.id===id);if(!task||task.status==='done')return;
+        const el=document.querySelector('[data-task-id="'+id+'"]');
+        task.status='done';task.completedAt=new Date().toISOString();
+        lsSet('mf_tasks',tasks);
+        const xp=task.priority==='high'?30:task.isQuickWin?5:15;
+        if(el){
+            el.classList.add('completing');
+            const check=el.querySelector('.task-check');
+            if(check){check.style.background=task.priority==='high'?'#e05555':task.priority==='medium'?'#d4a030':'#5aab6a';check.style.borderColor=check.style.background;check.textContent='✓';check.style.color='#fff'}
+            spawnConfetti(el);addXP(xp,el);
+            setTimeout(()=>renderAllTasks(),550)
+        }else{addXP(xp,null);renderAllTasks()}
+    }
+    function deleteTask(id){
+        tasks=tasks.filter(t=>t.id!==id);lsSet('mf_tasks',tasks);renderAllTasks();showNotification('🗑️ Aufgabe gelöscht')
+    }
+    function startNextMove(){
+        const pending=tasks.filter(t=>t.status==='pending'&&!t.isQuickWin).sort((a,b)=>{const p={high:0,medium:1,low:2};return p[a.priority]-p[b.priority]});
+        if(pending.length>0){pending[nextMoveIndex%pending.length].status='in_progress';lsSet('mf_tasks',tasks);renderAllTasks();showNotification('⚡ Los geht\'s!')}
+    }
+    function showNextMove(){
+        const pending=tasks.filter(t=>t.status==='pending'&&!t.isQuickWin).sort((a,b)=>{const p={high:0,medium:1,low:2};return p[a.priority]-p[b.priority]});
+        if(pending.length>1){nextMoveIndex=(nextMoveIndex+1)%pending.length;updateNextMoveCard()}
+    }
+    function updateNextMoveCard(){
+        const pending=tasks.filter(t=>t.status==='pending'&&!t.isQuickWin).sort((a,b)=>{const p={high:0,medium:1,low:2};return p[a.priority]-p[b.priority]});
+        if(pending.length===0){
+            document.getElementById('nextMoveEmoji').textContent='🎉';
+            document.getElementById('nextMoveTitle').textContent='Alles erledigt!';
+            document.getElementById('nextMoveDuration').textContent='Füge eine neue Aufgabe hinzu';return
+        }
+        const t=pending[nextMoveIndex%pending.length];
+        document.getElementById('nextMoveEmoji').textContent=t.emoji;
+        document.getElementById('nextMoveTitle').textContent=t.title;
+        document.getElementById('nextMoveDuration').textContent='⏱ '+t.duration+' · '+({high:'🔴 Hohe Prio',medium:'🟡 Mittlere Prio',low:'🟢 Niedrige Prio'}[t.priority])
+    }
+    function renderTaskCard(t,isQuickWin){
+        const prioClass=t.priority==='high'?'prio-high':t.priority==='medium'?'prio-medium':'prio-low';
+        return '<div class="task-card '+prioClass+(isQuickWin?' quick-win':'')+'" data-task-id="'+t.id+'">'+
+            '<div class="task-check" onclick="event.stopPropagation();completeTask('+t.id+')"></div>'+
+            '<div class="task-emoji">'+t.emoji+'</div>'+
+            '<div class="task-info"><div class="task-title">'+t.title+'</div><div class="task-duration">⏱ '+t.duration+'</div></div>'+
+            '<span onclick="event.stopPropagation();deleteTask('+t.id+')" style="color:var(--danger);opacity:.3;padding:4px 8px;cursor:pointer;font-size:1rem">×</span></div>'
+    }
+    function renderAllTasks(){
+        const pending=tasks.filter(t=>t.status!=='done');
+        const high=pending.filter(t=>t.priority==='high'&&!t.isQuickWin);
+        const medium=pending.filter(t=>t.priority==='medium'&&!t.isQuickWin);
+        const low=pending.filter(t=>t.priority==='low'&&!t.isQuickWin);
+        const qw=pending.filter(t=>t.isQuickWin);
+        const emptyMsg='<div style="padding:8px 0;color:var(--ink-ghost);font-size:.82rem;font-style:italic">Keine Aufgaben</div>';
+        document.getElementById('taskListHigh').innerHTML=high.length?high.map(t=>renderTaskCard(t,false)).join(''):emptyMsg;
+        document.getElementById('taskListMedium').innerHTML=medium.length?medium.map(t=>renderTaskCard(t,false)).join(''):emptyMsg;
+        document.getElementById('taskListLow').innerHTML=low.length?low.map(t=>renderTaskCard(t,false)).join(''):emptyMsg;
+        document.getElementById('taskListQuickWins').innerHTML=qw.length?qw.map(t=>renderTaskCard(t,true)).join(''):'<div style="padding:8px 0;color:var(--ink-ghost);font-size:.82rem;font-style:italic">Keine Quick Wins</div>';
+        updateNextMoveCard();updateXPDisplay()
+    }
+
     /* ═══ INIT ═══ */
     updateDate();
     initWisdom();
     loadRoutineState();
     checkEveningMode();
     updateSnapshot();
-    // refresh evening mode check every minute
+    renderAllTasks();
+    updateXPDisplay();
     setInterval(checkEveningMode,60000)
     </script>
 </body>

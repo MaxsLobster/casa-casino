@@ -1095,6 +1095,75 @@
         }
         .mode-picker-close:active{transform:scale(0.97)}
 
+        /* === SETTINGS BUTTON & MODAL === */
+        .settings-btn{
+            position:absolute;right:16px;top:50%;transform:translateY(-50%);
+            width:36px;height:36px;border-radius:50%;border:none;
+            background:var(--card);box-shadow:var(--shadow-card);
+            border:1px solid rgba(44,40,36,0.06);
+            cursor:pointer;display:flex;align-items:center;justify-content:center;
+            font-size:1.1rem;color:var(--ink-muted);
+            transition:all .25s var(--ease)
+        }
+        .settings-btn:active{transform:translateY(-50%) scale(0.92)}
+        body[data-mode="recovery"] .settings-btn{background:#252545;border-color:rgba(255,255,255,0.06);color:#9090B0}
+
+        .settings-overlay{
+            display:none;position:fixed;inset:0;
+            background:rgba(26,23,20,0.55);
+            backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+            z-index:2000;justify-content:center;align-items:center;
+            padding:20px
+        }
+        .settings-overlay.show{display:flex;animation:overlayIn .25s var(--ease)}
+        .settings-modal{
+            background:var(--card);border-radius:var(--radius-xl);
+            padding:28px 24px;width:100%;max-width:380px;
+            box-shadow:0 20px 60px rgba(26,23,20,0.18);
+            animation:popUp .35s var(--bounce)
+        }
+        body[data-mode="recovery"] .settings-modal{background:#252545}
+        .settings-title{
+            font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:800;
+            color:var(--ink);text-align:center;margin-bottom:20px
+        }
+        body[data-mode="recovery"] .settings-title{color:#E0E0F0}
+        .settings-field-label{
+            font-family:'Playfair Display',serif;font-size:.78rem;font-weight:600;
+            text-transform:uppercase;letter-spacing:1.5px;
+            color:var(--ink-faint);margin-bottom:8px
+        }
+        body[data-mode="recovery"] .settings-field-label{color:#8080A0}
+        .settings-input{
+            width:100%;padding:14px 16px;
+            border:1.5px solid var(--porcelain-deep);border-radius:var(--radius);
+            font-size:14px;font-family:'JetBrains Mono',monospace;
+            background:var(--card);color:var(--ink);
+            transition:all .2s var(--ease)
+        }
+        .settings-input:focus{outline:none;border-color:var(--theme-primary);box-shadow:0 0 0 3px var(--theme-primary-glow)}
+        .settings-input::placeholder{color:var(--ink-ghost);font-family:'Cormorant Garamond',Georgia,serif;font-size:15px}
+        body[data-mode="recovery"] .settings-input{background:#1E1E3A;border-color:rgba(123,104,238,0.2);color:#E0E0F0}
+        .settings-save{
+            width:100%;padding:14px;border:none;border-radius:var(--radius);
+            background:var(--theme-primary);color:#fff;
+            font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.95rem;font-weight:600;cursor:pointer;
+            margin-top:14px;box-shadow:var(--shadow-theme);
+            transition:all .2s var(--ease)
+        }
+        .settings-save:active{transform:scale(0.98)}
+        .settings-cancel{
+            display:block;width:100%;margin-top:8px;
+            padding:12px;border:none;border-radius:var(--radius);
+            background:var(--porcelain-warm);
+            font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.88rem;font-weight:600;color:var(--ink-muted);
+            cursor:pointer;transition:all .2s var(--ease)
+        }
+        .settings-cancel:active{transform:scale(0.97)}
+        body[data-mode="recovery"] .settings-cancel{background:#2A2A4A;color:#9090B0}
+
         /* === RECOVERY VIEW === */
         .recovery-section{display:none}
         body[data-mode="recovery"] .recovery-section{display:block}
@@ -1275,6 +1344,18 @@
             <span class="mode-indicator-dot"></span>
             <span id="modeIndicatorLabel">Standard</span>
             <span class="mode-indicator-arrow">▼</span>
+        </div>
+        <button class="settings-btn" onclick="openSettings()" aria-label="Einstellungen">⚙</button>
+    </div>
+
+    <!-- ═══════ SETTINGS MODAL ═══════ -->
+    <div class="settings-overlay" id="settingsOverlay" onclick="if(event.target===this)closeSettings()">
+        <div class="settings-modal">
+            <div class="settings-title">⚙ Einstellungen</div>
+            <div class="settings-field-label">Claude API-Key</div>
+            <input class="settings-input" id="settingsApiKey" type="password" placeholder="sk-ant-..." autocomplete="off" spellcheck="false">
+            <button class="settings-save" onclick="saveSettings()">Speichern</button>
+            <button class="settings-cancel" onclick="closeSettings()">Abbrechen</button>
         </div>
     </div>
 
@@ -3041,13 +3122,31 @@
        RECOVERY VIEW — Tagesreflexion, Rewind, Routine
        ═══════════════════════════════════════════════ */
 
-    // API-Key für Claude (manuell eintragen oder via URL-Parameter ?apikey=...)
+    // API-Key für Claude (aus Settings, localStorage oder URL-Parameter)
     let CLAUDE_API_KEY = lsGet('neuros_apikey', '');
     (function(){
         const p = new URLSearchParams(window.location.search);
         const k = p.get('apikey');
         if(k){ CLAUDE_API_KEY = k; lsSet('neuros_apikey', k); }
     })();
+
+    /* ═══ SETTINGS MODAL ═══ */
+    function openSettings(){
+        const overlay = document.getElementById('settingsOverlay');
+        const input = document.getElementById('settingsApiKey');
+        input.value = CLAUDE_API_KEY;
+        overlay.classList.add('show');
+    }
+    function closeSettings(){
+        document.getElementById('settingsOverlay').classList.remove('show');
+    }
+    function saveSettings(){
+        const key = document.getElementById('settingsApiKey').value.trim();
+        CLAUDE_API_KEY = key;
+        lsSet('neuros_apikey', key);
+        closeSettings();
+        showNotification(key ? '✓ API-Key gespeichert' : 'API-Key entfernt');
+    }
 
     /**
      * Tagesreflexion speichern (Recovery View)

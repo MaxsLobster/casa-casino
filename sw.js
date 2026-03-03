@@ -1,15 +1,6 @@
-const CACHE_NAME = 'maxflow-v1';
+const CACHE_NAME = 'neuros-v2';
 
 self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll([
-        '/casa-casino/',
-        '/casa-casino/index.html',
-        '/casa-casino/manifest.json'
-      ]);
-    })
-  );
   self.skipWaiting();
 });
 
@@ -26,18 +17,14 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request).then((fetchResponse) => {
-        if (fetchResponse.status === 200) {
-          const responseClone = fetchResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseClone);
-          });
-        }
-        return fetchResponse;
-      });
+    fetch(event.request).then((response) => {
+      if (response.status === 200) {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+      }
+      return response;
     }).catch(() => {
-      return caches.match('/casa-casino/index.html');
+      return caches.match(event.request) || caches.match('/casa-casino/index.html');
     })
   );
 });

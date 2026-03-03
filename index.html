@@ -1095,6 +1095,169 @@
         }
         .mode-picker-close:active{transform:scale(0.97)}
 
+        /* === RECOVERY VIEW === */
+        .recovery-section{display:none}
+        body[data-mode="recovery"] .recovery-section{display:block}
+
+        .recovery-reflection{
+            background:linear-gradient(145deg,#252545,#2A2A4A);
+            border-radius:var(--radius-xl);padding:24px 22px;
+            margin-bottom:16px;border:1px solid rgba(123,104,238,0.12)
+        }
+        .recovery-reflection-label{
+            font-family:'Playfair Display',serif;font-size:.72rem;
+            text-transform:uppercase;letter-spacing:2.5px;
+            color:rgba(224,224,240,0.5);font-weight:600;margin-bottom:14px
+        }
+        .recovery-reflection-input{
+            width:100%;padding:16px;border:1.5px solid rgba(123,104,238,0.2);
+            border-radius:var(--radius);font-size:16px;font-family:inherit;
+            background:rgba(123,104,238,0.06);color:#E0E0F0;
+            transition:all .2s var(--ease);resize:none;min-height:80px;line-height:1.5
+        }
+        .recovery-reflection-input::placeholder{color:rgba(224,224,240,0.3)}
+        .recovery-reflection-input:focus{outline:none;border-color:#7B68EE;box-shadow:0 0 0 3px rgba(123,104,238,0.15)}
+        .recovery-saved{
+            font-family:'JetBrains Mono',monospace;font-size:.65rem;
+            color:rgba(123,104,238,0.6);margin-top:8px;text-align:right;
+            opacity:0;transition:opacity .3s ease
+        }
+        .recovery-saved.show{opacity:1}
+
+        .recovery-rewind{
+            background:linear-gradient(145deg,#252545,#2A2A4A);
+            border-radius:var(--radius-xl);padding:24px 22px;
+            margin-bottom:16px;border:1px solid rgba(123,104,238,0.12)
+        }
+        .recovery-rewind-label{
+            font-family:'Playfair Display',serif;font-size:.72rem;
+            text-transform:uppercase;letter-spacing:2.5px;
+            color:rgba(224,224,240,0.5);font-weight:600;margin-bottom:14px
+        }
+        .rewind-stats{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+        .rewind-stat{
+            flex:1;min-width:calc(50% - 8px);background:rgba(123,104,238,0.08);
+            border-radius:var(--radius);padding:14px 12px;text-align:center;
+            border:1px solid rgba(123,104,238,0.1)
+        }
+        .rewind-stat-icon{font-size:1.3rem;display:block;margin-bottom:4px}
+        .rewind-stat-num{
+            font-family:'Playfair Display',serif;font-size:1.4rem;
+            font-weight:800;color:#E0E0F0;line-height:1
+        }
+        .rewind-stat-label{
+            font-family:'JetBrains Mono',monospace;font-size:.52rem;
+            color:rgba(224,224,240,0.4);text-transform:uppercase;
+            letter-spacing:.5px;margin-top:4px
+        }
+        .rewind-ai-text{
+            background:rgba(123,104,238,0.06);border-radius:var(--radius);
+            padding:16px 18px;font-size:.95rem;line-height:1.6;
+            color:rgba(224,224,240,0.8);font-style:italic;
+            border-left:3px solid rgba(123,104,238,0.3);
+            min-height:40px
+        }
+        .rewind-ai-text.loading{
+            color:rgba(224,224,240,0.4);font-style:normal
+        }
+        .rewind-generate-btn{
+            display:block;width:100%;margin-top:12px;padding:12px;
+            border:1.5px dashed rgba(123,104,238,0.3);
+            border-radius:var(--radius);background:transparent;
+            font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.88rem;font-weight:600;color:#7B68EE;
+            cursor:pointer;transition:all .2s var(--ease)
+        }
+        .rewind-generate-btn:active{transform:scale(0.97)}
+        .rewind-generate-btn:hover{background:rgba(123,104,238,0.06)}
+
+        .recovery-routine{
+            background:linear-gradient(145deg,#252545,#2A2A4A);
+            border-radius:var(--radius-xl);padding:24px 22px;
+            margin-bottom:16px;border:1px solid rgba(123,104,238,0.12)
+        }
+        .recovery-routine-label{
+            font-family:'Playfair Display',serif;font-size:.72rem;
+            text-transform:uppercase;letter-spacing:2.5px;
+            color:rgba(224,224,240,0.5);font-weight:600;margin-bottom:14px
+        }
+        .recovery-routine-item{
+            display:flex;align-items:center;padding:14px 16px;
+            background:rgba(123,104,238,0.06);border-radius:var(--radius);
+            margin-bottom:8px;cursor:pointer;
+            border:1px solid rgba(123,104,238,0.08);transition:all .25s var(--ease)
+        }
+        .recovery-routine-item:active{transform:scale(0.98)}
+        .recovery-routine-item.done{background:rgba(123,104,238,0.15);border-color:rgba(123,104,238,0.2)}
+        .recovery-routine-check{
+            width:26px;height:26px;border:2px solid rgba(123,104,238,0.3);
+            border-radius:50%;margin-right:14px;display:flex;
+            align-items:center;justify-content:center;flex-shrink:0;
+            transition:all .25s var(--bounce);font-size:.75rem
+        }
+        .recovery-routine-item.done .recovery-routine-check{
+            background:#7B68EE;border-color:#7B68EE;color:#fff;transform:scale(1.05)
+        }
+        .recovery-routine-emoji{font-size:1.25rem;margin-right:10px}
+        .recovery-routine-text{font-weight:500;font-size:1rem;flex:1;color:rgba(224,224,240,0.7)}
+
+        /* === KI-COACH === */
+        .coach-card{
+            background:var(--card);border-radius:var(--radius-xl);
+            padding:22px 20px;margin-bottom:16px;
+            box-shadow:var(--shadow-card);border:1px solid rgba(44,40,36,0.04);
+            position:relative;overflow:hidden
+        }
+        .coach-card::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:3px;
+            background:linear-gradient(90deg,var(--theme-primary),var(--theme-accent),var(--theme-secondary));
+            opacity:.6
+        }
+        .coach-label{
+            font-family:'Playfair Display',serif;font-size:.72rem;
+            text-transform:uppercase;letter-spacing:2.5px;
+            color:var(--ink-faint);font-weight:600;margin-bottom:12px
+        }
+        .coach-input-row{display:flex;gap:8px}
+        .coach-input{
+            flex:1;padding:14px 16px;border:1.5px solid var(--porcelain-deep);
+            border-radius:var(--radius);font-size:16px;font-family:inherit;
+            background:var(--card);color:var(--ink);transition:all .2s var(--ease)
+        }
+        .coach-input::placeholder{color:var(--ink-ghost)}
+        .coach-input:focus{outline:none;border-color:var(--theme-primary);box-shadow:0 0 0 3px var(--theme-primary-glow)}
+        .coach-send{
+            width:48px;height:48px;border:none;border-radius:var(--radius);
+            background:var(--theme-primary);color:#fff;font-size:1.1rem;
+            cursor:pointer;transition:all .2s var(--ease);flex-shrink:0;
+            display:flex;align-items:center;justify-content:center
+        }
+        .coach-send:active{transform:scale(0.9)}
+        .coach-send:disabled{opacity:.4;cursor:default}
+        .coach-response{
+            margin-top:14px;padding:16px 18px;
+            background:var(--porcelain);border-radius:var(--radius);
+            font-size:.92rem;line-height:1.6;color:var(--ink-soft);
+            border-left:3px solid var(--theme-primary);
+            display:none;animation:barIn .3s var(--ease)
+        }
+        .coach-response.show{display:block}
+        .coach-response.loading{color:var(--ink-ghost);font-style:italic}
+        .coach-hint{
+            font-family:'JetBrains Mono',monospace;font-size:.6rem;
+            color:var(--ink-ghost);margin-top:8px
+        }
+
+        /* Deep Work Coach — gedämpfte Variante */
+        body[data-mode="deepwork"] .coach-card{
+            border-color:rgba(91,109,199,0.1)
+        }
+        /* Recovery Coach-Rewind Overrides */
+        body[data-mode="recovery"] .coach-response{
+            background:rgba(123,104,238,0.06);border-left-color:rgba(123,104,238,0.3);
+            color:rgba(224,224,240,0.8)
+        }
+
         /* === RESPONSIVE === */
         @media(min-width:768px){
             body{padding-bottom:120px}
@@ -1253,6 +1416,19 @@
             </div>
         </div>
 
+        <!-- KI-Coach (Morning + Deep Work) -->
+        <div class="coach-card" id="coachCard" data-mode-hide="creative,recovery,default">
+            <div class="coach-label">🧠 KI-Coach</div>
+            <div class="coach-input-row">
+                <input type="text" class="coach-input" id="coachInput"
+                    placeholder="Was blockiert dich gerade?"
+                    onkeydown="if(event.key==='Enter'&&!event.shiftKey)askCoach()">
+                <button class="coach-send" id="coachSendBtn" onclick="askCoach()">→</button>
+            </div>
+            <div class="coach-hint">Claude kennt deinen Tag — Tasks, Modus, Fortschritt</div>
+            <div class="coach-response" id="coachResponse"></div>
+        </div>
+
         <!-- Abend-Modus (wird nach 19:00 sichtbar) -->
         <div class="evening-card" id="eveningCard" style="display:none" data-mode-hide="deepwork,creative">
             <div class="evening-label">🌙 Abend Check-in</div>
@@ -1284,6 +1460,54 @@
                 <div class="achievements-count" id="achieveCount">0/10</div>
             </div>
             <div class="achievements-grid" id="achieveGrid"></div>
+        </div>
+
+        <!-- ═══ RECOVERY VIEW (nur im Erholungs-Modus sichtbar) ═══ -->
+
+        <!-- Tagesreflexion -->
+        <div class="recovery-section recovery-reflection">
+            <div class="recovery-reflection-label">✨ Was lief heute gut?</div>
+            <textarea class="recovery-reflection-input" id="recoveryReflection"
+                placeholder="Schreib 1–3 Sätze... kein Druck."
+                oninput="saveRecoveryReflection()"></textarea>
+            <div class="recovery-saved" id="recoverySaved">✓ gespeichert</div>
+        </div>
+
+        <!-- Tages-Rewind (automatischer Abend-Report) -->
+        <div class="recovery-section recovery-rewind">
+            <div class="recovery-rewind-label">📊 Dein Tag auf einen Blick</div>
+            <div class="rewind-stats" id="rewindStats"></div>
+            <div class="rewind-ai-text" id="rewindAiText">Lade deinen Tages-Rückblick...</div>
+            <button class="rewind-generate-btn" id="rewindGenerateBtn" onclick="generateRewindText()">
+                🧠 Rückblick mit KI generieren
+            </button>
+        </div>
+
+        <!-- Abendroutine (optional) -->
+        <div class="recovery-section recovery-routine">
+            <div class="recovery-routine-label">🌙 Abendroutine (optional)</div>
+            <div id="recoveryRoutineItems">
+                <div class="recovery-routine-item" onclick="toggleRecoveryRoutine(this)" data-routine="bildschirm">
+                    <div class="recovery-routine-check"></div>
+                    <span class="recovery-routine-emoji">📱</span>
+                    <span class="recovery-routine-text">Bildschirm aus</span>
+                </div>
+                <div class="recovery-routine-item" onclick="toggleRecoveryRoutine(this)" data-routine="tee">
+                    <div class="recovery-routine-check"></div>
+                    <span class="recovery-routine-emoji">🍵</span>
+                    <span class="recovery-routine-text">Tee / Wasser</span>
+                </div>
+                <div class="recovery-routine-item" onclick="toggleRecoveryRoutine(this)" data-routine="journal">
+                    <div class="recovery-routine-check"></div>
+                    <span class="recovery-routine-emoji">📓</span>
+                    <span class="recovery-routine-text">Kurz reflektieren</span>
+                </div>
+                <div class="recovery-routine-item" onclick="toggleRecoveryRoutine(this)" data-routine="atemübung">
+                    <div class="recovery-routine-check"></div>
+                    <span class="recovery-routine-emoji">🫁</span>
+                    <span class="recovery-routine-text">5 tiefe Atemzüge</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1931,7 +2155,8 @@
     function checkEveningMode(){
         const h=new Date().getHours();
         const card=document.getElementById('eveningCard');
-        if(h>=19||h<5){
+        // Im Recovery-Modus immer anzeigen, sonst nur ab 19 Uhr
+        if(h>=19||h<5||currentMode==='recovery'){
             card.style.display='block';
             renderMoodWeek();
             // restore today's note
@@ -2813,6 +3038,290 @@
     }
 
     /* ═══════════════════════════════════════════════
+       RECOVERY VIEW — Tagesreflexion, Rewind, Routine
+       ═══════════════════════════════════════════════ */
+
+    // API-Key für Claude (manuell eintragen oder via URL-Parameter ?apikey=...)
+    let CLAUDE_API_KEY = lsGet('neuros_apikey', '');
+    (function(){
+        const p = new URLSearchParams(window.location.search);
+        const k = p.get('apikey');
+        if(k){ CLAUDE_API_KEY = k; lsSet('neuros_apikey', k); }
+    })();
+
+    /**
+     * Tagesreflexion speichern (Recovery View)
+     */
+    let reflectionSaveTimer = null;
+    function saveRecoveryReflection(){
+        clearTimeout(reflectionSaveTimer);
+        reflectionSaveTimer = setTimeout(()=>{
+            const text = document.getElementById('recoveryReflection').value;
+            const reflections = lsGet('neuros_reflections', {});
+            reflections[getTodayKey()] = text;
+            lsSet('neuros_reflections', reflections);
+            const saved = document.getElementById('recoverySaved');
+            saved.classList.add('show');
+            setTimeout(()=> saved.classList.remove('show'), 2000);
+        }, 600);
+    }
+
+    /** Tagesreflexion laden */
+    function loadRecoveryReflection(){
+        const reflections = lsGet('neuros_reflections', {});
+        const today = reflections[getTodayKey()] || '';
+        document.getElementById('recoveryReflection').value = today;
+    }
+
+    /**
+     * Abendroutine Toggle (Recovery View)
+     */
+    function toggleRecoveryRoutine(el){
+        el.classList.toggle('done');
+        const check = el.querySelector('.recovery-routine-check');
+        check.textContent = el.classList.contains('done') ? '✓' : '';
+        // In localStorage speichern
+        const routineKey = el.getAttribute('data-routine');
+        const state = lsGet('neuros_evening_routine_' + getTodayKey(), {});
+        state[routineKey] = el.classList.contains('done');
+        lsSet('neuros_evening_routine_' + getTodayKey(), state);
+    }
+
+    /** Abendroutine-State laden */
+    function loadRecoveryRoutine(){
+        const state = lsGet('neuros_evening_routine_' + getTodayKey(), {});
+        document.querySelectorAll('.recovery-routine-item').forEach(el => {
+            const key = el.getAttribute('data-routine');
+            if(state[key]){
+                el.classList.add('done');
+                el.querySelector('.recovery-routine-check').textContent = '✓';
+            }
+        });
+    }
+
+    /**
+     * Tages-Rewind — Automatischer Abend-Report aus localStorage-Daten
+     */
+    function getDayStats(){
+        const today = getTodayKey();
+        // Erledigte Tasks heute
+        const allTasks = lsGet('mf_tasks', []);
+        const doneTasks = allTasks.filter(t =>
+            t.status === 'done' && t.completedAt && t.completedAt.startsWith(today)
+        );
+        // Ideen heute
+        const allIdeen = lsGet('mf_ideen', []);
+        const todayIdeen = allIdeen.filter(i =>
+            i.created && i.created.startsWith(today)
+        );
+        // Morgenroutine
+        const routineState = load('routine_' + today, {});
+        const routineDone = ['meditation','stretching','eistonne'].filter(r => routineState[r]).length;
+        // Streak
+        const streak = calculateStreak();
+        // XP heute (approximieren aus erledigten Tasks)
+        let xpToday = 0;
+        doneTasks.forEach(t => {
+            xpToday += t.priority === 'high' ? 30 : t.isQuickWin ? 5 : 15;
+        });
+        // Achievements
+        const unlocked = getUnlockedAchievements();
+
+        return {
+            tasksCompleted: doneTasks.length,
+            taskTitles: doneTasks.map(t => (t.emoji||'') + ' ' + t.title),
+            ideasCaptured: todayIdeen.length,
+            routineDone: routineDone,
+            routineTotal: 3,
+            streak: streak,
+            xpToday: xpToday,
+            achievementsTotal: unlocked.length
+        };
+    }
+
+    /** Rewind-Statistiken rendern */
+    function renderRewindStats(){
+        const stats = getDayStats();
+        const container = document.getElementById('rewindStats');
+        container.innerHTML = `
+            <div class="rewind-stat">
+                <span class="rewind-stat-icon">✅</span>
+                <div class="rewind-stat-num">${stats.tasksCompleted}</div>
+                <div class="rewind-stat-label">Tasks erledigt</div>
+            </div>
+            <div class="rewind-stat">
+                <span class="rewind-stat-icon">💡</span>
+                <div class="rewind-stat-num">${stats.ideasCaptured}</div>
+                <div class="rewind-stat-label">Ideen</div>
+            </div>
+            <div class="rewind-stat">
+                <span class="rewind-stat-icon">🧊</span>
+                <div class="rewind-stat-num">${stats.routineDone}/${stats.routineTotal}</div>
+                <div class="rewind-stat-label">Routine</div>
+            </div>
+            <div class="rewind-stat">
+                <span class="rewind-stat-icon">🔥</span>
+                <div class="rewind-stat-num">${stats.streak}</div>
+                <div class="rewind-stat-label">Streak</div>
+            </div>
+        `;
+
+        // Standard-Zusammenfassung (ohne API)
+        const rewindText = document.getElementById('rewindAiText');
+        if(stats.tasksCompleted === 0 && stats.ideasCaptured === 0 && stats.routineDone === 0){
+            rewindText.textContent = 'Heute war ein ruhiger Tag — und das ist okay. Nicht jeder Tag muss produktiv sein. 🌙';
+        } else {
+            let parts = [];
+            if(stats.tasksCompleted > 0) parts.push(stats.tasksCompleted + ' Task' + (stats.tasksCompleted > 1 ? 's' : '') + ' erledigt');
+            if(stats.ideasCaptured > 0) parts.push(stats.ideasCaptured + ' Idee' + (stats.ideasCaptured > 1 ? 'n' : '') + ' festgehalten');
+            if(stats.routineDone === 3) parts.push('Morgenroutine komplett');
+            else if(stats.routineDone > 0) parts.push(stats.routineDone + '/3 Routine');
+            if(stats.streak > 1) parts.push(stats.streak + ' Tage Streak');
+            rewindText.textContent = parts.join(' · ') + ' — Guter Tag. 💪';
+        }
+    }
+
+    /**
+     * Tages-Rewind KI-Text generieren (Claude API)
+     */
+    async function generateRewindText(){
+        if(!CLAUDE_API_KEY){
+            showNotification('API-Key fehlt! Setze ?apikey=... in der URL');
+            return;
+        }
+        const stats = getDayStats();
+        const btn = document.getElementById('rewindGenerateBtn');
+        const textEl = document.getElementById('rewindAiText');
+
+        btn.disabled = true;
+        btn.textContent = '⏳ Wird generiert...';
+        textEl.classList.add('loading');
+        textEl.textContent = 'Claude denkt nach...';
+
+        const prompt = `Du bist ein persönlicher Coach für Max. Schreib einen kurzen, warmen Abend-Rückblick (2-3 Sätze, Deutsch, du-Form). Sei spezifisch, nicht generisch.
+
+Tages-Daten:
+- ${stats.tasksCompleted} Tasks erledigt${stats.taskTitles.length ? ': ' + stats.taskTitles.join(', ') : ''}
+- ${stats.ideasCaptured} neue Ideen festgehalten
+- Morgenroutine: ${stats.routineDone}/${stats.routineTotal}
+- Streak: ${stats.streak} Tage
+- ${stats.xpToday} XP verdient
+
+Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivierender Rückblick auf den Tag. Max 3 Sätze.`;
+
+        try {
+            const resp = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': CLAUDE_API_KEY,
+                    'anthropic-version': '2023-06-01',
+                    'anthropic-dangerous-direct-browser-access': 'true'
+                },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-20250514',
+                    max_tokens: 300,
+                    messages: [{role:'user', content: prompt}]
+                })
+            });
+            const data = await resp.json();
+            if(data.content && data.content[0]){
+                textEl.textContent = data.content[0].text;
+                textEl.classList.remove('loading');
+            } else {
+                textEl.textContent = 'Konnte keinen Rückblick generieren. Probier es nochmal.';
+                textEl.classList.remove('loading');
+            }
+        } catch(e){
+            textEl.textContent = 'Verbindungsfehler — bist du online?';
+            textEl.classList.remove('loading');
+        }
+        btn.disabled = false;
+        btn.textContent = '🧠 Rückblick mit KI generieren';
+    }
+
+    /* ═══════════════════════════════════════════════
+       KI-COACH — Claude API Integration
+       Verfügbar in Morning + Deep Work Modus
+       ═══════════════════════════════════════════════ */
+
+    /**
+     * askCoach — Sendet User-Input + Tageskontext an Claude API
+     */
+    async function askCoach(){
+        const input = document.getElementById('coachInput');
+        const text = input.value.trim();
+        if(!text) return;
+
+        if(!CLAUDE_API_KEY){
+            showNotification('API-Key fehlt! Setze ?apikey=... in der URL');
+            return;
+        }
+
+        const responseEl = document.getElementById('coachResponse');
+        const sendBtn = document.getElementById('coachSendBtn');
+
+        sendBtn.disabled = true;
+        responseEl.className = 'coach-response show loading';
+        responseEl.textContent = 'Claude denkt nach...';
+
+        // Kontext zusammenbauen
+        const stats = getDayStats();
+        const h = new Date().getHours();
+        const modeLabel = MODE_LABELS[currentMode];
+        const allTasks = lsGet('mf_tasks', []);
+        const pendingTasks = allTasks.filter(t => t.status !== 'done');
+        const highPrio = pendingTasks.filter(t => t.priority === 'high');
+
+        const systemPrompt = `Du bist ein ADHS-Coach für Max. Kurz, direkt, empathisch. Du-Form, Deutsch.
+Kein generisches Blabla. Antworte in 2-4 Sätzen.
+
+Kontext:
+- Aktuelle Uhrzeit: ${h}:${String(new Date().getMinutes()).padStart(2,'0')}
+- Modus: ${modeLabel.emoji} ${modeLabel.name}
+- Tasks offen: ${pendingTasks.length} (davon ${highPrio.length} hohe Prio${highPrio.length ? ': ' + highPrio.map(t=>(t.emoji||'')+' '+t.title).join(', ') : ''})
+- Heute erledigt: ${stats.tasksCompleted} Tasks, ${stats.xpToday} XP
+- Morgenroutine: ${stats.routineDone}/${stats.routineTotal}
+- Streak: ${stats.streak} Tage
+- Ideen heute: ${stats.ideasCaptured}`;
+
+        try {
+            const resp = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': CLAUDE_API_KEY,
+                    'anthropic-version': '2023-06-01',
+                    'anthropic-dangerous-direct-browser-access': 'true'
+                },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-20250514',
+                    max_tokens: 300,
+                    system: systemPrompt,
+                    messages: [{role:'user', content: text}]
+                })
+            });
+            const data = await resp.json();
+            if(data.content && data.content[0]){
+                responseEl.textContent = data.content[0].text;
+                responseEl.className = 'coach-response show';
+            } else if(data.error){
+                responseEl.textContent = 'Fehler: ' + (data.error.message || 'Unbekannt');
+                responseEl.className = 'coach-response show';
+            } else {
+                responseEl.textContent = 'Keine Antwort erhalten. Versuch es nochmal.';
+                responseEl.className = 'coach-response show';
+            }
+        } catch(e){
+            responseEl.textContent = 'Verbindungsfehler — bist du online?';
+            responseEl.className = 'coach-response show';
+        }
+
+        sendBtn.disabled = false;
+        input.value = '';
+    }
+
+    /* ═══════════════════════════════════════════════
        MODE MANAGER — Herzstück von neurOS
        Bestimmt den aktiven Modus und steuert Farben,
        Sichtbarkeit und UI-State.
@@ -3107,6 +3616,10 @@
     initTag();
     initIdeen();
     initAchievements();
+    // Recovery View initialisieren
+    loadRecoveryReflection();
+    loadRecoveryRoutine();
+    renderRewindStats();
     setInterval(checkEveningMode,60000);
     setInterval(checkAchievements,30000)
     </script>

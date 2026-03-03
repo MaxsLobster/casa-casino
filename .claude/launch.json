@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "neuros-dev",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-p", "8080", "-s", "-n"],
+      "port": 8080
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
-  "name": "MaxFlow",
-  "short_name": "MaxFlow",
-  "description": "ADHS Co-Pilot für Max",
+  "name": "neurOS",
+  "short_name": "neurOS",
+  "description": "Dein iPhone. Dein Rhythmus. Dein System.",
   "start_url": "/casa-casino/",
   "scope": "/casa-casino/",
   "display": "standalone",

@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "neuros-dev",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "-p", "8080", "-s", "-n"],
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "setTimeout(()=>{},999999999)"],
       "port": 8080
     }
   ]

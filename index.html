@@ -216,28 +216,29 @@
             padding:5px 12px;border-radius:20px
         }
         .streak-badge.frozen{color:var(--ocean);background:var(--ocean-glow)}
-        .routine-item{
-            display:flex;align-items:center;padding:14px 16px;
-            background:var(--porcelain-warm);border-radius:var(--radius);
-            margin-bottom:8px;cursor:pointer;
-            border:1px solid transparent;transition:all .25s var(--ease)
+        .routine-complete-btn{
+            width:100%;padding:18px 20px;border:none;border-radius:var(--radius-lg);
+            background:linear-gradient(135deg,var(--theme-primary),var(--theme-accent));
+            color:#fff;font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;
+            cursor:pointer;transition:all .3s var(--ease);position:relative;overflow:hidden;
+            box-shadow:0 4px 16px var(--theme-primary-glow);letter-spacing:0.5px
         }
-        .routine-item:active{transform:scale(0.98)}
-        .routine-item.done{background:var(--sage-bg);border-color:rgba(129,199,132,0.2)}
-        .routine-check{
-            width:26px;height:26px;border:2px solid var(--ink-ghost);
-            border-radius:50%;margin-right:14px;display:flex;
-            align-items:center;justify-content:center;flex-shrink:0;
-            transition:all .25s var(--bounce);font-size:.75rem
+        .routine-complete-btn:active{transform:scale(0.96)}
+        .routine-complete-btn.completed{
+            background:linear-gradient(135deg,var(--sage),var(--sage-light));
+            box-shadow:0 4px 16px var(--sage-glow)
         }
-        .routine-item.done .routine-check{
-            background:var(--sage);border-color:var(--sage);color:#fff;
-            transform:scale(1.05)
+        .routine-sub-list{
+            display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap
         }
-        .routine-emoji{font-size:1.25rem;margin-right:10px}
-        .routine-text{font-weight:500;font-size:1rem;flex:1;color:var(--ink-soft)}
+        .routine-sub-item{
+            display:flex;align-items:center;gap:5px;
+            font-size:.78rem;color:var(--ink-muted);
+            background:var(--porcelain-warm);padding:6px 12px;border-radius:20px
+        }
+        .routine-sub-item-emoji{font-size:.85rem}
         .streak-freeze-btn{
-            margin-top:8px;padding:8px 14px;border:1.5px dashed var(--ocean);
+            margin-top:10px;padding:8px 14px;border:1.5px dashed var(--ocean);
             background:rgba(100,181,246,0.05);border-radius:10px;
             font-family:'Cormorant Garamond',Georgia,serif;font-size:.82rem;
             font-weight:600;cursor:pointer;color:var(--ocean);
@@ -1558,23 +1559,14 @@
                 <div class="routine-header-left">🧊 Morgen Routine</div>
                 <div class="streak-badge" id="streakBadge">🔥 Tag 0</div>
             </div>
-            <div id="morningRoutineItems">
-                <div class="routine-item" data-routine="meditation" onclick="toggleMorningRoutine(this)">
-                    <div class="routine-check"></div>
-                    <span class="routine-emoji">🧘</span>
-                    <span class="routine-text">5 Min Meditation</span>
-                </div>
-                <div class="routine-item" data-routine="stretching" onclick="toggleMorningRoutine(this)">
-                    <div class="routine-check"></div>
-                    <span class="routine-emoji">🤸</span>
-                    <span class="routine-text">5 Min Stretching</span>
-                </div>
-                <div class="routine-item" data-routine="eistonne" onclick="toggleMorningRoutine(this)">
-                    <div class="routine-check"></div>
-                    <span class="routine-emoji">🧊</span>
-                    <span class="routine-text">3 Min Eistonne</span>
-                </div>
+            <div class="routine-sub-list">
+                <span class="routine-sub-item"><span class="routine-sub-item-emoji">🧘</span> Meditation</span>
+                <span class="routine-sub-item"><span class="routine-sub-item-emoji">🤸</span> Stretching</span>
+                <span class="routine-sub-item"><span class="routine-sub-item-emoji">🧊</span> Eistonne</span>
             </div>
+            <button class="routine-complete-btn" id="routineCompleteBtn" onclick="completeMorningRoutine()">
+                Morgenroutine abschließen
+            </button>
             <button class="streak-freeze-btn" id="freezeBtn" onclick="useStreakFreeze()">
                 ❄️ Streak Freeze (1x pro Woche)
             </button>
@@ -1667,7 +1659,7 @@
         </div>
 
         <!-- Achievements -->
-        <div class="achievements-section" data-mode-hide="deepwork,creative">
+        <div class="achievements-section" data-mode-hide="morning,deepwork,creative,default">
             <div class="achievements-header">
                 <div class="achievements-title">🏆 Achievements</div>
                 <div class="achievements-count" id="achieveCount">0/10</div>
@@ -2246,59 +2238,41 @@
     /* ═══ MORNING ROUTINE + STREAK ═══ */
     function loadRoutineState(){
         const today=getTodayKey();
-        const state=load('routine_'+today,{meditation:false,stretching:false,eistonne:false});
-        document.querySelectorAll('.routine-item').forEach(item=>{
-            const key=item.getAttribute('data-routine');
-            if(state[key]){
-                item.classList.add('done');
-                item.querySelector('.routine-check').innerHTML='✓'
-            }
-        });
+        const completed=load('routine_completed',{});
+        const btn=document.getElementById('routineCompleteBtn');
+        if(completed[today]){
+            btn.classList.add('completed');
+            btn.textContent='✓ Erledigt — gut gemacht!';
+            btn.style.pointerEvents='none'
+        }
         updateStreakDisplay()
     }
-    function toggleMorningRoutine(el){
-        const wasDone=el.classList.contains('done');
-        el.classList.toggle('done');
-        const cb=el.querySelector('.routine-check');
-        cb.innerHTML=el.classList.contains('done')?'✓':'';
-        if(!wasDone && el.classList.contains('done') && typeof feedCompanion==='function') feedCompanion('melu',5,el);
-        saveMorningRoutine()
-    }
-    function saveMorningRoutine(){
+    function completeMorningRoutine(){
         const today=getTodayKey();
-        const state={};
-        document.querySelectorAll('.routine-item').forEach(item=>{
-            state[item.getAttribute('data-routine')]=item.classList.contains('done')
-        });
-        store('routine_'+today,state);
-        checkStreakCompletion()
-    }
-    function checkStreakCompletion(){
-        const today=getTodayKey();
-        const state=load('routine_'+today,{});
-        const allDone=state.meditation&&state.stretching&&state.eistonne;
-        if(allDone){
-            const completed=load('routine_completed',{});
-            if(!completed[today]){
-                completed[today]=true;
-                store('routine_completed',completed);
-                showNotification('🔥 Morgenroutine komplett! Streak +1');
-                updateStreakDisplay();
-                if(typeof feedCompanion==='function') feedCompanion('melu',15,null)
-            }
-        }
+        const completed=load('routine_completed',{});
+        if(completed[today]) return;
+        completed[today]=true;
+        store('routine_completed',completed);
+        // Also store old format for backward compat with stats
+        store('routine_'+today,{meditation:true,stretching:true,eistonne:true});
+        const btn=document.getElementById('routineCompleteBtn');
+        btn.classList.add('completed');
+        btn.textContent='✓ Erledigt — gut gemacht!';
+        btn.style.pointerEvents='none';
+        spawnConfetti(btn);
+        addXP(50,btn);
+        showNotification('🔥 Morgenroutine komplett! Streak +1');
+        updateStreakDisplay();
+        if(typeof feedCompanion==='function') feedCompanion('melu',15,btn)
     }
     function calculateStreak(){
         const completed=load('routine_completed',{});
         const freezes=load('streak_freezes',{});
         let streak=0;
         const d=new Date();
-        // Check today first
         const todayKey=getTodayKey();
-        const todayState=load('routine_'+todayKey,{});
-        const todayDone=todayState.meditation&&todayState.stretching&&todayState.eistonne;
+        const todayDone=!!completed[todayKey];
         if(!todayDone&&!freezes[todayKey]){
-            // Today not done yet — check from yesterday
             d.setDate(d.getDate()-1)
         }
         while(true){

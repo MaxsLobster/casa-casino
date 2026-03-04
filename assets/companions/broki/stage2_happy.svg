@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="bodyGrad" cx="50%" cy="55%" r="50%">
+      <stop offset="0%" stop-color="#C8E6C9"/>
+      <stop offset="100%" stop-color="#43A047"/>
+    </radialGradient>
+    <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF8A65" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Happy glow -->
+  <ellipse cx="32" cy="36" rx="26" ry="24" fill="#A5D6A7" opacity="0.15"/>
+  <!-- Body -->
+  <path d="M32 16 Q44 22 44 36 Q44 48 40 52 Q38 54 32 54 Q26 54 24 52 Q20 48 20 36 Q20 22 32 16Z" fill="url(#bodyGrad)" stroke="#388E3C" stroke-width="1.2"/>
+  <!-- Inner highlight -->
+  <ellipse cx="29" cy="30" rx="7" ry="8" fill="#E8F5E9" opacity="0.4"/>
+  <!-- Leaves growing bigger - happy! -->
+  <path d="M26 16 Q18 6 14 8 Q16 14 24 16Z" fill="#66BB6A" stroke="#388E3C" stroke-width="0.8"/>
+  <path d="M38 16 Q46 6 50 8 Q48 14 40 16Z" fill="#66BB6A" stroke="#388E3C" stroke-width="0.8"/>
+  <!-- Extra happy leaves -->
+  <path d="M22 20 Q14 16 12 18 Q16 22 22 22Z" fill="#81C784" stroke="#388E3C" stroke-width="0.6" opacity="0.7"/>
+  <path d="M42 20 Q50 16 52 18 Q48 22 42 22Z" fill="#81C784" stroke="#388E3C" stroke-width="0.6" opacity="0.7"/>
+  <!-- Stem with flower bud -->
+  <line x1="32" y1="10" x2="32" y2="18" stroke="#388E3C" stroke-width="1.8" stroke-linecap="round"/>
+  <circle cx="32" cy="9" r="2.5" fill="#FFF176" stroke="#F9A825" stroke-width="0.6"/>
+  <!-- Happy eyes - ^ ^ -->
+  <path d="M23 33 L27 30 L31 33" fill="none" stroke="#1B5E20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M33 33 L37 30 L41 33" fill="none" stroke="#1B5E20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Cheeks -->
+  <circle cx="20" cy="37" r="4" fill="url(#cheek)"/>
+  <circle cx="44" cy="37" r="4" fill="url(#cheek)"/>
+  <!-- Big happy smile -->
+  <path d="M26 39 Q32 46 38 39" fill="none" stroke="#1B5E20" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Happy sparkles -->
+  <path d="M10 24 L12 22 L14 24 L12 26Z" fill="#81C784"/>
+  <path d="M50 20 L52 18 L54 20 L52 22Z" fill="#81C784"/>
+  <!-- Root feet -->
+  <path d="M26 54 Q24 58 22 56" fill="none" stroke="#795548" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M38 54 Q40 58 42 56" fill="none" stroke="#795548" stroke-width="1.2" stroke-linecap="round"/>
+</svg>

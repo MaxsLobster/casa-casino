@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="bodyGrad" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </radialGradient>
+    <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF8A65" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Outer glow -->
+  <ellipse cx="32" cy="38" rx="20" ry="18" fill="#FFE082" opacity="0.15"/>
+  <!-- Flame body -->
+  <path d="M32 8 Q42 18 42 30 Q42 42 38 48 Q36 52 32 52 Q28 52 26 48 Q22 42 22 30 Q22 18 32 8Z" fill="url(#bodyGrad)" stroke="#F9A825" stroke-width="1.2"/>
+  <!-- Inner highlight -->
+  <path d="M32 14 Q37 22 37 30 Q37 38 34 42 Q32 44 30 42 Q27 38 27 30 Q27 22 32 14Z" fill="#FFF8E1" opacity="0.4"/>
+  <!-- Eyes -->
+  <ellipse cx="28" cy="32" rx="3" ry="3.5" fill="#4E342E"/>
+  <ellipse cx="36" cy="32" rx="3" ry="3.5" fill="#4E342E"/>
+  <!-- Eye highlights -->
+  <circle cx="29" cy="31" r="1.2" fill="white"/>
+  <circle cx="37" cy="31" r="1.2" fill="white"/>
+  <!-- Cheeks -->
+  <circle cx="22" cy="36" r="3.5" fill="url(#cheek)"/>
+  <circle cx="42" cy="36" r="3.5" fill="url(#cheek)"/>
+  <!-- Neutral mouth - small line -->
+  <line x1="29" y1="39" x2="35" y2="39" stroke="#BF360C" stroke-width="1.2" stroke-linecap="round"/>
+  <!-- Flame tips -->
+  <path d="M28 10 Q30 4 32 8" fill="none" stroke="#FFD54F" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M36 10 Q34 4 32 8" fill="none" stroke="#FFD54F" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

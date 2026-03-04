@@ -115,7 +115,7 @@
             box-shadow:0 0 0 1px var(--theme-primary-glow);
             transition:background-color 2s ease,box-shadow 2s ease
         }
-        .nav-item[data-tab="Home"].active,.nav-item[data-tab="Fokus"].active,.nav-item[data-tab="Ideen"].active,.nav-item[data-tab="Tag"].active,.nav-item[data-tab="Family"].active{background:var(--theme-primary-glow)}
+        .nav-item[data-tab="Home"].active,.nav-item[data-tab="Fokus"].active,.nav-item[data-tab="Ideen"].active,.nav-item[data-tab="Tag"].active,.nav-item[data-tab="Family"].active,.nav-item[data-tab="Crew"].active{background:var(--theme-primary-glow)}
         .nav-icon{font-size:1.3rem}
         .nav-label{
             font-family:'Playfair Display',serif;font-size:.42rem;font-weight:700;
@@ -1165,6 +1165,121 @@
         .settings-cancel:active{transform:scale(0.97)}
         body[data-mode="recovery"] .settings-cancel{background:#2A2A4A;color:#9090B0}
 
+        /* === COMPANION SYSTEM === */
+        @keyframes companion-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+        @keyframes companion-bounce{0%{transform:translateY(0)}30%{transform:translateY(-14px) scale(1.1)}60%{transform:translateY(2px) scale(0.95)}100%{transform:translateY(0) scale(1)}}
+        @keyframes companion-xp-popup{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-20px)}}
+
+        .crew-header{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+        .crew-subheader{font-size:.82rem;color:var(--ink-muted);margin-bottom:20px}
+        .crew-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
+        .companion-card{
+            background:var(--card);border-radius:var(--radius-lg);padding:16px 12px;text-align:center;
+            box-shadow:var(--shadow-card);border:2px solid transparent;cursor:pointer;
+            transition:all .3s var(--ease);position:relative;overflow:hidden
+        }
+        .companion-card:active{transform:scale(0.96)}
+        .companion-card.selected{border-color:var(--theme-primary);box-shadow:var(--shadow-theme)}
+        .companion-card::before{
+            content:'';position:absolute;top:0;left:0;right:0;height:2px;
+            background:linear-gradient(90deg,transparent 10%,var(--kintsugi) 50%,transparent 90%);opacity:0;transition:opacity .3s
+        }
+        .companion-card.selected::before{opacity:.6}
+        .companion-img-wrap{
+            width:72px;height:72px;margin:0 auto 10px;position:relative;
+            display:flex;align-items:center;justify-content:center
+        }
+        .companion-img{
+            width:64px;height:64px;object-fit:contain;
+            animation:companion-float 3s ease-in-out infinite;
+            image-rendering:pixelated
+        }
+        .companion-card.feeding .companion-img{animation:companion-bounce .6s var(--bounce)}
+        .companion-name{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--ink)}
+        .companion-type{font-size:.68rem;color:var(--ink-muted);margin-bottom:8px}
+        .companion-xp-bar{
+            background:var(--porcelain-warm);border-radius:999px;height:6px;overflow:hidden;margin-bottom:4px
+        }
+        .companion-xp-fill{height:100%;border-radius:999px;transition:width .5s var(--ease)}
+        .companion-xp-fill.lumino{background:linear-gradient(90deg,#F5A623,#FFD54F)}
+        .companion-xp-fill.broki{background:linear-gradient(90deg,#81C784,#A5D6A7)}
+        .companion-xp-fill.melu{background:linear-gradient(90deg,#B39DDB,#CE93D8)}
+        .companion-level{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--ink-ghost)}
+        .companion-today{font-size:.62rem;color:var(--ink-faint);margin-top:4px}
+
+        .companion-detail{
+            background:var(--card);border-radius:var(--radius-lg);padding:24px 20px;
+            box-shadow:var(--shadow-card);border:1px solid rgba(44,40,36,0.04);margin-bottom:16px
+        }
+        .companion-detail-top{display:flex;gap:20px;align-items:center;margin-bottom:16px}
+        .companion-detail-img{width:96px;height:96px;object-fit:contain;animation:companion-float 3s ease-in-out infinite;image-rendering:pixelated}
+        .companion-detail-info{flex:1}
+        .companion-detail-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink)}
+        .companion-detail-mood{font-size:.82rem;color:var(--ink-muted);margin:4px 0 8px;font-style:italic}
+        .companion-detail-stats{display:flex;gap:16px;margin-bottom:16px}
+        .companion-detail-stat{text-align:center}
+        .companion-detail-stat-value{font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--theme-primary)}
+        .companion-detail-stat-label{font-size:.62rem;color:var(--ink-ghost);text-transform:uppercase;letter-spacing:1px}
+        .companion-evolution{display:flex;gap:8px;align-items:center;justify-content:center;margin-bottom:16px}
+        .companion-evo-stage{
+            width:48px;height:48px;border-radius:50%;background:var(--porcelain-warm);
+            display:flex;align-items:center;justify-content:center;opacity:.4;
+            border:2px solid transparent;transition:all .3s var(--ease)
+        }
+        .companion-evo-stage.reached{opacity:1;border-color:var(--theme-primary);background:var(--theme-primary-glow)}
+        .companion-evo-stage img{width:32px;height:32px;object-fit:contain;image-rendering:pixelated}
+        .companion-evo-arrow{color:var(--ink-ghost);font-size:.8rem}
+        .companion-quick-actions{display:flex;gap:8px;flex-wrap:wrap}
+        .companion-quick-action{
+            flex:1;min-width:120px;padding:12px;border-radius:var(--radius);
+            background:var(--porcelain);border:1px solid rgba(44,40,36,0.06);
+            cursor:pointer;text-align:center;transition:all .2s var(--ease);
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.82rem;font-weight:600;color:var(--ink-soft)
+        }
+        .companion-quick-action:active{transform:scale(0.96)}
+        .companion-quick-action:hover{background:var(--theme-primary-glow)}
+
+        .companion-xp-popup{
+            position:fixed;pointer-events:none;z-index:9999;
+            font-family:'JetBrains Mono',monospace;font-size:.78rem;font-weight:700;
+            color:var(--theme-primary);animation:companion-xp-popup 1.2s var(--ease) forwards
+        }
+
+        /* Home mini-preview */
+        .crew-mini{
+            display:flex;gap:12px;justify-content:center;align-items:center;
+            padding:14px 16px;margin-bottom:16px;cursor:pointer;
+            background:var(--card);border-radius:var(--radius-lg);
+            box-shadow:var(--shadow-card);border:1px solid rgba(44,40,36,0.04);
+            transition:all .2s var(--ease)
+        }
+        .crew-mini:active{transform:scale(0.97)}
+        .crew-mini-companion{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1}
+        .crew-mini-img{width:48px;height:48px;object-fit:contain;animation:companion-float 3s ease-in-out infinite;image-rendering:pixelated}
+        .crew-mini-status{font-size:.6rem;color:var(--ink-muted);text-align:center;line-height:1.2}
+
+        /* Evening crew summary */
+        .evening-crew-summary{
+            margin-top:12px;padding:10px 14px;border-radius:var(--radius);
+            background:var(--porcelain);font-size:.78rem;color:var(--ink-muted);
+            display:flex;gap:8px;align-items:center;flex-wrap:wrap
+        }
+        .evening-crew-item{display:flex;align-items:center;gap:4px}
+
+        /* Recovery mode overrides */
+        body[data-mode="recovery"] .companion-card{background:rgba(30,30,52,0.6);border-color:rgba(255,255,255,0.04)}
+        body[data-mode="recovery"] .companion-card.selected{border-color:rgba(224,224,240,0.2)}
+        body[data-mode="recovery"] .companion-name{color:#E0E0F0}
+        body[data-mode="recovery"] .companion-type{color:#9090B0}
+        body[data-mode="recovery"] .companion-xp-bar{background:rgba(255,255,255,0.06)}
+        body[data-mode="recovery"] .companion-level{color:#7070A0}
+        body[data-mode="recovery"] .companion-detail{background:rgba(30,30,52,0.6);border-color:rgba(255,255,255,0.04)}
+        body[data-mode="recovery"] .companion-detail-name{color:#E0E0F0}
+        body[data-mode="recovery"] .companion-detail-mood{color:#9090B0}
+        body[data-mode="recovery"] .companion-quick-action{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);color:#B0B0D0}
+        body[data-mode="recovery"] .crew-mini{background:rgba(30,30,52,0.6);border-color:rgba(255,255,255,0.04)}
+        body[data-mode="recovery"] .evening-crew-summary{background:rgba(255,255,255,0.04)}
+
         /* === RECOVERY VIEW === */
         .recovery-section{display:none}
         body[data-mode="recovery"] .recovery-section{display:block}
@@ -1457,6 +1572,22 @@
             </button>
         </div>
 
+        <!-- Crew Mini-Preview -->
+        <div class="crew-mini" id="crewMiniPreview" onclick="showScreen('Crew')">
+            <div class="crew-mini-companion" id="miniLumino">
+                <img class="crew-mini-img" id="miniLuminoImg" src="" alt="Lumino">
+                <div class="crew-mini-status" id="miniLuminoStatus">Lumino wartet...</div>
+            </div>
+            <div class="crew-mini-companion" id="miniBroki">
+                <img class="crew-mini-img" id="miniBrokiImg" src="" alt="Broki">
+                <div class="crew-mini-status" id="miniBrokiStatus">Broki wartet...</div>
+            </div>
+            <div class="crew-mini-companion" id="miniMelu">
+                <img class="crew-mini-img" id="miniMeluImg" src="" alt="Melu">
+                <div class="crew-mini-status" id="miniMeluStatus">Melu wartet...</div>
+            </div>
+        </div>
+
         <!-- Tages-Snapshot -->
         <div class="snapshot" id="daySnapshot" data-mode-hide="deepwork,creative,recovery">
             <div class="snapshot-item">
@@ -1524,6 +1655,7 @@
             </div>
             <div class="mood-week" id="moodWeek"></div>
             <input type="text" class="evening-input" id="eveningNote" placeholder="Was war heute gut?" onkeydown="if(event.key==='Enter')saveEveningNote()">
+            <div class="evening-crew-summary" id="eveningCrewSummary" style="display:none"></div>
         </div>
 
         <!-- Achievements -->
@@ -1819,6 +1951,33 @@
         </div>
     </div>
 
+    <!-- ═══════ CREW ═══════ -->
+    <div class="screen" id="screenCrew">
+        <div class="hero" style="padding:22px 24px 20px;margin-bottom:4px">
+            <div class="hero-title" style="font-size:1.5rem">Deine <em>Crew</em> 🐾</div>
+        </div>
+        <div class="crew-subheader" id="crewDayXP">Heute: +0 XP für deine Crew</div>
+
+        <div class="crew-grid" id="crewGrid"></div>
+
+        <div class="companion-detail" id="companionDetail" style="display:none">
+            <div class="companion-detail-top">
+                <img class="companion-detail-img" id="detailImg" src="" alt="">
+                <div class="companion-detail-info">
+                    <div class="companion-detail-name" id="detailName"></div>
+                    <div class="companion-detail-mood" id="detailMood"></div>
+                    <div class="companion-xp-bar" style="height:8px;margin-bottom:6px">
+                        <div class="companion-xp-fill" id="detailXPFill"></div>
+                    </div>
+                    <div class="companion-level" id="detailLevel"></div>
+                </div>
+            </div>
+            <div class="companion-detail-stats" id="detailStats"></div>
+            <div class="companion-evolution" id="detailEvolution"></div>
+            <div class="companion-quick-actions" id="detailActions"></div>
+        </div>
+    </div>
+
     <!-- ═══════ TASK POPUP ═══════ -->
     <div class="popup-overlay" id="taskPopup"><div class="popup" style="max-width:380px">
         <h3>🎯 Neue Aufgabe</h3>
@@ -1978,6 +2137,9 @@
         <div class="nav-item" data-tab="Family" onclick="showScreen('Family')" data-mode-hide="morning,deepwork,creative,recovery">
             <span class="nav-icon">👨‍👩‍👧</span><span class="nav-label">Family</span>
         </div>
+        <div class="nav-item" data-tab="Crew" onclick="showScreen('Crew')">
+            <span class="nav-icon">🐾</span><span class="nav-label">Crew</span>
+        </div>
     </nav>
 
     <script>
@@ -2100,7 +2262,8 @@
         spawnConfetti(btn);
         addXP(50,btn);
         showNotification('🔥 Morgenroutine komplett! Streak +1');
-        updateStreakDisplay()
+        updateStreakDisplay();
+        if(typeof feedCompanion==='function') feedCompanion('melu',15,btn)
     }
     function calculateStreak(){
         const completed=load('routine_completed',{});
@@ -2332,6 +2495,7 @@
         task.status='done';task.completedAt=new Date().toISOString();
         lsSet('mf_tasks',tasks);
         const xp=task.priority==='high'?30:task.isQuickWin?5:15;
+        if(typeof feedCompanion==='function') feedCompanion('broki',10,el);
         if(el){
             el.classList.add('completing');
             const check=el.querySelector('.task-check');
@@ -2588,6 +2752,7 @@
         input.value='';
         renderIdeen();
         showNotification('💡 Idee gespeichert!');
+        if(typeof feedCompanion==='function') feedCompanion('broki',5,document.getElementById('ideenTextInput'));
         checkAchievements()
     }
 
@@ -3133,11 +3298,15 @@
         reflectionSaveTimer = setTimeout(()=>{
             const text = document.getElementById('recoveryReflection').value;
             const reflections = lsGet('neuros_reflections', {});
+            const hadReflection = !!reflections[getTodayKey()];
             reflections[getTodayKey()] = text;
             lsSet('neuros_reflections', reflections);
             const saved = document.getElementById('recoverySaved');
             saved.classList.add('show');
             setTimeout(()=> saved.classList.remove('show'), 2000);
+            if(!hadReflection && text.trim() && typeof feedCompanion==='function'){
+                feedCompanion('melu',10,document.getElementById('recoveryReflection'));
+            }
         }, 600);
     }
 
@@ -3152,9 +3321,11 @@
      * Abendroutine Toggle (Recovery View)
      */
     function toggleRecoveryRoutine(el){
+        const wasDone = el.classList.contains('done');
         el.classList.toggle('done');
         const check = el.querySelector('.recovery-routine-check');
         check.textContent = el.classList.contains('done') ? '✓' : '';
+        if(!wasDone && el.classList.contains('done') && typeof feedCompanion==='function') feedCompanion('melu',5,el);
         // In localStorage speichern
         const routineKey = el.getAttribute('data-routine');
         const state = lsGet('neuros_evening_routine_' + getTodayKey(), {});
@@ -3316,6 +3487,277 @@ Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivier
     }
 
     /* ═══════════════════════════════════════════════
+       COMPANION SYSTEM — Begleiter-Kreaturen
+       Lumino (gold/Fokus), Broki (grün/Tasks), Melu (lila/Seele)
+       ═══════════════════════════════════════════════ */
+
+    const COMPANION_LEVELS = [
+        {name:'Baby', min:0, max:499},
+        {name:'Jugendlich', min:500, max:1999},
+        {name:'Erwachsen', min:2000, max:Infinity}
+    ];
+
+    const COMPANION_META = {
+        lumino: {name:'Lumino', type:'Fokus-Wächter', color:'lumino', emoji:'✨'},
+        broki:  {name:'Broki',  type:'Aufgaben-Buddy', color:'broki', emoji:'💪'},
+        melu:   {name:'Melu',   type:'Seelen-Hüter', color:'melu', emoji:'💜'}
+    };
+
+    const COMPANION_MOODS = {
+        happy:     {label:'ist happy!', icon:'😊', threshold:24},
+        neutral:   {label:'wartet...', icon:'😐', threshold:48},
+        sleepy:    {label:'schläft...', icon:'😴', threshold:96},
+        vermissend:{label:'vermisst dich!', icon:'🥺', threshold:Infinity}
+    };
+
+    const COMPANION_QUOTES = {
+        lumino: {
+            happy:'Fokus-Power aktiviert! Lass uns was reißen!',
+            neutral:'Hey, ein kleiner Sprint wäre nice...',
+            sleepy:'*gähnt* Weck mich für eine Fokus-Session...',
+            vermissend:'Lumino vermisst euren Flow zusammen...'
+        },
+        broki: {
+            happy:'Yes! Tasks crushen ist mein Ding!',
+            neutral:'Na, was steht heute an?',
+            sleepy:'*streckt sich* Ein Task wäre nett...',
+            vermissend:'Broki wartet auf neue Abenteuer...'
+        },
+        melu: {
+            happy:'Du kümmerst dich so gut um dich!',
+            neutral:'Eine kleine Pause wäre fein...',
+            sleepy:'*kuschelt sich ein* Ruhemoment gefällig?',
+            vermissend:'Melu vermisst eure ruhigen Momente...'
+        }
+    };
+
+    let companionState = lsGet('neuros_companions', null);
+    let companionDayXP = lsGet('neuros_companion_day_' + getTodayKey(), {lumino:0, broki:0, melu:0});
+    let selectedCompanion = 'lumino';
+
+    function initCompanions(){
+        if(!companionState){
+            companionState = {
+                lumino: {xp:0, level:1, mood:'neutral', lastFed:null, totalStat:0},
+                broki:  {xp:0, level:1, mood:'neutral', lastFed:null, totalStat:0},
+                melu:   {xp:0, level:1, mood:'neutral', lastFed:null, totalStat:0}
+            };
+            lsSet('neuros_companions', companionState);
+        }
+        // Daily login bonus (once per day)
+        const loginKey = 'neuros_companion_login_' + getTodayKey();
+        if(!lsGet(loginKey, false)){
+            lsSet(loginKey, true);
+            feedCompanion('lumino', 5, null, true);
+            feedCompanion('broki', 5, null, true);
+            feedCompanion('melu', 5, null, true);
+        }
+        updateAllCompanionMoods();
+        renderCrewScreen();
+        renderCrewMiniPreview();
+        updateEveningCrewSummary();
+    }
+
+    function getCompanionLevel(xp){
+        if(xp >= 2000) return 3;
+        if(xp >= 500) return 2;
+        return 1;
+    }
+
+    function getCompanionLevelInfo(xp){
+        const lvl = getCompanionLevel(xp);
+        const info = COMPANION_LEVELS[lvl-1];
+        const nextMax = lvl < 3 ? COMPANION_LEVELS[lvl].min : Infinity;
+        const curMin = info.min;
+        const pct = nextMax === Infinity ? 100 : Math.min(100, ((xp - curMin) / (nextMax - curMin)) * 100);
+        return {level:lvl, name:info.name, pct, xp, nextXP:nextMax === Infinity ? '∞' : nextMax};
+    }
+
+    function getCompanionMood(companion){
+        const c = companionState[companion];
+        if(!c.lastFed) return 'neutral';
+        const hours = (Date.now() - new Date(c.lastFed).getTime()) / (1000*60*60);
+        if(hours < 24) return 'happy';
+        if(hours < 48) return 'neutral';
+        if(hours < 96) return 'sleepy';
+        return 'vermissend';
+    }
+
+    function updateAllCompanionMoods(){
+        ['lumino','broki','melu'].forEach(id => {
+            companionState[id].mood = getCompanionMood(id);
+            companionState[id].level = getCompanionLevel(companionState[id].xp);
+        });
+        lsSet('neuros_companions', companionState);
+    }
+
+    function getCompanionSprite(id){
+        const c = companionState[id];
+        const lvl = getCompanionLevel(c.xp);
+        const mood = c.mood || 'neutral';
+        // Only stage 2 has mood variants
+        if(lvl === 2){
+            return 'assets/companions/' + id + '/stage2_' + mood + '.svg';
+        }
+        return 'assets/companions/' + id + '/stage' + lvl + '_neutral.svg';
+    }
+
+    function feedCompanion(id, xp, triggerEl, silent){
+        const c = companionState[id];
+        const oldLevel = getCompanionLevel(c.xp);
+        // Mood bonus
+        const mood = getCompanionMood(id);
+        const effectiveXP = mood === 'happy' ? Math.round(xp * 1.1) : xp;
+        c.xp += effectiveXP;
+        c.totalStat += effectiveXP;
+        c.lastFed = new Date().toISOString();
+        c.mood = getCompanionMood(id);
+        c.level = getCompanionLevel(c.xp);
+        lsSet('neuros_companions', companionState);
+        // Track daily XP
+        const dayKey = 'neuros_companion_day_' + getTodayKey();
+        companionDayXP = lsGet(dayKey, {lumino:0, broki:0, melu:0});
+        companionDayXP[id] = (companionDayXP[id]||0) + effectiveXP;
+        lsSet(dayKey, companionDayXP);
+        // Show XP popup
+        if(!silent && triggerEl){
+            showCompanionXPPopup(id, effectiveXP, triggerEl);
+        }
+        // Level up notification
+        const newLevel = getCompanionLevel(c.xp);
+        if(newLevel > oldLevel){
+            showNotification(COMPANION_META[id].emoji + ' ' + COMPANION_META[id].name + ' hat Stufe ' + newLevel + ' erreicht!');
+        }
+        // Re-render
+        renderCrewScreen();
+        renderCrewMiniPreview();
+        updateEveningCrewSummary();
+    }
+
+    function showCompanionXPPopup(id, amount, el){
+        const popup = document.createElement('div');
+        popup.className = 'companion-xp-popup';
+        const meta = COMPANION_META[id];
+        popup.textContent = meta.emoji + ' +' + amount + ' XP';
+        const rect = el.getBoundingClientRect();
+        popup.style.left = rect.left + 'px';
+        popup.style.top = (rect.top - 10) + 'px';
+        document.body.appendChild(popup);
+        setTimeout(() => popup.remove(), 1400);
+    }
+
+    function renderCrewScreen(){
+        const grid = document.getElementById('crewGrid');
+        if(!grid) return;
+        // Day XP summary
+        const dayKey = 'neuros_companion_day_' + getTodayKey();
+        companionDayXP = lsGet(dayKey, {lumino:0, broki:0, melu:0});
+        const totalDay = companionDayXP.lumino + companionDayXP.broki + companionDayXP.melu;
+        const subEl = document.getElementById('crewDayXP');
+        if(subEl) subEl.textContent = 'Heute: +' + totalDay + ' XP für deine Crew';
+        grid.innerHTML = '';
+        ['lumino','broki','melu'].forEach(id => {
+            const c = companionState[id];
+            const meta = COMPANION_META[id];
+            const info = getCompanionLevelInfo(c.xp);
+            const card = document.createElement('div');
+            card.className = 'companion-card' + (selectedCompanion === id ? ' selected' : '');
+            card.onclick = () => { selectedCompanion = id; renderCrewScreen(); };
+            card.innerHTML =
+                '<div class="companion-img-wrap">' +
+                    '<img class="companion-img" src="' + getCompanionSprite(id) + '" alt="' + meta.name + '" onerror="this.style.display=\'none\';this.parentElement.innerHTML=\'<div style=font-size:2.5rem>' + meta.emoji + '</div>\'">' +
+                '</div>' +
+                '<div class="companion-name">' + meta.name + '</div>' +
+                '<div class="companion-type">' + meta.type + '</div>' +
+                '<div class="companion-xp-bar"><div class="companion-xp-fill ' + id + '" style="width:' + info.pct + '%"></div></div>' +
+                '<div class="companion-level">Stufe ' + info.level + ' · ' + c.xp + '/' + info.nextXP + ' XP</div>' +
+                '<div class="companion-today">Heute +' + (companionDayXP[id]||0) + ' XP</div>';
+            grid.appendChild(card);
+        });
+        renderCompanionDetail();
+    }
+
+    function renderCompanionDetail(){
+        const detail = document.getElementById('companionDetail');
+        if(!detail) return;
+        const id = selectedCompanion;
+        const c = companionState[id];
+        const meta = COMPANION_META[id];
+        const info = getCompanionLevelInfo(c.xp);
+        detail.style.display = 'block';
+        // Image
+        const img = document.getElementById('detailImg');
+        img.src = getCompanionSprite(id);
+        img.onerror = function(){ this.style.display='none'; this.parentElement.innerHTML = '<div style="font-size:4rem">' + meta.emoji + '</div>' + this.parentElement.innerHTML; };
+        // Name + mood
+        document.getElementById('detailName').textContent = meta.name + ' — ' + meta.type;
+        document.getElementById('detailMood').textContent = '„' + COMPANION_QUOTES[id][c.mood || 'neutral'] + '"';
+        // XP bar
+        const fill = document.getElementById('detailXPFill');
+        fill.className = 'companion-xp-fill ' + id;
+        fill.style.width = info.pct + '%';
+        document.getElementById('detailLevel').textContent = 'Stufe ' + info.level + ' (' + info.name + ') · ' + c.xp + '/' + info.nextXP + ' XP';
+        // Stats
+        document.getElementById('detailStats').innerHTML =
+            '<div class="companion-detail-stat"><div class="companion-detail-stat-value">' + c.xp + '</div><div class="companion-detail-stat-label">Gesamt XP</div></div>' +
+            '<div class="companion-detail-stat"><div class="companion-detail-stat-value">' + info.level + '</div><div class="companion-detail-stat-label">Level</div></div>' +
+            '<div class="companion-detail-stat"><div class="companion-detail-stat-value">' + info.name + '</div><div class="companion-detail-stat-label">Phase</div></div>';
+        // Evolution path
+        const evoEl = document.getElementById('detailEvolution');
+        evoEl.innerHTML = '';
+        for(let s = 1; s <= 3; s++){
+            if(s > 1) evoEl.innerHTML += '<span class="companion-evo-arrow">→</span>';
+            const reached = info.level >= s;
+            evoEl.innerHTML += '<div class="companion-evo-stage' + (reached ? ' reached' : '') + '">' +
+                '<span style="font-size:1.2rem">' + (s===1?'🥚':s===2?'🐣':'⭐') + '</span></div>';
+        }
+        // Quick actions
+        const actions = document.getElementById('detailActions');
+        if(id === 'lumino'){
+            actions.innerHTML = '<div class="companion-quick-action" onclick="showScreen(\'Fokus\')">⚡ Fokus starten</div>';
+        } else if(id === 'broki'){
+            actions.innerHTML = '<div class="companion-quick-action" onclick="showScreen(\'Fokus\')">✅ Task erledigen</div><div class="companion-quick-action" onclick="showScreen(\'Ideen\')">💡 Idee erfassen</div>';
+        } else {
+            actions.innerHTML = '<div class="companion-quick-action" onclick="showScreen(\'Home\')">🌙 Abendroutine</div>';
+        }
+    }
+
+    function renderCrewMiniPreview(){
+        ['lumino','broki','melu'].forEach(id => {
+            const c = companionState[id];
+            const meta = COMPANION_META[id];
+            const mood = c.mood || 'neutral';
+            const moodInfo = COMPANION_MOODS[mood];
+            const imgEl = document.getElementById('mini' + capitalize(id) + 'Img');
+            const statusEl = document.getElementById('mini' + capitalize(id) + 'Status');
+            if(imgEl){
+                imgEl.src = getCompanionSprite(id);
+                imgEl.onerror = function(){ this.style.display='none'; this.parentElement.querySelector('.crew-mini-status').insertAdjacentHTML('beforebegin','<div style="font-size:2rem;line-height:48px">' + meta.emoji + '</div>'); };
+            }
+            if(statusEl) statusEl.textContent = meta.name + ' ' + moodInfo.label;
+        });
+    }
+
+    function capitalize(s){ return s.charAt(0).toUpperCase() + s.slice(1); }
+
+    function updateEveningCrewSummary(){
+        const el = document.getElementById('eveningCrewSummary');
+        if(!el) return;
+        const dayKey = 'neuros_companion_day_' + getTodayKey();
+        companionDayXP = lsGet(dayKey, {lumino:0, broki:0, melu:0});
+        const total = companionDayXP.lumino + companionDayXP.broki + companionDayXP.melu;
+        if(total === 0){ el.style.display = 'none'; return; }
+        el.style.display = 'flex';
+        let html = '🐾 Crew heute: ';
+        ['lumino','broki','melu'].forEach(id => {
+            if(companionDayXP[id] > 0){
+                html += '<span class="evening-crew-item">' + COMPANION_META[id].emoji + ' ' + COMPANION_META[id].name + ' +' + companionDayXP[id] + ' XP</span>';
+            }
+        });
+        el.innerHTML = html;
+    }
+
+    /* ═══════════════════════════════════════════════
        KI-COACH — Claude API Integration
        Verfügbar in Morning + Deep Work Modus
        ═══════════════════════════════════════════════ */
@@ -3380,6 +3822,7 @@ Kontext:
             if(data.content && data.content[0]){
                 responseEl.textContent = data.content[0].text;
                 responseEl.className = 'coach-response show';
+                if(typeof feedCompanion==='function') feedCompanion('lumino',5,responseEl);
             } else if(data.error){
                 responseEl.textContent = 'Fehler: ' + (data.error.message || 'Unbekannt');
                 responseEl.className = 'coach-response show';
@@ -3695,6 +4138,8 @@ Kontext:
     loadRecoveryReflection();
     loadRecoveryRoutine();
     renderRewindStats();
+    // Companion System initialisieren
+    initCompanions();
     setInterval(checkEveningMode,60000);
     setInterval(checkAchievements,30000)
     </script>

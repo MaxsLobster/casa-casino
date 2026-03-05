@@ -1442,6 +1442,63 @@
         body[data-mode="recovery"] .crew-mini{background:rgba(30,30,52,0.6);border-color:rgba(255,255,255,0.04)}
         body[data-mode="recovery"] .evening-crew-summary{background:rgba(255,255,255,0.04)}
 
+        /* === COMPANION DELTA === */
+        @keyframes companionAchieveIn{from{opacity:0;transform:translateX(-50%) translateY(-16px) scale(0.9)}to{opacity:1;transform:translateX(-50%) translateY(0) scale(1)}}
+        @keyframes companionAchieveOut{from{opacity:1}to{opacity:0;transform:translateX(-50%) translateY(-8px)}}
+        .companion-achieve-toast{
+            position:fixed;top:24px;left:50%;transform:translateX(-50%);
+            background:linear-gradient(135deg,#FFD700 0%,#FFA500 100%);color:#3E2B00;
+            padding:14px 28px;border-radius:var(--radius);
+            box-shadow:0 8px 30px rgba(255,215,0,0.25),0 0 0 1px rgba(255,165,0,0.3);
+            font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:1rem;
+            z-index:3100;display:flex;align-items:center;gap:10px;
+            animation:companionAchieveIn .35s var(--bounce)
+        }
+        .companion-achieve-toast.hiding{animation:companionAchieveOut .3s var(--ease) forwards}
+
+        /* Feed Button */
+        .companion-need{padding:12px 16px;margin-bottom:12px;border-radius:var(--radius);background:var(--porcelain);border:1px solid rgba(44,40,36,0.04);display:flex;align-items:center;gap:12px}
+        .companion-need-text{flex:1;font-family:'Cormorant Garamond',Georgia,serif;font-size:.85rem;color:var(--ink-muted);line-height:1.35}
+        .companion-need-cta{flex-shrink:0;padding:8px 16px;border-radius:20px;border:none;font-family:'Cormorant Garamond',Georgia,serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s var(--ease);background:var(--theme-primary-glow);color:var(--theme-primary)}
+        .companion-need-cta:active{transform:scale(0.95)}
+        body[data-mode="recovery"] .companion-need{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06)}
+        body[data-mode="recovery"] .companion-need-text{color:#9090B0}
+        body[data-mode="recovery"] .companion-need-cta{background:rgba(123,104,238,0.15);color:#B0A0E0}
+
+        /* Pet Gesture */
+        @keyframes companion-pet-wiggle{0%{transform:rotate(0)}15%{transform:rotate(-8deg) scale(1.05)}30%{transform:rotate(8deg) scale(1.05)}45%{transform:rotate(-5deg)}60%{transform:rotate(5deg)}75%{transform:rotate(-2deg)}100%{transform:rotate(0)}}
+        .companion-card.petting .companion-img{animation:companion-pet-wiggle .6s var(--ease)!important}
+        .companion-pet-particle{position:fixed;pointer-events:none;z-index:3000;font-size:1.2rem;animation:companion-pet-float 1s var(--ease) forwards}
+        @keyframes companion-pet-float{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(0.5)}}
+
+        /* Evolution Animation */
+        .evolution-overlay{position:fixed;inset:0;z-index:2500;display:flex;align-items:center;justify-content:center;flex-direction:column;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);opacity:0;animation:evoOverlayIn .3s var(--ease) forwards}
+        @keyframes evoOverlayIn{from{opacity:0}to{opacity:1}}
+        @keyframes evoOverlayOut{from{opacity:1}to{opacity:0}}
+        .evolution-sprite-wrap{position:relative;width:140px;height:140px;display:flex;align-items:center;justify-content:center}
+        .evolution-sprite{width:120px;height:120px;object-fit:contain;image-rendering:pixelated}
+        @keyframes evolution-glow{0%{filter:brightness(1) drop-shadow(0 0 0 transparent)}50%{filter:brightness(1.5) drop-shadow(0 0 20px rgba(255,215,0,0.5))}100%{filter:brightness(2) drop-shadow(0 0 30px rgba(255,215,0,0.8))}}
+        @keyframes evolution-fadeout{from{opacity:1;transform:scale(1)}to{opacity:0;transform:scale(0.4)}}
+        @keyframes evolution-reveal{0%{opacity:0;transform:scale(1.5)}60%{opacity:1;transform:scale(0.9)}100%{opacity:1;transform:scale(1)}}
+        .evolution-sprite.phase-glow{animation:evolution-glow 1s var(--ease) forwards}
+        .evolution-sprite.phase-fadeout{animation:evolution-fadeout .5s var(--ease) forwards}
+        .evolution-sprite.phase-reveal{animation:evolution-reveal .6s var(--bounce) forwards}
+        .evolution-particle{position:absolute;width:6px;height:6px;border-radius:50%;background:gold;pointer-events:none;animation:evo-particle-rise 1.2s var(--ease) forwards}
+        @keyframes evo-particle-rise{0%{opacity:1;transform:translateY(0) translateX(0) scale(1)}100%{opacity:0;transform:translateY(var(--ey)) translateX(var(--ex)) scale(0)}}
+        .evolution-text{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:800;color:#FFD700;margin-top:24px;opacity:0;animation:companionAchieveIn .5s var(--bounce) forwards}
+        .evolution-level-badge{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:rgba(255,255,255,0.7);margin-top:8px;opacity:0;animation:companionAchieveIn .4s var(--ease) .2s forwards}
+
+        /* Goodnight Animation */
+        .evening-companion-highlight[data-companion]{cursor:pointer;transition:transform .2s var(--ease)}
+        .evening-companion-highlight[data-companion]:active{transform:scale(0.97)}
+        .evening-companion-highlight.sleeping{opacity:0.6;filter:brightness(0.5);transition:all 1.5s var(--ease)}
+        .goodnight-particle{position:absolute;pointer-events:none;font-size:.9rem;opacity:0;animation:goodnight-zzz 1.8s var(--ease) forwards}
+        @keyframes goodnight-zzz{0%{opacity:0;transform:translate(0,0) scale(0.5)}30%{opacity:0.8;transform:translate(8px,-12px) scale(1)}100%{opacity:0;transform:translate(16px,-35px) scale(0.6)}}
+        .goodnight-star{position:absolute;pointer-events:none;font-size:.7rem;opacity:0;animation:goodnight-star-float 1.5s var(--ease) forwards}
+        @keyframes goodnight-star-float{0%{opacity:0;transform:translate(0,0) scale(0.3)}40%{opacity:1;transform:translate(var(--sx),var(--sy)) scale(1)}100%{opacity:0;transform:translate(var(--sx),calc(var(--sy) - 15px)) scale(0.5)}}
+        .goodnight-message{text-align:center;padding:16px;font-family:'Playfair Display',serif;font-size:1.05rem;color:#C0C0D8;margin-top:12px;opacity:0;animation:eveningFadeIn .8s ease .3s forwards}
+        @keyframes eveningFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
         /* === EVENING SCREEN === */
         .evening-screen{padding:20px 16px 40px}
         .evening-screen-header{
@@ -2403,6 +2460,7 @@
             </div>
             <div class="companion-detail-stats" id="detailStats"></div>
             <div class="companion-evolution" id="detailEvolution"></div>
+            <div id="detailNeed"></div>
             <div class="companion-quick-actions" id="detailActions"></div>
         </div>
     </div>
@@ -3991,6 +4049,8 @@ Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivier
         renderCrewScreen();
         renderCrewMiniPreview();
         updateEveningCrewSummary();
+        initCompanionPetGesture();
+        checkCompanionAchievements();
     }
 
     function getCompanionLevel(xp){
@@ -4040,8 +4100,9 @@ Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivier
     function feedCompanion(id, xp, triggerEl, silent){
         const c = companionState[id];
         const oldLevel = getCompanionLevel(c.xp);
+        const oldMood = getCompanionMood(id);
         // Mood bonus
-        const mood = getCompanionMood(id);
+        const mood = oldMood;
         const effectiveXP = mood === 'happy' ? Math.round(xp * 1.1) : xp;
         c.xp += effectiveXP;
         c.totalStat += effectiveXP;
@@ -4058,15 +4119,26 @@ Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivier
         if(!silent && triggerEl){
             showCompanionXPPopup(id, effectiveXP, triggerEl);
         }
-        // Level up notification
+        // Comeback achievement check
+        if(oldMood === 'vermissend' && getCompanionMood(id) === 'happy'){
+            unlockCompanionAchievement('comeback');
+        }
+        // Level up — evolution animation or notification
         const newLevel = getCompanionLevel(c.xp);
         if(newLevel > oldLevel){
-            showNotification(COMPANION_META[id].emoji + ' ' + COMPANION_META[id].name + ' hat Stufe ' + newLevel + ' erreicht!');
+            playEvolutionAnimation(id, oldLevel, newLevel, function(){
+                renderCrewScreen();
+                renderCrewMiniPreview();
+                updateEveningCrewSummary();
+                checkCompanionAchievements();
+            });
+            return;
         }
-        // Re-render
+        // Re-render (no evolution)
         renderCrewScreen();
         renderCrewMiniPreview();
         updateEveningCrewSummary();
+        checkCompanionAchievements();
     }
 
     function showCompanionXPPopup(id, amount, el){
@@ -4146,6 +4218,16 @@ Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivier
             evoEl.innerHTML += '<div class="companion-evo-stage' + (reached ? ' reached' : '') + '">' +
                 '<span style="font-size:1.2rem">' + (s===1?'🥚':s===2?'🐣':'⭐') + '</span></div>';
         }
+        // Need / Feed button
+        const needEl = document.getElementById('detailNeed');
+        if(needEl){
+            const need = COMPANION_NEEDS[id]?.[c.mood || 'neutral'] || COMPANION_NEEDS[id]?.neutral;
+            if(need){
+                needEl.innerHTML = '<div class="companion-need"><div class="companion-need-text">' + need.text + '</div><button class="companion-need-cta" onclick="showScreen(\'' + need.screen + '\')">' + need.cta + '</button></div>';
+            } else {
+                needEl.innerHTML = '';
+            }
+        }
         // Quick actions
         const actions = document.getElementById('detailActions');
         if(id === 'lumino'){
@@ -4190,6 +4272,387 @@ Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivier
             }
         });
         el.innerHTML = html;
+    }
+
+    /* ═══════════════════════════════════════════════
+       COMPANION DELTA — Interactions & Animations
+       ═══════════════════════════════════════════════ */
+
+    // ── Mini-Achievements ──
+    const COMPANION_ACHIEVEMENTS = {
+        all_happy:       {icon:'😊', toast:'Alle drei sind happy! Deine Crew liebt dich.'},
+        first_evolution: {icon:'🐣', toast:'Dein erster Begleiter hat sich entwickelt!'},
+        full_evolution:  {icon:'⭐', toast:'{name} ist jetzt erwachsen. Was für eine Reise!'},
+        all_evolved:     {icon:'👑', toast:'Dein komplettes Team hat sich entwickelt!'},
+        comeback:        {icon:'💪', toast:'Du bist zurück! Deine Crew hat dich vermisst.'},
+        night_owl:       {icon:'🦉', toast:'Noch wach? Melu sagt: Ab ins Bett!'},
+        early_bird:      {icon:'🌅', toast:'Wow, schon wach? Lumino ist beeindruckt.'},
+        perfect_day:     {icon:'🏆', toast:'Was für ein Tag! Alle Begleiter feiern dich.'}
+    };
+
+    let _achieveToastQueue = [];
+    let _achieveToastActive = false;
+
+    function showCompanionAchievementToast(achievement){
+        _achieveToastQueue.push(achievement);
+        if(!_achieveToastActive) _drainAchieveQueue();
+    }
+
+    function _drainAchieveQueue(){
+        if(_achieveToastQueue.length === 0){ _achieveToastActive = false; return; }
+        _achieveToastActive = true;
+        const a = _achieveToastQueue.shift();
+        const el = document.createElement('div');
+        el.className = 'companion-achieve-toast';
+        el.textContent = a.icon + '  ' + a.toast;
+        document.body.appendChild(el);
+        if(navigator.vibrate) navigator.vibrate(40);
+        setTimeout(() => { el.classList.add('hiding'); }, 3000);
+        setTimeout(() => { el.remove(); _drainAchieveQueue(); }, 3300);
+    }
+
+    function unlockCompanionAchievement(id, extraData){
+        const achieved = lsGet('neuros_companion_achievements', []);
+        if(achieved.includes(id)) return;
+        const def = COMPANION_ACHIEVEMENTS[id];
+        if(!def) return;
+        achieved.push(id);
+        lsSet('neuros_companion_achievements', achieved);
+        let toast = def.toast;
+        if(extraData && extraData.name) toast = toast.replace('{name}', extraData.name);
+        showCompanionAchievementToast({icon: def.icon, toast: toast});
+    }
+
+    function checkCompanionAchievements(){
+        if(!companionState) return;
+        const achieved = lsGet('neuros_companion_achievements', []);
+
+        // all_happy
+        if(!achieved.includes('all_happy')){
+            const allHappy = ['lumino','broki','melu'].every(id => getCompanionMood(id) === 'happy');
+            if(allHappy) unlockCompanionAchievement('all_happy');
+        }
+        // first_evolution
+        if(!achieved.includes('first_evolution')){
+            if(['lumino','broki','melu'].some(id => getCompanionLevel(companionState[id].xp) >= 2))
+                unlockCompanionAchievement('first_evolution');
+        }
+        // full_evolution
+        if(!achieved.includes('full_evolution')){
+            const evolved = ['lumino','broki','melu'].find(id => getCompanionLevel(companionState[id].xp) >= 3);
+            if(evolved) unlockCompanionAchievement('full_evolution', {name: COMPANION_META[evolved].name});
+        }
+        // all_evolved
+        if(!achieved.includes('all_evolved')){
+            if(['lumino','broki','melu'].every(id => getCompanionLevel(companionState[id].xp) >= 3))
+                unlockCompanionAchievement('all_evolved');
+        }
+        // night_owl
+        if(!achieved.includes('night_owl') && new Date().getHours() >= 23){
+            const activeScreen = document.querySelector('#screenEvening.active');
+            if(activeScreen) unlockCompanionAchievement('night_owl');
+        }
+        // early_bird
+        if(!achieved.includes('early_bird') && new Date().getHours() < 6){
+            const activeScreen = document.querySelector('#screenMorning.active');
+            if(activeScreen) unlockCompanionAchievement('early_bird');
+        }
+        // perfect_day
+        if(!achieved.includes('perfect_day')){
+            const today = new Date().toDateString();
+            const morningViewed = localStorage.getItem('neuros_last_morning_view') === today;
+            const eveningViewed = localStorage.getItem('neuros_last_evening_view') === today;
+            const dayXP = lsGet('neuros_companion_day_' + getTodayKey(), {lumino:0,broki:0,melu:0});
+            const allFed = dayXP.lumino > 0 && dayXP.broki > 0 && dayXP.melu > 0;
+            const moods = load('moods',{});
+            const moodToday = moods[getTodayKey()];
+            if(morningViewed && eveningViewed && allFed && moodToday)
+                unlockCompanionAchievement('perfect_day');
+        }
+    }
+
+    // ── Feed Button ──
+    const COMPANION_NEEDS = {
+        lumino: {
+            happy:     {text:'Lumino strahlt! Noch eine Fokus-Session?', cta:'Fokus starten', screen:'Fokus'},
+            neutral:   {text:'Lumino wünscht sich eine Fokus-Session', cta:'Fokus starten', screen:'Fokus'},
+            sleepy:    {text:'Lumino döst... eine Fokus-Session würde ihn zum Leuchten bringen', cta:'Fokus starten', screen:'Fokus'},
+            vermissend:{text:'Lumino wartet auf dich. Ein bisschen Fokus?', cta:'Fokus starten', screen:'Fokus'}
+        },
+        broki: {
+            happy:     {text:'Broki ist satt und zufrieden! Aber ein Task geht immer...', cta:'Task erledigen', screen:'Fokus'},
+            neutral:   {text:'Broki hätte gern eine erledigte Aufgabe', cta:'Task erledigen', screen:'Fokus'},
+            sleepy:    {text:'Broki gähnt... ein erledigter Task würde ihn aufwecken!', cta:'Task erledigen', screen:'Fokus'},
+            vermissend:{text:'Broki vermisst dich. Zeig ihm einen erledigten Task?', cta:'Task erledigen', screen:'Fokus'}
+        },
+        melu: {
+            happy:     {text:'Melu schnurrt zufrieden. Du passt gut auf dich auf!', cta:'Pause machen', screen:'Home'},
+            neutral:   {text:'Melu freut sich über eine Pause', cta:'Pause machen', screen:'Home'},
+            sleepy:    {text:'Melu erinnert dich sanft: Gönn dir mal eine Pause', cta:'Pause machen', screen:'Home'},
+            vermissend:{text:'Melu macht sich Sorgen. Nimm dir einen Moment für dich?', cta:'Pause machen', screen:'Home'}
+        }
+    };
+
+    // ── Pet Gesture ──
+    const COMPANION_PET_EMOJIS = {
+        lumino: ['✨','💡','🌟'],
+        broki:  ['💪','🎉','👊'],
+        melu:   ['💖','🫂','☺️']
+    };
+    let companionPetCooldowns = {};
+    let _petSwiping = false;
+
+    function initCompanionPetGesture(){
+        const grid = document.getElementById('crewGrid');
+        if(!grid) return;
+        const companionIds = ['lumino','broki','melu'];
+        let startX = 0, startY = 0, currentCard = null, currentId = null;
+
+        grid.addEventListener('pointerdown', function(e){
+            const card = e.target.closest('.companion-card');
+            if(!card) return;
+            const idx = Array.from(grid.querySelectorAll('.companion-card')).indexOf(card);
+            if(idx < 0 || idx >= companionIds.length) return;
+            currentCard = card;
+            currentId = companionIds[idx];
+            startX = e.clientX;
+            startY = e.clientY;
+            _petSwiping = false;
+            card.setPointerCapture(e.pointerId);
+        });
+
+        grid.addEventListener('pointermove', function(e){
+            if(!currentCard) return;
+            const dx = e.clientX - startX;
+            if(Math.abs(dx) > 15) _petSwiping = true;
+        });
+
+        grid.addEventListener('pointerup', function(e){
+            if(!currentCard) return;
+            const dx = e.clientX - startX;
+            const card = currentCard;
+            const id = currentId;
+            currentCard = null;
+            currentId = null;
+
+            if(Math.abs(dx) < 30) { _petSwiping = false; return; }
+
+            // Cooldown check
+            if(companionPetCooldowns[id] && Date.now() - companionPetCooldowns[id] < 3000) return;
+            companionPetCooldowns[id] = Date.now();
+
+            // Suppress click
+            _petSwiping = true;
+            setTimeout(() => { _petSwiping = false; }, 100);
+
+            // Wiggle animation
+            card.classList.add('petting');
+            setTimeout(() => card.classList.remove('petting'), 650);
+
+            // Particles
+            spawnPetParticles(id, card);
+            if(navigator.vibrate) navigator.vibrate(20);
+        });
+
+        // Suppress card click during swipe
+        grid.addEventListener('click', function(e){
+            if(_petSwiping){ e.stopPropagation(); e.preventDefault(); }
+        }, true);
+    }
+
+    function spawnPetParticles(companionId, cardEl){
+        const emojis = COMPANION_PET_EMOJIS[companionId] || ['❤️'];
+        const rect = cardEl.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 3;
+        for(let i = 0; i < 5; i++){
+            const p = document.createElement('div');
+            p.className = 'companion-pet-particle';
+            p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+            p.style.left = cx + 'px';
+            p.style.top = cy + 'px';
+            p.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
+            p.style.setProperty('--dy', (-20 - Math.random() * 40) + 'px');
+            p.style.animationDelay = (i * 0.08) + 's';
+            document.body.appendChild(p);
+            setTimeout(() => p.remove(), 1200);
+        }
+    }
+
+    // ── Evolution Animation ──
+    function playEvolutionAnimation(companionId, oldLevel, newLevel, callback){
+        const meta = COMPANION_META[companionId];
+        const oldSprite = 'assets/companions/' + companionId + '/stage' + oldLevel + '_neutral.svg';
+        const newSprite = getCompanionSprite(companionId);
+
+        // Overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'evolution-overlay';
+
+        const wrap = document.createElement('div');
+        wrap.className = 'evolution-sprite-wrap';
+        const img = document.createElement('img');
+        img.className = 'evolution-sprite';
+        img.src = oldSprite;
+        img.alt = meta.name;
+        img.style.imageRendering = 'pixelated';
+        wrap.appendChild(img);
+        overlay.appendChild(wrap);
+
+        document.body.appendChild(overlay);
+        if(navigator.vibrate) navigator.vibrate([30, 50, 30]);
+
+        const finish = function(){
+            overlay.style.animation = 'evoOverlayOut .3s var(--ease) forwards';
+            setTimeout(() => { overlay.remove(); if(callback) callback(); }, 350);
+        };
+
+        // Click to dismiss
+        overlay.addEventListener('click', function(){ finish(); });
+
+        // Phase 1: Glow (0-1000ms)
+        requestAnimationFrame(() => img.classList.add('phase-glow'));
+
+        // Phase 2: Particles + fadeout (1000ms)
+        setTimeout(() => {
+            // Spawn particles
+            for(let i = 0; i < 12; i++){
+                const p = document.createElement('div');
+                p.className = 'evolution-particle';
+                p.style.left = '50%';
+                p.style.top = '50%';
+                p.style.setProperty('--ex', (Math.random() * 120 - 60) + 'px');
+                p.style.setProperty('--ey', (-30 - Math.random() * 60) + 'px');
+                p.style.animationDelay = (Math.random() * 0.3) + 's';
+                p.style.background = ['gold','#FFD700','#FFA500','#fff'][Math.floor(Math.random()*4)];
+                wrap.appendChild(p);
+            }
+            img.classList.remove('phase-glow');
+            img.classList.add('phase-fadeout');
+        }, 1000);
+
+        // Phase 3: Swap + reveal (1600ms)
+        setTimeout(() => {
+            img.src = newSprite;
+            img.classList.remove('phase-fadeout');
+            img.classList.add('phase-reveal');
+
+            // Level text
+            const levelNames = {1:'Baby', 2:'Jugendlich', 3:'Erwachsen'};
+            const text = document.createElement('div');
+            text.className = 'evolution-text';
+            text.textContent = meta.emoji + ' ' + meta.name + ' hat sich entwickelt!';
+            overlay.appendChild(text);
+
+            const badge = document.createElement('div');
+            badge.className = 'evolution-level-badge';
+            badge.textContent = 'Stufe ' + newLevel + ': ' + levelNames[newLevel];
+            overlay.appendChild(badge);
+        }, 1600);
+
+        // Auto-dismiss after 4s
+        setTimeout(() => { if(document.body.contains(overlay)) finish(); }, 4000);
+    }
+
+    // ── Goodnight Animation ──
+    function initGoodnightTap(){
+        const container = document.getElementById('eveningCompanionHighlights');
+        if(!container) return;
+
+        // Restore sleeping state
+        const goodnightState = lsGet('neuros_goodnight_' + getTodayKey(), {});
+        container.querySelectorAll('.evening-companion-highlight[data-companion]').forEach(el => {
+            if(goodnightState[el.dataset.companion]) el.classList.add('sleeping');
+        });
+
+        // Check if all already sleeping
+        if(goodnightState.lumino && goodnightState.broki && goodnightState.melu){
+            _showGoodnightMessage(container);
+        }
+
+        container.addEventListener('click', function(e){
+            const highlight = e.target.closest('.evening-companion-highlight[data-companion]');
+            if(!highlight || highlight.classList.contains('sleeping')) return;
+
+            const id = highlight.dataset.companion;
+            const state = lsGet('neuros_goodnight_' + getTodayKey(), {});
+            if(state[id]) return;
+
+            // Mark as sleeping
+            state[id] = true;
+            lsSet('neuros_goodnight_' + getTodayKey(), state);
+
+            // Play animation
+            playGoodnightAnimation(id, highlight);
+
+            // Check if all done
+            if(state.lumino && state.broki && state.melu){
+                setTimeout(() => _showGoodnightMessage(container), 2000);
+            }
+        });
+    }
+
+    function _showGoodnightMessage(container){
+        if(container.querySelector('.goodnight-message')) return;
+        const msg = document.createElement('div');
+        msg.className = 'goodnight-message';
+        msg.textContent = 'Deine Crew schläft. Bis morgen! 🌙';
+        container.appendChild(msg);
+    }
+
+    function playGoodnightAnimation(companionId, highlightEl){
+        const avatarEl = highlightEl.querySelector('.evening-companion-avatar');
+        if(!avatarEl) return;
+        avatarEl.style.position = 'relative';
+
+        if(navigator.vibrate) navigator.vibrate(15);
+
+        // Add sleeping class after short delay
+        setTimeout(() => highlightEl.classList.add('sleeping'), 300);
+
+        if(companionId === 'lumino'){
+            // Stars floating
+            const stars = ['✨','⭐','🌟','✨'];
+            stars.forEach((s, i) => {
+                const p = document.createElement('span');
+                p.className = 'goodnight-star';
+                p.textContent = s;
+                p.style.setProperty('--sx', (Math.random() * 50 - 25) + 'px');
+                p.style.setProperty('--sy', (-15 - Math.random() * 25) + 'px');
+                p.style.animationDelay = (i * 0.3) + 's';
+                p.style.left = (20 + Math.random() * 30) + 'px';
+                p.style.top = '10px';
+                avatarEl.appendChild(p);
+                setTimeout(() => p.remove(), 2000);
+            });
+        } else if(companionId === 'broki'){
+            // Zzz bubbles
+            ['💤','💤','💤'].forEach((z, i) => {
+                const p = document.createElement('span');
+                p.className = 'goodnight-particle';
+                p.textContent = z;
+                p.style.animationDelay = (i * 0.5) + 's';
+                p.style.left = (30 + i * 8) + 'px';
+                p.style.top = '5px';
+                avatarEl.appendChild(p);
+                setTimeout(() => p.remove(), 2500);
+            });
+        } else if(companionId === 'melu'){
+            // Warm glow waves
+            const waves = ['💜','🌊','💜'];
+            waves.forEach((w, i) => {
+                const p = document.createElement('span');
+                p.className = 'goodnight-star';
+                p.textContent = w;
+                p.style.setProperty('--sx', (-10 + i * 15) + 'px');
+                p.style.setProperty('--sy', (-10 - Math.random() * 20) + 'px');
+                p.style.animationDelay = (i * 0.4) + 's';
+                p.style.left = (15 + i * 10) + 'px';
+                p.style.top = '15px';
+                avatarEl.appendChild(p);
+                setTimeout(() => p.remove(), 2000);
+            });
+        }
     }
 
     /* ═══════════════════════════════════════════════
@@ -4885,6 +5348,7 @@ Antworte NUR als JSON-Array mit max 3 Task-IDs: [${openTasks.slice(0,3).map(t=>t
         document.getElementById('morningGreeting').innerHTML = buildMorningGreeting();
         loadMorningFocus();
         awardMorningXP();
+        checkCompanionAchievements();
     }
 
     function dismissMorningScreen(){
@@ -4987,7 +5451,7 @@ Antworte NUR als JSON-Array mit max 3 Task-IDs: [${openTasks.slice(0,3).map(t=>t
             const sprite = typeof getCompanionSprite === 'function' ? getCompanionSprite(id) : '';
             const meta = typeof COMPANION_META !== 'undefined' ? COMPANION_META[id] : {emoji:'🐾', name:id};
 
-            html += '<div class="evening-companion-highlight">' +
+            html += '<div class="evening-companion-highlight" data-companion="' + id + '">' +
                 '<div class="evening-companion-avatar">' +
                     (sprite ? '<img src="' + sprite + '" alt="' + meta.name + '">' : meta.emoji) +
                 '</div>' +
@@ -5189,6 +5653,8 @@ Antworte NUR als JSON-Array mit max 3 Task-IDs: [${openTasks.slice(0,3).map(t=>t
         renderEveningRollover();
         renderEveningMoodPicker();
         awardEveningXP();
+        initGoodnightTap();
+        checkCompanionAchievements();
     }
 
     function openEveningScreen(){

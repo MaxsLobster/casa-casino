@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="100%" stop-color="#FFB300"/>
+    </radialGradient>
+    <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF8A65" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF8A65" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Outer glow -->
+  <circle cx="32" cy="34" r="22" fill="#FFE082" opacity="0.2"/>
+  <!-- Body - small round golden blob -->
+  <circle cx="32" cy="34" r="16" fill="url(#glow)" stroke="#F9A825" stroke-width="1.5"/>
+  <!-- Inner highlight -->
+  <ellipse cx="28" cy="28" rx="8" ry="6" fill="#FFF8E1" opacity="0.5"/>
+  <!-- Eyes - big baby eyes -->
+  <ellipse cx="26" cy="33" rx="3.5" ry="4" fill="#4E342E"/>
+  <ellipse cx="38" cy="33" rx="3.5" ry="4" fill="#4E342E"/>
+  <!-- Eye highlights -->
+  <circle cx="27.5" cy="31.5" r="1.5" fill="white"/>
+  <circle cx="39.5" cy="31.5" r="1.5" fill="white"/>
+  <!-- Cheeks -->
+  <circle cx="20" cy="37" r="4" fill="url(#cheek)"/>
+  <circle cx="44" cy="37" r="4" fill="url(#cheek)"/>
+  <!-- Small mouth -->
+  <ellipse cx="32" cy="40" rx="2" ry="1" fill="#E65100" opacity="0.5"/>
+  <!-- Tiny flame wisp on top -->
+  <path d="M32 18 Q34 14 32 10 Q30 14 32 18Z" fill="#FFD54F" opacity="0.7"/>
+</svg>

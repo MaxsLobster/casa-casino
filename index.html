@@ -115,7 +115,7 @@
             box-shadow:0 0 0 1px var(--theme-primary-glow);
             transition:background-color 2s ease,box-shadow 2s ease
         }
-        .nav-item[data-tab="Home"].active,.nav-item[data-tab="Fokus"].active,.nav-item[data-tab="Ideen"].active,.nav-item[data-tab="Tag"].active,.nav-item[data-tab="Family"].active,.nav-item[data-tab="Crew"].active{background:var(--theme-primary-glow)}
+        .nav-item[data-tab="Morning"].active,.nav-item[data-tab="Home"].active,.nav-item[data-tab="Fokus"].active,.nav-item[data-tab="Ideen"].active,.nav-item[data-tab="Tag"].active,.nav-item[data-tab="Family"].active,.nav-item[data-tab="Crew"].active{background:var(--theme-primary-glow)}
         .nav-icon{font-size:1.3rem}
         .nav-label{
             font-family:'Playfair Display',serif;font-size:.42rem;font-weight:700;
@@ -1165,6 +1165,168 @@
         .settings-cancel:active{transform:scale(0.97)}
         body[data-mode="recovery"] .settings-cancel{background:#2A2A4A;color:#9090B0}
 
+        /* === MORNING SCREEN === */
+        .morning-screen{padding:20px 16px 40px}
+        .morning-greeting{
+            font-family:'Playfair Display',serif;font-size:1.6rem;
+            font-weight:700;color:var(--ink);line-height:1.3;
+            margin-bottom:28px;opacity:0;animation:morningFadeIn .8s ease forwards
+        }
+        .morning-greeting em{font-style:normal;color:var(--theme-primary)}
+        @keyframes morningFadeIn{
+            from{opacity:0;transform:translateY(12px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+        .morning-section-label{
+            font-family:'Playfair Display',serif;font-size:.72rem;
+            text-transform:uppercase;letter-spacing:2.5px;
+            color:var(--ink-muted);font-weight:600;margin-bottom:14px
+        }
+        .morning-focus-area{margin-bottom:28px}
+        .morning-focus-loading{
+            text-align:center;padding:32px 0;color:var(--ink-muted);
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem
+        }
+        .morning-focus-loading .spinner{
+            display:inline-block;width:20px;height:20px;
+            border:2px solid var(--porcelain-deep);border-top-color:var(--theme-primary);
+            border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .morning-task-card{
+            background:var(--card);border-radius:var(--radius-lg);
+            padding:16px 18px;margin-bottom:10px;
+            box-shadow:var(--shadow-card);border:1px solid rgba(0,0,0,0.04);
+            display:flex;align-items:center;gap:12px;cursor:pointer;
+            transition:all .2s var(--ease);
+            opacity:0;animation:morningFadeIn .6s ease forwards
+        }
+        .morning-task-card:nth-child(1){animation-delay:.1s}
+        .morning-task-card:nth-child(2){animation-delay:.2s}
+        .morning-task-card:nth-child(3){animation-delay:.3s}
+        .morning-task-card:active{transform:scale(0.98)}
+        .morning-task-card.active-task{border-left:3px solid var(--theme-primary)}
+        .morning-task-emoji{font-size:1.4rem;flex-shrink:0}
+        .morning-task-info{flex:1;min-width:0}
+        .morning-task-title{
+            font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:1rem;font-weight:600;color:var(--ink);
+            white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+        }
+        .morning-task-meta{
+            display:flex;gap:8px;align-items:center;margin-top:3px;
+            font-size:.75rem;color:var(--ink-muted)
+        }
+        .morning-prio-dot{
+            width:8px;height:8px;border-radius:50%;flex-shrink:0
+        }
+        .morning-prio-dot.high{background:#e05555}
+        .morning-prio-dot.medium{background:#d4a030}
+        .morning-prio-dot.low{background:#5aab6a}
+        .morning-task-deadline{color:var(--danger);font-weight:600}
+        .morning-more-btn{
+            display:block;margin:12px auto 0;padding:8px 24px;
+            background:transparent;border:1px solid var(--porcelain-deep);
+            border-radius:var(--radius);color:var(--ink-muted);
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.88rem;
+            cursor:pointer;transition:all .2s var(--ease)
+        }
+        .morning-more-btn:active{transform:scale(0.97)}
+        .morning-manual-hint{
+            text-align:center;padding:8px 0;color:var(--ink-faint);
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.82rem;
+            font-style:italic
+        }
+        .morning-task-card .select-check{
+            width:22px;height:22px;border-radius:50%;
+            border:2px solid var(--porcelain-deep);flex-shrink:0;
+            display:flex;align-items:center;justify-content:center;
+            font-size:.7rem;color:#fff;transition:all .2s var(--ease)
+        }
+        .morning-task-card.selected .select-check{
+            background:var(--theme-primary);border-color:var(--theme-primary)
+        }
+        .morning-confirm-btn{
+            display:block;margin:16px auto 0;padding:10px 32px;
+            background:var(--theme-primary);color:#fff;border:none;
+            border-radius:var(--radius);font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.95rem;font-weight:600;cursor:pointer;
+            transition:all .2s var(--ease)
+        }
+        .morning-confirm-btn:active{transform:scale(0.97)}
+        .morning-companions{
+            display:flex;gap:14px;justify-content:center;
+            padding:12px 0;margin-top:8px;
+            opacity:0;animation:morningFadeIn .8s ease .4s forwards
+        }
+        .morning-companion{
+            text-align:center;cursor:pointer;
+            transition:transform .2s var(--bounce)
+        }
+        .morning-companion:active{transform:scale(0.9)}
+        .morning-companion-avatar{
+            width:52px;height:52px;border-radius:50%;
+            background:var(--porcelain);display:flex;
+            align-items:center;justify-content:center;font-size:1.6rem;
+            box-shadow:var(--shadow-card);margin-bottom:4px;
+            border:2px solid transparent;transition:border-color .2s ease
+        }
+        .morning-companion-name{
+            font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.72rem;color:var(--ink-muted);font-weight:600
+        }
+        .morning-companion-msg{
+            position:fixed;bottom:100px;left:50%;transform:translateX(-50%);
+            background:var(--card);border-radius:var(--radius-lg);
+            padding:14px 20px;box-shadow:var(--shadow-lifted);
+            font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.92rem;color:var(--ink);max-width:300px;text-align:center;
+            opacity:0;pointer-events:none;transition:opacity .3s ease;z-index:200
+        }
+        .morning-companion-msg.show{opacity:1;pointer-events:auto}
+        .morning-braindump-overlay{
+            position:fixed;inset:0;background:rgba(0,0,0,0.4);
+            display:flex;align-items:flex-end;justify-content:center;
+            z-index:300;opacity:0;pointer-events:none;transition:opacity .3s ease
+        }
+        .morning-braindump-overlay.show{opacity:1;pointer-events:auto}
+        .morning-braindump{
+            background:var(--card);border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+            padding:24px 20px 32px;width:100%;max-width:420px
+        }
+        .morning-braindump-title{
+            font-family:'Playfair Display',serif;font-size:1rem;
+            font-weight:700;color:var(--ink);margin-bottom:12px
+        }
+        .morning-braindump textarea{
+            width:100%;height:120px;border:1px solid var(--porcelain-deep);
+            border-radius:var(--radius);padding:12px;resize:none;
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;
+            color:var(--ink);background:var(--porcelain)
+        }
+        .morning-braindump textarea:focus{
+            outline:none;border-color:var(--theme-primary)
+        }
+        .morning-braindump-save{
+            margin-top:12px;padding:10px 24px;background:var(--theme-primary);
+            color:#fff;border:none;border-radius:var(--radius);
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.9rem;
+            font-weight:600;cursor:pointer;width:100%
+        }
+        .morning-dismiss-btn{
+            display:block;margin:24px auto 0;padding:10px 32px;
+            background:var(--theme-primary);color:#fff;border:none;
+            border-radius:var(--radius);font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.95rem;font-weight:600;cursor:pointer;
+            transition:all .2s var(--ease);
+            opacity:0;animation:morningFadeIn .6s ease .5s forwards
+        }
+        .morning-dismiss-btn:active{transform:scale(0.97)}
+        .morning-no-tasks{
+            text-align:center;padding:24px 0;color:var(--ink-muted);
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem
+        }
+
         /* === COMPANION SYSTEM === */
         @keyframes companion-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
         @keyframes companion-bounce{0%{transform:translateY(0)}30%{transform:translateY(-14px) scale(1.1)}60%{transform:translateY(2px) scale(0.95)}100%{transform:translateY(0) scale(1)}}
@@ -1535,6 +1697,54 @@
                 </div>
             </div>
             <button class="mode-picker-close" onclick="closeModePicker()">Abbrechen</button>
+        </div>
+    </div>
+
+    <!-- ═══════ MORNING SCREEN ═══════ -->
+    <div class="screen" id="screenMorning">
+        <div class="morning-screen">
+            <!-- Tagesgruß -->
+            <div class="morning-greeting" id="morningGreeting"></div>
+
+            <!-- Top-3-Fokus -->
+            <div class="morning-focus-area">
+                <div class="morning-section-label">Dein Fokus heute</div>
+                <div id="morningFocusCards"></div>
+            </div>
+
+            <!-- Begleiter-Status -->
+            <div class="morning-focus-area">
+                <div class="morning-section-label">Deine Begleiter</div>
+                <div class="morning-companions" id="morningCompanions">
+                    <div class="morning-companion" onclick="showCompanionMsg('lumino')">
+                        <div class="morning-companion-avatar" id="companionLumino">✨</div>
+                        <div class="morning-companion-name">Lumino</div>
+                    </div>
+                    <div class="morning-companion" onclick="showCompanionMsg('broki')">
+                        <div class="morning-companion-avatar" id="companionBroki">🪨</div>
+                        <div class="morning-companion-name">Broki</div>
+                    </div>
+                    <div class="morning-companion" onclick="showCompanionMsg('melu')">
+                        <div class="morning-companion-avatar" id="companionMelu">🌊</div>
+                        <div class="morning-companion-name">Melu</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weiter-Button -->
+            <button class="morning-dismiss-btn" onclick="dismissMorningScreen()">Starte deinen Tag</button>
+        </div>
+    </div>
+
+    <!-- Companion Message Toast -->
+    <div class="morning-companion-msg" id="companionMsg"></div>
+
+    <!-- Brain Dump Overlay -->
+    <div class="morning-braindump-overlay" id="braindumpOverlay" onclick="if(event.target===this)closeBrainDump()">
+        <div class="morning-braindump">
+            <div class="morning-braindump-title" id="braindumpTitle">Brain Dump</div>
+            <textarea id="braindumpText" placeholder="Was geht dir zu diesem Task durch den Kopf?"></textarea>
+            <button class="morning-braindump-save" onclick="saveBrainDump()">Speichern</button>
         </div>
     </div>
 
@@ -2122,6 +2332,9 @@
 
     <!-- ═══════ NAV ═══════ -->
     <nav class="nav">
+        <div class="nav-item" data-tab="Morning" onclick="openMorningScreen()">
+            <span class="nav-icon">☀️</span><span class="nav-label">Morgen</span>
+        </div>
         <div class="nav-item active" data-tab="Home" onclick="showScreen('Home')">
             <span class="nav-icon">🏠</span><span class="nav-label">Home</span>
         </div>
@@ -4115,6 +4328,349 @@ Kontext:
         }
     }, 600000);
 
+    /* ═══════════════════════════════════════════════
+       MORNING SCREEN — Dein Tag auf einen Blick
+       ═══════════════════════════════════════════════ */
+
+    let morningBraindumpTaskId = null;
+    let morningManualMode = false;
+    let morningSelectedIds = [];
+    let morningXPAwarded = false;
+
+    function shouldShowMorningScreen(){
+        const hour = new Date().getHours();
+        const today = new Date().toDateString();
+        const lastMorningView = localStorage.getItem('neuros_last_morning_view');
+        if(hour >= 5 && hour < 9 && lastMorningView !== today) return true;
+        const lastAppOpen = localStorage.getItem('neuros_last_app_open');
+        if(lastAppOpen !== today) return true;
+        return false;
+    }
+
+    function getOpenTasks(){
+        return lsGet('mf_tasks',[]).filter(t => t.status !== 'done');
+    }
+
+    function getYesterdayOpenTasks(){
+        const allTasks = lsGet('mf_tasks',[]);
+        const today = getTodayKey();
+        return allTasks.filter(t => {
+            if(t.status === 'done') return false;
+            if(!t.createdAt) return false;
+            return t.createdAt.split('T')[0] < today;
+        });
+    }
+
+    function buildMorningGreeting(){
+        const now = new Date();
+        const days = ['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'];
+        const wochentag = days[now.getDay()];
+        const yesterdayTasks = getYesterdayOpenTasks();
+
+        if(yesterdayTasks.length > 0){
+            return `<em>${wochentag}</em>, du hast ${yesterdayTasks.length} offene Tasks von gestern.`;
+        } else if(now.getDay() === 1){
+            return `Neue Woche, <em>Max</em>. Was packst du heute an?`;
+        } else {
+            return `<em>${wochentag}</em>morgen. Bereit für den Tag?`;
+        }
+    }
+
+    async function loadMorningFocus(){
+        const container = document.getElementById('morningFocusCards');
+        const openTasks = getOpenTasks();
+
+        if(openTasks.length === 0){
+            container.innerHTML = '<div class="morning-no-tasks">Keine offenen Tasks. Genieß den Tag!</div>';
+            return;
+        }
+
+        const apiKey = lsGet('neuros_apikey','');
+        if(!apiKey){
+            showManualSelection(openTasks);
+            return;
+        }
+
+        // Show loading
+        container.innerHTML = '<div class="morning-focus-loading"><div class="spinner"></div><br>KI priorisiert deine Tasks...</div>';
+
+        try {
+            const response = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'x-api-key': apiKey,
+                    'anthropic-version': '2023-06-01',
+                    'anthropic-dangerous-direct-browser-access': 'true',
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-5-20250929',
+                    max_tokens: 300,
+                    messages: [{
+                        role: 'user',
+                        content: `Hier sind meine offenen Tasks: ${JSON.stringify(openTasks.map(t=>({id:t.id,title:t.title,priority:t.priority,duration:t.duration,createdAt:t.createdAt})))}
+Wähle die 3 wichtigsten für heute. Berücksichtige: Priorität, seit wann offen, Komplexität.
+Antworte NUR als JSON-Array mit max 3 Task-IDs: [${openTasks.slice(0,3).map(t=>t.id).join(',')}]`
+                    }]
+                })
+            });
+
+            if(!response.ok) throw new Error('API error: ' + response.status);
+
+            const data = await response.json();
+            const text = data.content[0].text.trim();
+            const match = text.match(/\[[\s\S]*?\]/);
+            if(!match) throw new Error('Invalid response format');
+
+            const selectedIds = JSON.parse(match[0]).map(Number);
+            const selectedTasks = selectedIds
+                .map(id => openTasks.find(t => t.id === id))
+                .filter(Boolean)
+                .slice(0, 3);
+
+            if(selectedTasks.length === 0) throw new Error('No matching tasks');
+
+            renderMorningFocusCards(selectedTasks, openTasks);
+        } catch(e) {
+            console.warn('Morning focus API error:', e);
+            showManualSelection(openTasks);
+        }
+    }
+
+    function showManualSelection(openTasks){
+        morningManualMode = true;
+        morningSelectedIds = [];
+
+        // Sort: priority desc, createdAt asc
+        const prioOrder = {high:0, medium:1, low:2};
+        const sorted = [...openTasks].sort((a,b) => {
+            if(prioOrder[a.priority] !== prioOrder[b.priority])
+                return prioOrder[a.priority] - prioOrder[b.priority];
+            return new Date(a.createdAt) - new Date(b.createdAt);
+        });
+
+        let html = '<div class="morning-manual-hint">Wähle bis zu 3 Tasks für heute</div>';
+        sorted.forEach(t => {
+            html += renderMorningTaskCardManual(t);
+        });
+        html += '<button class="morning-confirm-btn" id="morningConfirmBtn" onclick="confirmManualSelection()" style="display:none">Big 3 bestätigen</button>';
+
+        document.getElementById('morningFocusCards').innerHTML = html;
+    }
+
+    function renderMorningTaskCardManual(t){
+        return `<div class="morning-task-card" data-morning-task="${t.id}" onclick="toggleMorningSelect(${t.id})">
+            <div class="select-check"></div>
+            <div class="morning-task-emoji">${t.emoji}</div>
+            <div class="morning-task-info">
+                <div class="morning-task-title">${t.title}</div>
+                <div class="morning-task-meta">
+                    <div class="morning-prio-dot ${t.priority}"></div>
+                    <span>${t.duration}</span>
+                </div>
+            </div>
+        </div>`;
+    }
+
+    function toggleMorningSelect(id){
+        const idx = morningSelectedIds.indexOf(id);
+        if(idx > -1){
+            morningSelectedIds.splice(idx, 1);
+        } else if(morningSelectedIds.length < 3){
+            morningSelectedIds.push(id);
+        }
+        // Update UI
+        document.querySelectorAll('[data-morning-task]').forEach(card => {
+            const cardId = parseInt(card.getAttribute('data-morning-task'));
+            card.classList.toggle('selected', morningSelectedIds.includes(cardId));
+            card.querySelector('.select-check').textContent = morningSelectedIds.includes(cardId) ? '✓' : '';
+        });
+        const btn = document.getElementById('morningConfirmBtn');
+        if(btn) btn.style.display = morningSelectedIds.length > 0 ? 'block' : 'none';
+    }
+
+    function confirmManualSelection(){
+        const openTasks = getOpenTasks();
+        const selectedTasks = morningSelectedIds
+            .map(id => openTasks.find(t => t.id === id))
+            .filter(Boolean);
+        morningManualMode = false;
+        renderMorningFocusCards(selectedTasks, openTasks);
+    }
+
+    function renderMorningFocusCards(focusTasks, allTasks){
+        let html = '';
+        focusTasks.forEach(t => {
+            html += `<div class="morning-task-card" data-morning-task="${t.id}"
+                onclick="activateMorningTask(${t.id})"
+                oncontextmenu="event.preventDefault();openBrainDump(${t.id},'${t.title.replace(/'/g,"\\'")}')"
+                ontouchstart="startLongPress(event,${t.id},'${t.title.replace(/'/g,"\\'")}')"
+                ontouchend="cancelLongPress()" ontouchmove="cancelLongPress()">
+                <div class="morning-task-emoji">${t.emoji}</div>
+                <div class="morning-task-info">
+                    <div class="morning-task-title">${t.title}</div>
+                    <div class="morning-task-meta">
+                        <div class="morning-prio-dot ${t.priority}"></div>
+                        <span>${t.duration}</span>
+                    </div>
+                </div>
+            </div>`;
+        });
+
+        const remaining = allTasks.filter(t => !focusTasks.find(f => f.id === t.id));
+        if(remaining.length > 0){
+            html += `<button class="morning-more-btn" id="morningMoreBtn" onclick="showAllMorningTasks()">Mehr anzeigen (${remaining.length})</button>`;
+            html += `<div id="morningExtraTasks" style="display:none">`;
+            remaining.forEach(t => {
+                html += `<div class="morning-task-card" data-morning-task="${t.id}"
+                    onclick="activateMorningTask(${t.id})"
+                    oncontextmenu="event.preventDefault();openBrainDump(${t.id},'${t.title.replace(/'/g,"\\'")}')"
+                    ontouchstart="startLongPress(event,${t.id},'${t.title.replace(/'/g,"\\'")}')"
+                    ontouchend="cancelLongPress()" ontouchmove="cancelLongPress()">
+                    <div class="morning-task-emoji">${t.emoji}</div>
+                    <div class="morning-task-info">
+                        <div class="morning-task-title">${t.title}</div>
+                        <div class="morning-task-meta">
+                            <div class="morning-prio-dot ${t.priority}"></div>
+                            <span>${t.duration}</span>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+        }
+
+        document.getElementById('morningFocusCards').innerHTML = html;
+    }
+
+    function showAllMorningTasks(){
+        const extra = document.getElementById('morningExtraTasks');
+        const btn = document.getElementById('morningMoreBtn');
+        if(extra){ extra.style.display = 'block'; }
+        if(btn){ btn.style.display = 'none'; }
+    }
+
+    function activateMorningTask(id){
+        const allTasks = lsGet('mf_tasks',[]);
+        const task = allTasks.find(t => t.id === id);
+        if(task && task.status !== 'done'){
+            task.status = 'in_progress';
+            lsSet('mf_tasks', allTasks);
+            tasks = allTasks; // sync global
+            renderAllTasks();
+            showNotification('⚡ Fang ich an!');
+            // Visual feedback
+            const card = document.querySelector(`[data-morning-task="${id}"]`);
+            if(card) card.classList.add('active-task');
+        }
+    }
+
+    // Long-press for Brain Dump
+    let longPressTimer = null;
+    function startLongPress(event, id, title){
+        longPressTimer = setTimeout(() => {
+            event.preventDefault();
+            openBrainDump(id, title);
+        }, 500);
+    }
+    function cancelLongPress(){
+        clearTimeout(longPressTimer);
+    }
+
+    function openBrainDump(id, title){
+        morningBraindumpTaskId = id;
+        document.getElementById('braindumpTitle').textContent = '📝 ' + title;
+        // Load existing note
+        const notes = lsGet('neuros_braindump', {});
+        document.getElementById('braindumpText').value = notes[id] || '';
+        document.getElementById('braindumpOverlay').classList.add('show');
+    }
+
+    function closeBrainDump(){
+        document.getElementById('braindumpOverlay').classList.remove('show');
+    }
+
+    function saveBrainDump(){
+        if(morningBraindumpTaskId !== null){
+            const notes = lsGet('neuros_braindump', {});
+            notes[morningBraindumpTaskId] = document.getElementById('braindumpText').value;
+            lsSet('neuros_braindump', notes);
+        }
+        closeBrainDump();
+        showNotification('📝 Notiz gespeichert');
+    }
+
+    // Companion messages
+    const COMPANION_MESSAGES = {
+        lumino: {
+            happy: 'Lumino sagt: Du packst das!',
+            neutral: 'Lumino nickt dir aufmunternd zu.',
+            sleepy: 'Lumino strahlt schon für dich.'
+        },
+        broki: {
+            happy: 'Broki ist bereit, Berge zu versetzen!',
+            neutral: 'Broki wartet auf den ersten Task.',
+            sleepy: 'Broki dehnt sich... gleich geht\'s los.'
+        },
+        melu: {
+            happy: 'Melu summt fröhlich vor sich hin.',
+            neutral: 'Melu schwimmt gemütlich mit.',
+            sleepy: 'Melu gähnt noch... gönn dir erstmal einen Kaffee.'
+        }
+    };
+
+    function getCompanionMood(name){
+        const companions = lsGet('neuros_companions', null);
+        if(companions && companions[name]){
+            const xp = companions[name].xp || 0;
+            if(xp > 50) return 'happy';
+            if(xp > 20) return 'neutral';
+            return 'sleepy';
+        }
+        // No companion system: derive from time
+        const h = new Date().getHours();
+        if(h >= 7) return 'happy';
+        if(h >= 6) return 'neutral';
+        return 'sleepy';
+    }
+
+    function showCompanionMsg(name){
+        const mood = getCompanionMood(name);
+        const msg = COMPANION_MESSAGES[name][mood];
+        const el = document.getElementById('companionMsg');
+        el.textContent = msg;
+        el.classList.add('show');
+        setTimeout(() => el.classList.remove('show'), 2500);
+    }
+
+    function awardMorningXP(){
+        if(morningXPAwarded) return;
+        morningXPAwarded = true;
+        // Feed companions if system exists
+        if(typeof feedCompanion === 'function'){
+            feedCompanion('lumino', 5);
+            feedCompanion('broki', 5);
+            feedCompanion('melu', 5);
+        }
+    }
+
+    function openMorningScreen(){
+        showScreen('Morning');
+        initMorningScreen();
+    }
+
+    function initMorningScreen(){
+        document.getElementById('morningGreeting').innerHTML = buildMorningGreeting();
+        loadMorningFocus();
+        awardMorningXP();
+    }
+
+    function dismissMorningScreen(){
+        localStorage.setItem('neuros_last_morning_view', new Date().toDateString());
+        localStorage.setItem('neuros_last_app_open', new Date().toDateString());
+        showScreen('Home');
+    }
+
     /* ═══ INIT ═══ */
     // Modus bestimmen und anwenden (MUSS vor allem anderen laufen)
     currentMode = resolveMode();
@@ -4141,7 +4697,14 @@ Kontext:
     // Companion System initialisieren
     initCompanions();
     setInterval(checkEveningMode,60000);
-    setInterval(checkAchievements,30000)
+    setInterval(checkAchievements,30000);
+
+    // Morning Screen: automatisch anzeigen wenn Bedingungen erfüllt
+    if(shouldShowMorningScreen()){
+        localStorage.setItem('neuros_last_app_open', new Date().toDateString());
+        showScreen('Morning');
+        initMorningScreen();
+    }
     </script>
 </body>
 </html>

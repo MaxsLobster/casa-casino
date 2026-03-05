@@ -4,7 +4,7 @@
     {
       "name": "neuros-dev",
       "runtimeExecutable": "node",
-      "runtimeArgs": ["-e", "setTimeout(()=>{},999999999)"],
+      "runtimeArgs": ["-e", "const h=require('http'),f=require('fs');h.createServer((q,r)=>{f.readFile('/tmp/neuros-preview.html',(e,data)=>{if(e){r.writeHead(500);r.end('Err: '+e.message);return}r.writeHead(200,{'Content-Type':'text/html; charset=utf-8'});r.end(data)})}).listen(8080,()=>console.log('OK on 8080'))"],
       "port": 8080
     }
   ]

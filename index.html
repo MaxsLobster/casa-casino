@@ -115,7 +115,7 @@
             box-shadow:0 0 0 1px var(--theme-primary-glow);
             transition:background-color 2s ease,box-shadow 2s ease
         }
-        .nav-item[data-tab="Morning"].active,.nav-item[data-tab="Home"].active,.nav-item[data-tab="Fokus"].active,.nav-item[data-tab="Ideen"].active,.nav-item[data-tab="Tag"].active,.nav-item[data-tab="Family"].active,.nav-item[data-tab="Crew"].active{background:var(--theme-primary-glow)}
+        .nav-item[data-tab="Morning"].active,.nav-item[data-tab="Home"].active,.nav-item[data-tab="Fokus"].active,.nav-item[data-tab="Ideen"].active,.nav-item[data-tab="Tag"].active,.nav-item[data-tab="Family"].active,.nav-item[data-tab="Crew"].active,.nav-item[data-tab="Evening"].active{background:var(--theme-primary-glow)}
         .nav-icon{font-size:1.3rem}
         .nav-label{
             font-family:'Playfair Display',serif;font-size:.42rem;font-weight:700;
@@ -1442,6 +1442,174 @@
         body[data-mode="recovery"] .crew-mini{background:rgba(30,30,52,0.6);border-color:rgba(255,255,255,0.04)}
         body[data-mode="recovery"] .evening-crew-summary{background:rgba(255,255,255,0.04)}
 
+        /* === EVENING SCREEN === */
+        .evening-screen{padding:20px 16px 40px}
+        .evening-screen-header{
+            font-family:'Playfair Display',serif;font-size:1.5rem;
+            font-weight:700;color:#E0E0F0;line-height:1.3;
+            margin-bottom:24px;opacity:0;animation:eveningFadeIn .8s ease forwards
+        }
+        @keyframes eveningFadeIn{
+            from{opacity:0;transform:translateY(12px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+        @keyframes eveningSlideIn{
+            from{opacity:0;transform:translateY(16px)}
+            to{opacity:1;transform:translateY(0)}
+        }
+        .evening-section{margin-bottom:24px;opacity:0;animation:eveningSlideIn .6s ease forwards}
+        .evening-section:nth-child(2){animation-delay:.1s}
+        .evening-section:nth-child(3){animation-delay:.2s}
+        .evening-section:nth-child(4){animation-delay:.3s}
+        .evening-section:nth-child(5){animation-delay:.4s}
+        .evening-section:nth-child(6){animation-delay:.5s}
+        .evening-section-label{
+            font-family:'Playfair Display',serif;font-size:.72rem;
+            text-transform:uppercase;letter-spacing:2.5px;
+            color:#9090B0;font-weight:600;margin-bottom:12px
+        }
+        .evening-completed-card{
+            background:rgba(129,199,132,0.08);border-radius:var(--radius-lg);
+            padding:12px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;
+            border:1px solid rgba(129,199,132,0.15)
+        }
+        .evening-completed-check{
+            width:22px;height:22px;border-radius:50%;background:rgba(129,199,132,0.25);
+            display:flex;align-items:center;justify-content:center;
+            color:#81C784;font-size:.75rem;flex-shrink:0
+        }
+        .evening-completed-title{
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.92rem;
+            color:#C0C0D8;text-decoration:line-through;text-decoration-color:rgba(192,192,216,0.3);
+            flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+        }
+        .evening-completed-emoji{font-size:1.1rem;flex-shrink:0}
+        .evening-zero-msg{
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;
+            color:#9090B0;font-style:italic;padding:8px 0
+        }
+        .evening-companion-highlight{
+            background:rgba(37,37,69,0.6);border-radius:var(--radius-lg);
+            padding:14px 16px;margin-bottom:10px;display:flex;align-items:center;gap:14px;
+            border:1px solid rgba(255,255,255,0.04)
+        }
+        .evening-companion-avatar{
+            width:48px;height:48px;border-radius:50%;
+            display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+            flex-shrink:0
+        }
+        .evening-companion-avatar img{width:48px;height:48px;object-fit:contain;image-rendering:pixelated}
+        .evening-companion-text{
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.9rem;
+            color:#C0C0D8;line-height:1.4;flex:1
+        }
+        .evening-companion-text strong{color:#E0E0F0;font-weight:600}
+        .evening-xp-summary{
+            background:rgba(37,37,69,0.6);border-radius:var(--radius-lg);
+            padding:16px;border:1px solid rgba(255,255,255,0.04)
+        }
+        .evening-xp-total{
+            font-family:'Playfair Display',serif;font-size:1.2rem;
+            font-weight:700;color:#E0E0F0;margin-bottom:10px;text-align:center
+        }
+        .evening-xp-row{display:flex;justify-content:center;gap:20px}
+        .evening-xp-item{text-align:center}
+        .evening-xp-item-emoji{font-size:1.2rem}
+        .evening-xp-item-val{
+            font-family:'JetBrains Mono',monospace;font-size:.78rem;
+            color:#9B8FD0;margin-top:2px
+        }
+        .evening-levelup{
+            text-align:center;padding:8px 0;margin-top:8px;
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.88rem;
+            color:#FFD54F;animation:eveningGlow 2s ease-in-out infinite
+        }
+        @keyframes eveningGlow{
+            0%,100%{opacity:.7}50%{opacity:1}
+        }
+        .evening-rollover-card{
+            background:rgba(37,37,69,0.4);border-radius:var(--radius-lg);
+            padding:12px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;
+            border:1px solid rgba(255,255,255,0.04);
+            transition:transform .3s var(--ease),opacity .3s ease;
+            position:relative;overflow:hidden
+        }
+        .evening-rollover-card.swiping-right{transform:translateX(100%);opacity:0}
+        .evening-rollover-card.swiping-left{transform:translateX(-100%);opacity:0}
+        .evening-rollover-icon{color:#9090B0;font-size:.9rem;flex-shrink:0}
+        .evening-rollover-title{
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.92rem;
+            color:#C0C0D8;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+        }
+        .evening-rollover-emoji{font-size:1.1rem;flex-shrink:0}
+        .evening-rollover-actions{display:flex;gap:6px;flex-shrink:0}
+        .evening-rollover-btn{
+            width:32px;height:32px;border-radius:50%;border:none;
+            display:flex;align-items:center;justify-content:center;
+            cursor:pointer;font-size:.8rem;transition:all .2s var(--ease)
+        }
+        .evening-rollover-btn.tomorrow{background:rgba(155,143,208,0.15);color:#9B8FD0}
+        .evening-rollover-btn.tomorrow:active{background:rgba(155,143,208,0.3)}
+        .evening-rollover-btn.delete{background:rgba(224,90,80,0.1);color:rgba(224,90,80,0.6)}
+        .evening-rollover-btn.delete:active{background:rgba(224,90,80,0.2)}
+        .evening-bulk-btn{
+            display:block;margin:12px auto 0;padding:10px 28px;
+            background:rgba(155,143,208,0.15);color:#9B8FD0;border:1px solid rgba(155,143,208,0.2);
+            border-radius:var(--radius);font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.88rem;font-weight:600;cursor:pointer;transition:all .2s var(--ease)
+        }
+        .evening-bulk-btn:active{transform:scale(0.97);background:rgba(155,143,208,0.25)}
+        .evening-mood-row{
+            display:flex;justify-content:center;gap:12px;padding:8px 0
+        }
+        .evening-mood-btn{
+            width:52px;height:52px;border-radius:50%;border:2px solid rgba(255,255,255,0.06);
+            background:rgba(37,37,69,0.4);display:flex;align-items:center;justify-content:center;
+            font-size:1.5rem;cursor:pointer;transition:all .2s var(--bounce)
+        }
+        .evening-mood-btn:active{transform:scale(0.9)}
+        .evening-mood-btn.selected{
+            border-color:rgba(155,143,208,0.5);background:rgba(155,143,208,0.15);
+            transform:scale(1.15);box-shadow:0 0 20px rgba(155,143,208,0.2)
+        }
+        .evening-mood-thanks{
+            text-align:center;padding:12px 0;
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;
+            color:#9B8FD0;opacity:0;transition:opacity .5s ease
+        }
+        .evening-mood-thanks.show{opacity:1}
+        .evening-dismiss-btn{
+            display:block;margin:20px auto 0;padding:10px 32px;
+            background:rgba(123,104,238,0.2);color:#C0C0D8;border:1px solid rgba(123,104,238,0.2);
+            border-radius:var(--radius);font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.95rem;font-weight:600;cursor:pointer;
+            transition:all .2s var(--ease);
+            opacity:0;animation:eveningFadeIn .6s ease .6s forwards
+        }
+        .evening-dismiss-btn:active{transform:scale(0.97)}
+        .evening-delete-confirm{
+            position:fixed;inset:0;background:rgba(0,0,0,0.5);
+            display:flex;align-items:center;justify-content:center;
+            z-index:300;opacity:0;pointer-events:none;transition:opacity .3s ease
+        }
+        .evening-delete-confirm.show{opacity:1;pointer-events:auto}
+        .evening-delete-modal{
+            background:#252545;border-radius:var(--radius-lg);padding:24px 20px;
+            max-width:300px;text-align:center;border:1px solid rgba(255,255,255,0.06)
+        }
+        .evening-delete-modal p{
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;
+            color:#C0C0D8;margin-bottom:16px
+        }
+        .evening-delete-modal-btns{display:flex;gap:10px;justify-content:center}
+        .evening-delete-modal-btn{
+            padding:8px 20px;border-radius:var(--radius);border:none;
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.88rem;
+            font-weight:600;cursor:pointer;transition:all .2s var(--ease)
+        }
+        .evening-delete-modal-btn.confirm{background:rgba(224,90,80,0.2);color:#e05a50}
+        .evening-delete-modal-btn.cancel{background:rgba(255,255,255,0.06);color:#9090B0}
+
         /* === RECOVERY VIEW === */
         .recovery-section{display:none}
         body[data-mode="recovery"] .recovery-section{display:block}
@@ -1697,6 +1865,57 @@
                 </div>
             </div>
             <button class="mode-picker-close" onclick="closeModePicker()">Abbrechen</button>
+        </div>
+    </div>
+
+    <!-- ═══════ EVENING SCREEN ═══════ -->
+    <div class="screen" id="screenEvening">
+        <div class="evening-screen">
+            <div class="evening-screen-header" id="eveningScreenHeader"></div>
+
+            <!-- Erledigte Tasks -->
+            <div class="evening-section" id="eveningCompletedSection">
+                <div class="evening-section-label">Geschafft heute</div>
+                <div id="eveningCompletedList"></div>
+            </div>
+
+            <!-- Begleiter-Highlight -->
+            <div class="evening-section">
+                <div class="evening-section-label">Deine Begleiter</div>
+                <div id="eveningCompanionHighlights"></div>
+            </div>
+
+            <!-- XP-Zusammenfassung -->
+            <div class="evening-section">
+                <div id="eveningXPSummary"></div>
+            </div>
+
+            <!-- Unerledigte Tasks -->
+            <div class="evening-section" id="eveningRolloverSection" style="display:none">
+                <div class="evening-section-label">Diese warten auf morgen — kein Problem.</div>
+                <div id="eveningRolloverList"></div>
+                <button class="evening-bulk-btn" id="eveningBulkBtn" onclick="rolloverAllTasks()">Alle auf morgen schieben →</button>
+            </div>
+
+            <!-- Micro-Reflexion -->
+            <div class="evening-section">
+                <div class="evening-section-label">Wie war dein Tag?</div>
+                <div class="evening-mood-row" id="eveningMoodRow"></div>
+                <div class="evening-mood-thanks" id="eveningMoodThanks">Danke. Schlaf gut.</div>
+            </div>
+
+            <button class="evening-dismiss-btn" onclick="dismissEveningScreen()">Gute Nacht</button>
+        </div>
+    </div>
+
+    <!-- Evening Delete Confirmation -->
+    <div class="evening-delete-confirm" id="eveningDeleteConfirm">
+        <div class="evening-delete-modal">
+            <p id="eveningDeleteMsg">Task wirklich löschen?</p>
+            <div class="evening-delete-modal-btns">
+                <button class="evening-delete-modal-btn confirm" onclick="confirmDeleteRolloverTask()">Löschen</button>
+                <button class="evening-delete-modal-btn cancel" onclick="cancelDeleteRolloverTask()">Abbrechen</button>
+            </div>
         </div>
     </div>
 
@@ -2352,6 +2571,9 @@
         </div>
         <div class="nav-item" data-tab="Crew" onclick="showScreen('Crew')">
             <span class="nav-icon">🐾</span><span class="nav-label">Crew</span>
+        </div>
+        <div class="nav-item" data-tab="Evening" onclick="openEveningScreen()">
+            <span class="nav-icon">🌙</span><span class="nav-label">Abend</span>
         </div>
     </nav>
 
@@ -4671,6 +4893,314 @@ Antworte NUR als JSON-Array mit max 3 Task-IDs: [${openTasks.slice(0,3).map(t=>t
         showScreen('Home');
     }
 
+    /* ═══════════════════════════════════════════════
+       EVENING SCREEN — Tagesrückblick
+       ═══════════════════════════════════════════════ */
+
+    let eveningDeleteTaskId = null;
+    let eveningXPAwarded = false;
+
+    function shouldShowEveningScreen(){
+        const hour = new Date().getHours();
+        const today = new Date().toDateString();
+        const lastView = localStorage.getItem('neuros_last_evening_view');
+        return hour >= 18 && lastView !== today;
+    }
+
+    function getCompletedTasksToday(){
+        const today = getTodayKey();
+        return lsGet('mf_tasks',[]).filter(t =>
+            t.status === 'done' && t.completedAt && t.completedAt.startsWith(today)
+        );
+    }
+
+    function getUncompletedTasks(){
+        return lsGet('mf_tasks',[]).filter(t => t.status !== 'done');
+    }
+
+    function getTodayCompanionXP(){
+        const dayKey = 'neuros_companion_day_' + getTodayKey();
+        return lsGet(dayKey, {lumino:0, broki:0, melu:0});
+    }
+
+    function buildEveningHeader(completedCount){
+        if(completedCount === 0) return 'Heute war ein ruhiger Tag.';
+        if(completedCount === 1) return '1 Task geschafft heute!';
+        return completedCount + ' Tasks geschafft heute!';
+    }
+
+    function renderEveningCompleted(completed){
+        const container = document.getElementById('eveningCompletedList');
+        if(completed.length === 0){
+            container.innerHTML = '<div class="evening-zero-msg">Heute war ein ruhiger Tag. Auch das ist okay.</div>';
+            return;
+        }
+        container.innerHTML = completed.map(t =>
+            '<div class="evening-completed-card">' +
+                '<div class="evening-completed-check">✓</div>' +
+                '<div class="evening-completed-emoji">' + t.emoji + '</div>' +
+                '<div class="evening-completed-title">' + t.title + '</div>' +
+            '</div>'
+        ).join('');
+    }
+
+    function getCompanionHighlightText(id, mood, xpToday, completedCount){
+        const texts = {
+            broki: {
+                happy: completedCount >= 3
+                    ? 'Broki hat heute ' + completedCount + ' Tasks gefressen und ist pappsatt!'
+                    : 'Broki ist zufrieden — guter Tag!',
+                neutral: 'Broki döst vor sich hin. Morgen gibt\'s bestimmt was zu futtern.',
+                sleepy: 'Broki schläft tief. Morgen wird sein Tag!',
+                vermissend: 'Broki vermisst dich. Ein kleiner Task morgen würde ihn freuen.'
+            },
+            lumino: {
+                happy: xpToday > 15
+                    ? 'Lumino leuchtet hell — dein Fokus heute war stark!'
+                    : 'Lumino strahlt zufrieden vor sich hin.',
+                neutral: 'Lumino wartet geduldig auf den nächsten Fokus-Moment.',
+                sleepy: 'Lumino hat heute geschlafen. Kein Problem, morgen scheint er wieder.',
+                vermissend: 'Lumino vermisst deinen Fokus. Schon eine kurze Session hilft.'
+            },
+            melu: {
+                happy: 'Melu schnurrt zufrieden. Du hast heute gut auf dich aufgepasst.',
+                neutral: 'Melu erinnert dich: Morgen eine Pause einlegen, okay?',
+                sleepy: 'Melu gähnt und kuschelt sich ein. Schlaf gut!',
+                vermissend: 'Melu vermisst deine Ruhe-Momente. Gönn dir morgen eine Pause.'
+            }
+        };
+        return texts[id]?.[mood] || texts[id]?.neutral || '';
+    }
+
+    function renderEveningCompanionHighlights(completedCount){
+        const container = document.getElementById('eveningCompanionHighlights');
+        const companions = lsGet('neuros_companions', {});
+        const todayXP = getTodayCompanionXP();
+        let html = '';
+
+        ['lumino','broki','melu'].forEach(id => {
+            const c = companions[id];
+            if(!c) return;
+            const mood = c.mood || 'neutral';
+            const xpToday = todayXP[id] || 0;
+            const text = getCompanionHighlightText(id, mood, xpToday, completedCount);
+            const sprite = typeof getCompanionSprite === 'function' ? getCompanionSprite(id) : '';
+            const meta = typeof COMPANION_META !== 'undefined' ? COMPANION_META[id] : {emoji:'🐾', name:id};
+
+            html += '<div class="evening-companion-highlight">' +
+                '<div class="evening-companion-avatar">' +
+                    (sprite ? '<img src="' + sprite + '" alt="' + meta.name + '">' : meta.emoji) +
+                '</div>' +
+                '<div class="evening-companion-text"><strong>' + meta.name + ':</strong> ' + text + '</div>' +
+            '</div>';
+        });
+
+        container.innerHTML = html;
+    }
+
+    function renderEveningXPSummary(){
+        const container = document.getElementById('eveningXPSummary');
+        const todayXP = getTodayCompanionXP();
+        const total = (todayXP.lumino || 0) + (todayXP.broki || 0) + (todayXP.melu || 0);
+        const meta = typeof COMPANION_META !== 'undefined' ? COMPANION_META : {
+            lumino:{emoji:'✨',name:'Lumino'}, broki:{emoji:'💪',name:'Broki'}, melu:{emoji:'💜',name:'Melu'}
+        };
+
+        if(total === 0){
+            container.innerHTML = '';
+            return;
+        }
+
+        let html = '<div class="evening-xp-summary">' +
+            '<div class="evening-xp-total">+' + total + ' XP heute</div>' +
+            '<div class="evening-xp-row">';
+
+        ['lumino','broki','melu'].forEach(id => {
+            const xp = todayXP[id] || 0;
+            html += '<div class="evening-xp-item">' +
+                '<div class="evening-xp-item-emoji">' + meta[id].emoji + '</div>' +
+                '<div class="evening-xp-item-val">+' + xp + '</div>' +
+            '</div>';
+        });
+
+        html += '</div>';
+
+        // Check for level-ups today (simple heuristic: if XP today pushed past threshold)
+        const companions = lsGet('neuros_companions', {});
+        ['lumino','broki','melu'].forEach(id => {
+            const c = companions[id];
+            if(!c) return;
+            const xpToday = todayXP[id] || 0;
+            const prevXP = c.xp - xpToday;
+            const prevLevel = prevXP >= 2000 ? 3 : prevXP >= 500 ? 2 : 1;
+            const curLevel = c.xp >= 2000 ? 3 : c.xp >= 500 ? 2 : 1;
+            if(curLevel > prevLevel){
+                html += '<div class="evening-levelup">🎉 ' + meta[id].name + ' hat Level ' + curLevel + ' erreicht!</div>';
+            }
+        });
+
+        html += '</div>';
+        container.innerHTML = html;
+    }
+
+    function renderEveningRollover(){
+        const uncompleted = getUncompletedTasks();
+        const section = document.getElementById('eveningRolloverSection');
+
+        if(uncompleted.length === 0){
+            section.style.display = 'none';
+            return;
+        }
+
+        section.style.display = '';
+        const container = document.getElementById('eveningRolloverList');
+        container.innerHTML = uncompleted.map(t =>
+            '<div class="evening-rollover-card" id="rollover-' + t.id + '">' +
+                '<div class="evening-rollover-emoji">' + t.emoji + '</div>' +
+                '<div class="evening-rollover-title">' + t.title + '</div>' +
+                '<div class="evening-rollover-actions">' +
+                    '<button class="evening-rollover-btn tomorrow" onclick="event.stopPropagation();rolloverTask(\'' + t.id + '\')" title="Auf morgen">→</button>' +
+                    '<button class="evening-rollover-btn delete" onclick="event.stopPropagation();askDeleteRolloverTask(\'' + t.id + '\')" title="Löschen">×</button>' +
+                '</div>' +
+            '</div>'
+        ).join('');
+    }
+
+    function rolloverTask(id){
+        const card = document.getElementById('rollover-' + id);
+        if(card){
+            card.classList.add('swiping-right');
+            setTimeout(() => card.remove(), 300);
+        }
+        // Mark as rolled over (keep in task list, just visually dismiss from evening)
+        showNotification('→ Auf morgen verschoben');
+        updateRolloverVisibility();
+    }
+
+    function rolloverAllTasks(){
+        const cards = document.querySelectorAll('.evening-rollover-card');
+        cards.forEach((card, i) => {
+            setTimeout(() => card.classList.add('swiping-right'), i * 80);
+        });
+        setTimeout(() => {
+            document.getElementById('eveningRolloverList').innerHTML = '';
+            document.getElementById('eveningRolloverSection').style.display = 'none';
+            showNotification('→ Alle Tasks auf morgen verschoben');
+        }, cards.length * 80 + 300);
+    }
+
+    function askDeleteRolloverTask(id){
+        eveningDeleteTaskId = id;
+        document.getElementById('eveningDeleteConfirm').classList.add('show');
+    }
+
+    function confirmDeleteRolloverTask(){
+        if(eveningDeleteTaskId !== null){
+            const allTasks = lsGet('mf_tasks',[]);
+            const filtered = allTasks.filter(t => t.id !== eveningDeleteTaskId);
+            lsSet('mf_tasks', filtered);
+            tasks = filtered; // sync global
+
+            const card = document.getElementById('rollover-' + eveningDeleteTaskId);
+            if(card){
+                card.classList.add('swiping-left');
+                setTimeout(() => card.remove(), 300);
+            }
+
+            renderAllTasks();
+            showNotification('🗑️ Task gelöscht');
+            updateRolloverVisibility();
+        }
+        cancelDeleteRolloverTask();
+    }
+
+    function cancelDeleteRolloverTask(){
+        eveningDeleteTaskId = null;
+        document.getElementById('eveningDeleteConfirm').classList.remove('show');
+    }
+
+    function updateRolloverVisibility(){
+        setTimeout(() => {
+            const remaining = document.querySelectorAll('.evening-rollover-card');
+            if(remaining.length === 0){
+                document.getElementById('eveningRolloverSection').style.display = 'none';
+            }
+        }, 350);
+    }
+
+    function renderEveningMoodPicker(){
+        const moods = [
+            {emoji:'😫', label:'Tough'},
+            {emoji:'😕', label:'Meh'},
+            {emoji:'😐', label:'Okay'},
+            {emoji:'🙂', label:'Gut'},
+            {emoji:'😊', label:'Super'}
+        ];
+        const todayMood = load('moods',{})[getTodayKey()];
+        const container = document.getElementById('eveningMoodRow');
+
+        container.innerHTML = moods.map(m =>
+            '<button class="evening-mood-btn' + (todayMood && todayMood.emoji === m.emoji ? ' selected' : '') + '" ' +
+                'onclick="pickEveningMood(this,\'' + m.emoji + '\',\'' + m.label + '\')">' +
+                m.emoji +
+            '</button>'
+        ).join('');
+
+        if(todayMood){
+            document.getElementById('eveningMoodThanks').classList.add('show');
+        }
+    }
+
+    function pickEveningMood(btn, emoji, label){
+        // Store mood (using cc_ prefix system like existing mood picker)
+        const moods = load('moods',{});
+        moods[getTodayKey()] = {emoji, label, color:'#9B8FD0'};
+        store('moods', moods);
+
+        // Visual feedback
+        document.querySelectorAll('.evening-mood-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        document.getElementById('eveningMoodThanks').classList.add('show');
+
+        // Haptic feedback if available
+        if(navigator.vibrate) navigator.vibrate(30);
+
+        // Melu XP for mood check
+        if(typeof feedCompanion === 'function'){
+            feedCompanion('melu', 10, btn, true);
+        }
+    }
+
+    function awardEveningXP(){
+        if(eveningXPAwarded) return;
+        eveningXPAwarded = true;
+        if(typeof feedCompanion === 'function'){
+            feedCompanion('melu', 10, null, true);
+        }
+    }
+
+    function initEveningScreen(){
+        const completed = getCompletedTasksToday();
+
+        document.getElementById('eveningScreenHeader').textContent = buildEveningHeader(completed.length);
+        renderEveningCompleted(completed);
+        renderEveningCompanionHighlights(completed.length);
+        renderEveningXPSummary();
+        renderEveningRollover();
+        renderEveningMoodPicker();
+        awardEveningXP();
+    }
+
+    function openEveningScreen(){
+        showScreen('Evening');
+        initEveningScreen();
+    }
+
+    function dismissEveningScreen(){
+        localStorage.setItem('neuros_last_evening_view', new Date().toDateString());
+        showScreen('Home');
+    }
+
     /* ═══ INIT ═══ */
     // Modus bestimmen und anwenden (MUSS vor allem anderen laufen)
     currentMode = resolveMode();
@@ -4704,6 +5234,12 @@ Antworte NUR als JSON-Array mit max 3 Task-IDs: [${openTasks.slice(0,3).map(t=>t
         localStorage.setItem('neuros_last_app_open', new Date().toDateString());
         showScreen('Morning');
         initMorningScreen();
+    }
+
+    // Evening Screen: automatisch anzeigen ab 18:00 (1x pro Tag)
+    if(shouldShowEveningScreen()){
+        showScreen('Evening');
+        initEveningScreen();
     }
     </script>
 </body>

@@ -1499,6 +1499,96 @@
         .goodnight-message{text-align:center;padding:16px;font-family:'Playfair Display',serif;font-size:1.05rem;color:#C0C0D8;margin-top:12px;opacity:0;animation:eveningFadeIn .8s ease .3s forwards}
         @keyframes eveningFadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
+        /* === BRAIN DUMP === */
+        .braindump-fab{
+            position:fixed;bottom:calc(max(16px,env(safe-area-inset-bottom)) + 72px);
+            right:16px;width:56px;height:56px;border-radius:50%;border:none;
+            background:linear-gradient(135deg,var(--color-pink),var(--color-blue));
+            color:#fff;font-size:1.5rem;cursor:pointer;z-index:999;
+            box-shadow:0 4px 20px rgba(244,143,177,0.35),0 2px 8px rgba(0,0,0,0.1);
+            transition:all .2s var(--ease);display:flex;align-items:center;justify-content:center
+        }
+        .braindump-fab:active{transform:scale(0.9)}
+        .braindump-fab.hidden{opacity:0;pointer-events:none;transform:scale(0.5)}
+        body[data-mode="recovery"] .braindump-fab{background:linear-gradient(135deg,#7B68EE,#5C4FB0);box-shadow:0 4px 20px rgba(123,104,238,0.3)}
+
+        .braindump-sheet-overlay{
+            position:fixed;inset:0;background:rgba(0,0,0,0.4);
+            display:flex;align-items:flex-end;justify-content:center;
+            z-index:2000;opacity:0;pointer-events:none;transition:opacity .3s ease
+        }
+        .braindump-sheet-overlay.show{opacity:1;pointer-events:auto}
+        .braindump-sheet{
+            background:var(--card);border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+            padding:24px 20px 32px;width:100%;max-width:420px;
+            transform:translateY(100%);transition:transform .35s var(--ease)
+        }
+        .braindump-sheet-overlay.show .braindump-sheet{transform:translateY(0)}
+        .braindump-sheet-handle{width:36px;height:4px;background:var(--porcelain-deep);border-radius:2px;margin:0 auto 16px}
+        .braindump-sheet-title{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:12px}
+        .braindump-sheet textarea{
+            width:100%;height:120px;border:1px solid var(--porcelain-deep);
+            border-radius:var(--radius);padding:12px;resize:none;
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;
+            color:var(--ink);background:var(--porcelain)
+        }
+        .braindump-sheet textarea:focus{outline:none;border-color:var(--color-pink)}
+        .braindump-sheet-actions{display:flex;gap:8px;margin-top:12px}
+        .braindump-sheet-save{
+            flex:1;padding:12px 24px;background:var(--color-pink);color:#fff;border:none;
+            border-radius:var(--radius);font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.9rem;font-weight:600;cursor:pointer
+        }
+        .braindump-sheet-save:active{transform:scale(0.98)}
+        .braindump-sheet-mic{
+            width:48px;height:48px;border-radius:50%;border:none;
+            background:var(--porcelain);color:var(--color-pink);font-size:1.2rem;
+            cursor:pointer;transition:all .2s var(--ease);flex-shrink:0
+        }
+        .braindump-sheet-mic:active{transform:scale(0.95)}
+        .braindump-sheet-mic.recording{background:var(--color-pink);color:#fff;animation:micPulse 1.2s ease-in-out infinite}
+
+        .braindump-inbox-tabs{display:flex;gap:0;margin-bottom:16px;border-bottom:2px solid var(--porcelain-deep)}
+        .braindump-inbox-tab{
+            flex:1;padding:10px 0;text-align:center;border:none;background:none;
+            font-family:'Playfair Display',serif;font-size:.85rem;font-weight:600;
+            color:var(--ink-muted);cursor:pointer;position:relative;transition:color .2s
+        }
+        .braindump-inbox-tab.active{color:var(--color-pink)}
+        .braindump-inbox-tab.active::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:2px;background:var(--color-pink)}
+        .braindump-inbox-badge{
+            display:inline-flex;align-items:center;justify-content:center;
+            min-width:18px;height:18px;padding:0 5px;border-radius:9px;
+            background:var(--color-pink);color:#fff;font-size:.65rem;
+            font-family:'JetBrains Mono',monospace;margin-left:6px;font-weight:700
+        }
+        .braindump-inbox-badge:empty{display:none}
+        .braindump-card{background:var(--card);border:1px solid var(--porcelain-warm);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+        .braindump-card-text{font-family:'Cormorant Garamond',Georgia,serif;font-size:.95rem;color:var(--ink);line-height:1.4;margin-bottom:8px}
+        .braindump-card-meta{font-size:.72rem;color:var(--ink-ghost);margin-bottom:10px}
+        .braindump-card-actions{display:flex;gap:6px;flex-wrap:wrap}
+        .braindump-card-action{
+            padding:6px 12px;border:1.5px solid var(--porcelain-deep);border-radius:20px;
+            background:var(--card);font-family:'Cormorant Garamond',Georgia,serif;
+            font-size:.78rem;color:var(--ink-soft);cursor:pointer;transition:all .15s
+        }
+        .braindump-card-action:active{transform:scale(0.96)}
+        .braindump-card-action:hover{border-color:var(--color-pink);color:var(--color-pink)}
+        .braindump-ki-sort-btn{
+            width:100%;padding:12px;margin-top:12px;border:2px dashed var(--porcelain-deep);
+            border-radius:var(--radius);background:none;
+            font-family:'Cormorant Garamond',Georgia,serif;font-size:.88rem;
+            color:var(--ink-muted);cursor:pointer;transition:all .2s
+        }
+        .braindump-ki-sort-btn:hover{border-color:var(--color-pink);color:var(--color-pink)}
+        .braindump-ki-sort-btn:disabled{opacity:.4;cursor:default}
+        .braindump-ki-sort-btn.loading{border-style:solid;border-color:var(--color-pink);color:var(--color-pink)}
+        .braindump-empty{padding:24px 0;color:var(--ink-ghost);font-size:.85rem;font-style:italic;text-align:center}
+        body[data-mode="recovery"] .braindump-sheet{background:#1E1E34;border-color:rgba(255,255,255,0.06)}
+        body[data-mode="recovery"] .braindump-sheet textarea{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);color:#C0C0D0}
+        body[data-mode="recovery"] .braindump-card{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06)}
+        body[data-mode="recovery"] .braindump-card-action{border-color:rgba(255,255,255,0.1);color:#9090B0}
+
         /* === EVENING SCREEN === */
         .evening-screen{padding:20px 16px 40px}
         .evening-screen-header{
@@ -2096,9 +2186,9 @@
                 <span class="quick-action-icon">⚡</span>
                 <span class="quick-action-label">Was soll ich tun?</span>
             </div>
-            <div class="quick-action ideen" onclick="showScreen('Ideen')">
-                <span class="quick-action-icon">💡</span>
-                <span class="quick-action-label">Idee!</span>
+            <div class="quick-action ideen" onclick="openBrainDumpSheet()">
+                <span class="quick-action-icon">💭</span>
+                <span class="quick-action-label">Brain Dump</span>
             </div>
             <div class="quick-action tag" onclick="showScreen('Tag')">
                 <span class="quick-action-icon">📅</span>
@@ -2234,31 +2324,47 @@
 
     <!-- ═══════ IDEEN ═══════ -->
     <div class="screen" id="screenIdeen">
-        <div class="ideen-capture">
-            <button class="ideen-mic-btn" id="ideenMicBtn" onclick="toggleIdeenMic()">🎤</button>
-            <div class="ideen-mic-label" id="ideenMicLabel">Tippe zum Aufnehmen</div>
-            <div class="ideen-text-input">
-                <input id="ideenTextInput" placeholder="Idee eingeben..." onkeydown="if(event.key==='Enter')saveIdea()">
-                <button onclick="saveIdea()">➕</button>
+        <!-- Brain Dump / Ideen Tabs -->
+        <div class="braindump-inbox-tabs">
+            <button class="braindump-inbox-tab" onclick="switchIdeenTab('braindump')">💭 Brain Dump <span class="braindump-inbox-badge" id="brainDumpBadge" style="display:none">0</span></button>
+            <button class="braindump-inbox-tab active" onclick="switchIdeenTab('ideen')">💡 Ideen</button>
+        </div>
+
+        <!-- Brain Dump Inbox View -->
+        <div id="brainDumpInboxView" style="display:none">
+            <div id="brainDumpInboxList"></div>
+            <button class="braindump-ki-sort-btn" id="brainDumpKiSortBtn" onclick="kiBrainDumpSort()">🧠 KI Auto-Sortieren</button>
+            <div class="braindump-empty" id="brainDumpEmpty" style="display:none">Noch keine Brain Dumps — tippe 💭 um loszulegen!</div>
+        </div>
+
+        <!-- Ideen Content View -->
+        <div id="ideenContentView">
+            <div class="ideen-capture">
+                <button class="ideen-mic-btn" id="ideenMicBtn" onclick="toggleIdeenMic()">🎤</button>
+                <div class="ideen-mic-label" id="ideenMicLabel">Tippe zum Aufnehmen</div>
+                <div class="ideen-text-input">
+                    <input id="ideenTextInput" placeholder="Idee eingeben..." onkeydown="if(event.key==='Enter')saveIdea()">
+                    <button onclick="saveIdea()">➕</button>
+                </div>
             </div>
-        </div>
 
-        <div class="ideen-category-filter">
-            <button class="ideen-filter-btn active" onclick="filterIdeen(this,'all')">Alle</button>
-            <button class="ideen-filter-btn" onclick="filterIdeen(this,'gedanke')">💭 Gedanke</button>
-            <button class="ideen-filter-btn" onclick="filterIdeen(this,'aufgabe')">⚡ Aufgabe</button>
-            <button class="ideen-filter-btn" onclick="filterIdeen(this,'projekt')">🌱 Projekt</button>
-            <button class="ideen-filter-btn" onclick="filterIdeen(this,'spass')">🎯 Spaß</button>
-        </div>
+            <div class="ideen-category-filter">
+                <button class="ideen-filter-btn active" onclick="filterIdeen(this,'all')">Alle</button>
+                <button class="ideen-filter-btn" onclick="filterIdeen(this,'gedanke')">💭 Gedanke</button>
+                <button class="ideen-filter-btn" onclick="filterIdeen(this,'aufgabe')">⚡ Aufgabe</button>
+                <button class="ideen-filter-btn" onclick="filterIdeen(this,'projekt')">🌱 Projekt</button>
+                <button class="ideen-filter-btn" onclick="filterIdeen(this,'spass')">🎯 Spaß</button>
+            </div>
 
-        <div class="ideen-inbox-header">
-            <div class="ideen-inbox-title">💡 Ideen-Inbox</div>
-            <div class="ideen-count" id="ideenCount">0 Ideen</div>
-        </div>
-        <div id="ideenList"></div>
+            <div class="ideen-inbox-header">
+                <div class="ideen-inbox-title">💡 Ideen-Inbox</div>
+                <div class="ideen-count" id="ideenCount">0 Ideen</div>
+            </div>
+            <div id="ideenList"></div>
 
-        <div class="ideen-review-hint" id="ideenReviewHint" style="display:none">
-            🔄 <strong>Wöchentlicher Review:</strong> Schau dir deine Ideen durch – was wird zur Aufgabe, was darf gehen?
+            <div class="ideen-review-hint" id="ideenReviewHint" style="display:none">
+                🔄 <strong>Wöchentlicher Review:</strong> Schau dir deine Ideen durch – was wird zur Aufgabe, was darf gehen?
+            </div>
         </div>
     </div>
 
@@ -2634,6 +2740,22 @@
             <span class="nav-icon">🌙</span><span class="nav-label">Abend</span>
         </div>
     </nav>
+
+    <!-- Brain Dump FAB -->
+    <button class="braindump-fab" id="braindumpFab" onclick="openBrainDumpSheet()">💭</button>
+
+    <!-- Brain Dump Bottom Sheet -->
+    <div class="braindump-sheet-overlay" id="brainDumpSheetOverlay" onclick="if(event.target===this)closeBrainDumpSheet()">
+        <div class="braindump-sheet">
+            <div class="braindump-sheet-handle"></div>
+            <div style="font-size:1.1rem;font-weight:700;margin-bottom:12px">💭 Brain Dump</div>
+            <textarea id="brainDumpSheetText" placeholder="Was geht dir durch den Kopf? Einfach raus damit..."></textarea>
+            <div style="display:flex;gap:8px;align-items:center">
+                <button class="braindump-sheet-mic" id="brainDumpMicBtn" onclick="toggleBrainDumpMic()">🎤</button>
+                <button class="braindump-sheet-save" onclick="saveBrainDump_global()">Raus damit!</button>
+            </div>
+        </div>
+    </div>
 
     <script>
     /* ═══ STORAGE HELPERS ═══ */
@@ -4233,7 +4355,7 @@ Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivier
         if(id === 'lumino'){
             actions.innerHTML = '<div class="companion-quick-action" onclick="showScreen(\'Fokus\')">⚡ Fokus starten</div>';
         } else if(id === 'broki'){
-            actions.innerHTML = '<div class="companion-quick-action" onclick="showScreen(\'Fokus\')">✅ Task erledigen</div><div class="companion-quick-action" onclick="showScreen(\'Ideen\')">💡 Idee erfassen</div>';
+            actions.innerHTML = '<div class="companion-quick-action" onclick="showScreen(\'Fokus\')">✅ Task erledigen</div><div class="companion-quick-action" onclick="openBrainDumpSheet()">💭 Brain Dump</div>';
         } else {
             actions.innerHTML = '<div class="companion-quick-action" onclick="showScreen(\'Home\')">🌙 Abendroutine</div>';
         }
@@ -4654,6 +4776,284 @@ Regeln: Kein "Hey Max", keine Fragen, keine To-Dos für morgen. Nur ein motivier
             });
         }
     }
+
+    /* ═══════════════════════════════════════════════
+       BRAIN DUMP — Quick Capture System
+       ═══════════════════════════════════════════════ */
+
+    // Storage
+    function getBrainDumps(){ return JSON.parse(localStorage.getItem('neuros_brain_dumps') || '[]'); }
+    function setBrainDumps(d){ localStorage.setItem('neuros_brain_dumps', JSON.stringify(d)); }
+
+    // Sheet open/close
+    function openBrainDumpSheet(){
+        document.getElementById('brainDumpSheetOverlay').classList.add('show');
+        document.getElementById('braindumpFab').classList.add('hidden');
+        setTimeout(() => document.getElementById('brainDumpSheetText').focus(), 300);
+    }
+    function closeBrainDumpSheet(){
+        document.getElementById('brainDumpSheetOverlay').classList.remove('show');
+        document.getElementById('braindumpFab').classList.remove('hidden');
+        document.getElementById('brainDumpSheetText').value = '';
+        stopBrainDumpMic();
+    }
+
+    // Voice
+    var _bdMicRecog = null;
+    function toggleBrainDumpMic(){
+        var btn = document.getElementById('brainDumpMicBtn');
+        if(_bdMicRecog){ stopBrainDumpMic(); return; }
+        if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
+            showNotification('Spracherkennung nicht verfügbar'); return;
+        }
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        _bdMicRecog = new SR();
+        _bdMicRecog.lang = 'de-DE';
+        _bdMicRecog.continuous = true;
+        _bdMicRecog.interimResults = false;
+        _bdMicRecog.onresult = function(e){
+            var ta = document.getElementById('brainDumpSheetText');
+            for(var i = e.resultIndex; i < e.results.length; i++){
+                if(e.results[i].isFinal) ta.value += (ta.value ? ' ' : '') + e.results[i][0].transcript;
+            }
+        };
+        _bdMicRecog.onerror = function(){ stopBrainDumpMic(); };
+        _bdMicRecog.onend = function(){ if(_bdMicRecog) stopBrainDumpMic(); };
+        _bdMicRecog.start();
+        btn.classList.add('recording');
+    }
+    function stopBrainDumpMic(){
+        if(_bdMicRecog){ try{_bdMicRecog.stop();}catch(e){} _bdMicRecog = null; }
+        var btn = document.getElementById('brainDumpMicBtn');
+        if(btn) btn.classList.remove('recording');
+    }
+
+    // Save
+    function saveBrainDump_global(){
+        var text = document.getElementById('brainDumpSheetText').value.trim();
+        if(!text){ showNotification('Schreib erst was rein!'); return; }
+        var dumps = getBrainDumps();
+        dumps.unshift({
+            id: 'bd_' + Date.now(),
+            text: text,
+            tags: [],
+            linkedTaskId: null,
+            createdAt: new Date().toISOString(),
+            status: 'unsorted',
+            sortedCategory: null,
+            sortedAt: null
+        });
+        setBrainDumps(dumps);
+        feedCompanion('broki', 5, document.querySelector('.braindump-sheet-save'), true);
+        showNotification('💭 Brain Dump gespeichert!');
+        closeBrainDumpSheet();
+        updateBrainDumpBadge();
+    }
+
+    // Keyboard shortcut
+    document.addEventListener('keydown', function(e){
+        if((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'B'){
+            e.preventDefault();
+            var overlay = document.getElementById('brainDumpSheetOverlay');
+            if(overlay.classList.contains('show')) closeBrainDumpSheet();
+            else openBrainDumpSheet();
+        }
+    });
+
+    // Tab switching
+    function switchIdeenTab(tab){
+        var tabs = document.querySelectorAll('.braindump-inbox-tab');
+        tabs.forEach(function(t){ t.classList.remove('active'); });
+        if(tab === 'braindump'){
+            tabs[0].classList.add('active');
+            document.getElementById('brainDumpInboxView').style.display = '';
+            document.getElementById('ideenContentView').style.display = 'none';
+            renderBrainDumpInbox();
+        } else {
+            tabs[1].classList.add('active');
+            document.getElementById('brainDumpInboxView').style.display = 'none';
+            document.getElementById('ideenContentView').style.display = '';
+        }
+    }
+
+    // Badge
+    function updateBrainDumpBadge(){
+        var dumps = getBrainDumps();
+        var unsorted = dumps.filter(function(d){ return d.status === 'unsorted'; }).length;
+        var badge = document.getElementById('brainDumpBadge');
+        if(unsorted > 0){
+            badge.textContent = unsorted;
+            badge.style.display = '';
+        } else {
+            badge.style.display = 'none';
+        }
+    }
+
+    // Inbox rendering
+    function renderBrainDumpInbox(){
+        var dumps = getBrainDumps().filter(function(d){ return d.status === 'unsorted'; });
+        var list = document.getElementById('brainDumpInboxList');
+        var empty = document.getElementById('brainDumpEmpty');
+        var kiBtn = document.getElementById('brainDumpKiSortBtn');
+        if(dumps.length === 0){
+            list.innerHTML = '';
+            empty.style.display = '';
+            kiBtn.style.display = 'none';
+            return;
+        }
+        empty.style.display = 'none';
+        kiBtn.style.display = '';
+        list.innerHTML = dumps.map(function(d){
+            var ago = _timeAgo(d.createdAt);
+            return '<div class="braindump-card" data-id="' + d.id + '">' +
+                '<div style="margin-bottom:8px">' + d.text + '</div>' +
+                '<div style="font-size:.75rem;color:#888;margin-bottom:8px">' + ago + '</div>' +
+                '<div style="display:flex;gap:6px;flex-wrap:wrap">' +
+                    '<button class="braindump-card-action" onclick="brainDumpToTask(\'' + d.id + '\')">→ Task</button>' +
+                    '<button class="braindump-card-action" onclick="brainDumpToIdea(\'' + d.id + '\')">💡 Idee</button>' +
+                    '<button class="braindump-card-action" onclick="brainDumpToNote(\'' + d.id + '\')">📝 Notiz</button>' +
+                    '<button class="braindump-card-action" onclick="deleteBrainDump(\'' + d.id + '\')" style="color:#e74c3c">🗑</button>' +
+                '</div></div>';
+        }).join('');
+    }
+
+    function _timeAgo(iso){
+        var diff = Date.now() - new Date(iso).getTime();
+        var mins = Math.floor(diff/60000);
+        if(mins < 1) return 'gerade eben';
+        if(mins < 60) return 'vor ' + mins + ' Min';
+        var hrs = Math.floor(mins/60);
+        if(hrs < 24) return 'vor ' + hrs + ' Std';
+        return 'vor ' + Math.floor(hrs/24) + ' Tag(en)';
+    }
+
+    // Sort actions
+    function brainDumpToTask(id){
+        var dumps = getBrainDumps();
+        var d = dumps.find(function(x){ return x.id === id; });
+        if(!d) return;
+        // Create task
+        var tasks = JSON.parse(localStorage.getItem('mf_tasks') || '[]');
+        var taskId = 't' + Date.now();
+        tasks.push({ id: taskId, text: '💭 ' + d.text, done: false, date: getTodayKey(), energy: 'low', category: 'misc' });
+        localStorage.setItem('mf_tasks', JSON.stringify(tasks));
+        // Mark sorted
+        d.status = 'sorted'; d.sortedCategory = 'task'; d.sortedAt = new Date().toISOString(); d.linkedTaskId = taskId;
+        setBrainDumps(dumps);
+        showNotification('→ Task erstellt!');
+        renderBrainDumpInbox(); updateBrainDumpBadge(); renderAllTasks();
+    }
+
+    function brainDumpToIdea(id){
+        var dumps = getBrainDumps();
+        var d = dumps.find(function(x){ return x.id === id; });
+        if(!d) return;
+        var ideen = JSON.parse(localStorage.getItem('mf_ideen') || '[]');
+        ideen.unshift({ id: 'i' + Date.now(), text: d.text, category: 'gedanke', date: getTodayKey() });
+        localStorage.setItem('mf_ideen', JSON.stringify(ideen));
+        d.status = 'sorted'; d.sortedCategory = 'idea'; d.sortedAt = new Date().toISOString();
+        setBrainDumps(dumps);
+        showNotification('💡 Idee erstellt!');
+        renderBrainDumpInbox(); updateBrainDumpBadge(); renderIdeen();
+    }
+
+    function brainDumpToNote(id){
+        var dumps = getBrainDumps();
+        var d = dumps.find(function(x){ return x.id === id; });
+        if(!d) return;
+        d.status = 'sorted'; d.sortedCategory = 'note'; d.sortedAt = new Date().toISOString();
+        setBrainDumps(dumps);
+        showNotification('📝 Als Notiz gespeichert!');
+        renderBrainDumpInbox(); updateBrainDumpBadge();
+    }
+
+    function deleteBrainDump(id){
+        if(!confirm('Brain Dump löschen?')) return;
+        var dumps = getBrainDumps().filter(function(x){ return x.id !== id; });
+        setBrainDumps(dumps);
+        showNotification('🗑 Gelöscht');
+        renderBrainDumpInbox(); updateBrainDumpBadge();
+    }
+
+    // KI Auto-Sort
+    async function kiBrainDumpSort(){
+        var apiKey = localStorage.getItem('neuros_apikey');
+        if(!apiKey){ showNotification('API Key fehlt — gehe zu Einstellungen'); return; }
+        var dumps = getBrainDumps().filter(function(d){ return d.status === 'unsorted'; });
+        if(dumps.length === 0){ showNotification('Keine unsortierten Brain Dumps'); return; }
+        var btn = document.getElementById('brainDumpKiSortBtn');
+        btn.classList.add('loading');
+        btn.textContent = '🧠 Sortiere...';
+        try {
+            var prompt = 'Du bist ein ADHS-Coach. Sortiere diese Brain Dumps in Kategorien. Antworte NUR mit einem JSON-Array.\n' +
+                'Jedes Element: {"id":"...", "category":"task"|"idea"|"note"|"delete", "reason":"kurzer Grund"}\n\n' +
+                'Brain Dumps:\n' + dumps.map(function(d){ return '- [' + d.id + '] ' + d.text; }).join('\n');
+            var resp = await fetch('https://api.anthropic.com/v1/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': apiKey,
+                    'anthropic-version': '2023-06-01',
+                    'anthropic-dangerous-direct-browser-access': 'true'
+                },
+                body: JSON.stringify({
+                    model: 'claude-sonnet-4-20250514',
+                    max_tokens: 1024,
+                    messages: [{ role: 'user', content: prompt }]
+                })
+            });
+            var data = await resp.json();
+            var text = data.content[0].text;
+            var match = text.match(/\[[\s\S]*\]/);
+            if(!match) throw new Error('No JSON');
+            var sorted = JSON.parse(match[0]);
+            var allDumps = getBrainDumps();
+            var count = {task:0, idea:0, note:0, delete:0};
+            sorted.forEach(function(s){
+                var d = allDumps.find(function(x){ return x.id === s.id; });
+                if(!d || d.status !== 'unsorted') return;
+                if(s.category === 'task'){
+                    var tasks = JSON.parse(localStorage.getItem('mf_tasks') || '[]');
+                    var tid = 't' + Date.now() + Math.random().toString(36).slice(2,5);
+                    tasks.push({ id: tid, text: '💭 ' + d.text, done: false, date: getTodayKey(), energy: 'low', category: 'misc' });
+                    localStorage.setItem('mf_tasks', JSON.stringify(tasks));
+                    d.status = 'sorted'; d.sortedCategory = 'task'; d.linkedTaskId = tid;
+                    count.task++;
+                } else if(s.category === 'idea'){
+                    var ideen = JSON.parse(localStorage.getItem('mf_ideen') || '[]');
+                    ideen.unshift({ id: 'i' + Date.now() + Math.random().toString(36).slice(2,5), text: d.text, category: 'gedanke', date: getTodayKey() });
+                    localStorage.setItem('mf_ideen', JSON.stringify(ideen));
+                    d.status = 'sorted'; d.sortedCategory = 'idea';
+                    count.idea++;
+                } else if(s.category === 'note'){
+                    d.status = 'sorted'; d.sortedCategory = 'note';
+                    count.note++;
+                } else if(s.category === 'delete'){
+                    d.status = 'sorted'; d.sortedCategory = 'deleted';
+                    count.delete++;
+                }
+                d.sortedAt = new Date().toISOString();
+            });
+            setBrainDumps(allDumps);
+            var msg = '🧠 KI sortiert: ' + count.task + ' Tasks, ' + count.idea + ' Ideen, ' + count.note + ' Notizen';
+            if(count.delete > 0) msg += ', ' + count.delete + ' verworfen';
+            showNotification(msg);
+        } catch(e){
+            console.error('KI Brain Dump Sort error:', e);
+            showNotification('KI-Sortierung fehlgeschlagen');
+        }
+        btn.classList.remove('loading');
+        btn.textContent = '🧠 KI Auto-Sortieren';
+        renderBrainDumpInbox(); updateBrainDumpBadge(); renderAllTasks(); renderIdeen();
+    }
+
+    // Hide mic button if Speech API not available
+    (function(){
+        if(!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)){
+            var mic = document.getElementById('brainDumpMicBtn');
+            if(mic) mic.style.display = 'none';
+        }
+    })();
 
     /* ═══════════════════════════════════════════════
        KI-COACH — Claude API Integration
@@ -5685,6 +6085,7 @@ Antworte NUR als JSON-Array mit max 3 Task-IDs: [${openTasks.slice(0,3).map(t=>t
     updateXPDisplay();
     initTag();
     initIdeen();
+    updateBrainDumpBadge();
     initAchievements();
     // Recovery View initialisieren
     loadRecoveryReflection();
